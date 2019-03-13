@@ -16,14 +16,12 @@ import mekanism.client.MekanismKeyHandler;
 import mekanism.common.Mekanism;
 import mekanism.common.Tier.BaseTier;
 import mekanism.common.Tier.GasTankTier;
-import mekanism.common.base.ISideConfiguration;
 import mekanism.common.base.ISustainedInventory;
 import mekanism.common.base.ITierItem;
 import mekanism.common.base.TileNetworkList;
 import mekanism.common.config.MekanismConfig.general;
 import mekanism.common.network.PacketTileEntity.TileEntityMessage;
 import mekanism.common.security.ISecurityItem;
-import mekanism.common.security.ISecurityTile;
 import mekanism.common.security.ISecurityTile.SecurityMode;
 import mekanism.common.tile.TileEntityGasTank;
 import mekanism.common.util.ItemDataUtils;
@@ -90,22 +88,22 @@ public class ItemBlockGasTank extends ItemBlock implements IGasItem, ISustainedI
             tileEntity.gasTank.setMaxGas(tileEntity.tier.storage);
             tileEntity.gasTank.setGas(getGas(stack));
 
-			((ISecurityTile) tileEntity).getSecurity().setOwnerUUID(getOwnerUUID(stack));
+			tileEntity.getSecurity().setOwnerUUID(getOwnerUUID(stack));
 
             if (hasSecurity(stack)) {
-                ((ISecurityTile) tileEntity).getSecurity().setMode(getSecurity(stack));
+                tileEntity.getSecurity().setMode(getSecurity(stack));
             }
 
             if (getOwnerUUID(stack) == null) {
-                ((ISecurityTile) tileEntity).getSecurity().setOwnerUUID(player.getUniqueID());
+                tileEntity.getSecurity().setOwnerUUID(player.getUniqueID());
             }
 
 			if (ItemDataUtils.hasData(stack, "sideDataStored")) {
-                ((ISideConfiguration) tileEntity).getConfig().read(ItemDataUtils.getDataMap(stack));
-                ((ISideConfiguration) tileEntity).getEjector().read(ItemDataUtils.getDataMap(stack));
+                tileEntity.getConfig().read(ItemDataUtils.getDataMap(stack));
+                tileEntity.getEjector().read(ItemDataUtils.getDataMap(stack));
             }
 
-            ((ISustainedInventory) tileEntity).setInventory(getInventory(stack));
+            tileEntity.setInventory(getInventory(stack));
 
             if (!world.isRemote) {
                 Mekanism.packetHandler.sendToReceivers(new TileEntityMessage(Coord4D.get(tileEntity),

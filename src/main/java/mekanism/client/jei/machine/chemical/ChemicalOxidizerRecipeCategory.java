@@ -1,6 +1,5 @@
 package mekanism.client.jei.machine.chemical;
 
-import javax.annotation.Nullable;
 import mekanism.api.gas.GasStack;
 import mekanism.client.gui.element.GuiGasGauge;
 import mekanism.client.gui.element.GuiGauge;

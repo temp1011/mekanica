@@ -1,6 +1,5 @@
 package mekanism.client.jei.machine;
 
-import javax.annotation.Nullable;
 import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.gui.element.GuiPowerBar.IPowerInfoHandler;
 import mekanism.client.gui.element.GuiProgress;

@@ -7,7 +7,6 @@ import mekanism.api.energy.IEnergizedItem;
 import mekanism.common.Mekanism;
 import mekanism.common.MekanismBlocks;
 import mekanism.common.Tier.EnergyCubeTier;
-import mekanism.common.base.ISideConfiguration;
 import mekanism.common.base.ISustainedInventory;
 import mekanism.common.base.ITierItem;
 import mekanism.common.block.states.BlockStateEnergyCube;
@@ -15,7 +14,6 @@ import mekanism.common.block.states.BlockStateFacing;
 import mekanism.common.integration.wrenches.Wrenches;
 import mekanism.common.item.ItemBlockEnergyCube;
 import mekanism.common.security.ISecurityItem;
-import mekanism.common.security.ISecurityTile;
 import mekanism.common.tile.TileEntityEnergyCube;
 import mekanism.common.tile.prefab.TileEntityBasicBlock;
 import mekanism.common.util.ItemDataUtils;
@@ -279,12 +277,12 @@ public class BlockEnergyCube extends BlockContainer {
             ISecurityItem securityItem = (ISecurityItem) itemStack.getItem();
 
             if (securityItem.hasSecurity(itemStack)) {
-                securityItem.setOwnerUUID(itemStack, ((ISecurityTile) tileEntity).getSecurity().getOwnerUUID());
-                securityItem.setSecurity(itemStack, ((ISecurityTile) tileEntity).getSecurity().getMode());
+                securityItem.setOwnerUUID(itemStack, tileEntity.getSecurity().getOwnerUUID());
+                securityItem.setSecurity(itemStack, tileEntity.getSecurity().getMode());
             }
 
-            ((ISideConfiguration) tileEntity).getConfig().write(ItemDataUtils.getDataMap(itemStack));
-            ((ISideConfiguration) tileEntity).getEjector().write(ItemDataUtils.getDataMap(itemStack));
+            tileEntity.getConfig().write(ItemDataUtils.getDataMap(itemStack));
+            tileEntity.getEjector().write(ItemDataUtils.getDataMap(itemStack));
         }
 
         ITierItem tierItem = (ITierItem) itemStack.getItem();
