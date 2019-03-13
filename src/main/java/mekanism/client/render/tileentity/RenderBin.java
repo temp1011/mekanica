@@ -88,6 +88,7 @@ public class RenderBin extends TileEntitySpecialRenderer<TileEntityBin> {
         GlStateManager.doPolygonOffset(-10, -10);
         GlStateManager.enablePolygonOffset();
 
+        //at the moment this is just 1. Should there be a float here?
         float displayWidth = 1 - (2 / 16);
         float displayHeight = 1 - (2 / 16);
         GlStateManager.translate(x, y, z);
