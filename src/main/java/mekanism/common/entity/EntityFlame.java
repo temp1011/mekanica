@@ -99,8 +99,7 @@ public class EntityFlame extends Entity implements IEntityAdditionalSpawnData {
 
         if (ticksExisted > LIFESPAN) {
             setDead();
-            return;
-        }
+		}
     }
 
     private void calculateVector() {

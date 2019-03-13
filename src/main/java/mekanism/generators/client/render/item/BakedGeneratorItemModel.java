@@ -118,8 +118,7 @@ public class BakedGeneratorItemModel implements IBakedModel {
                 windGenerator.render(0.016F, 0);
             }
 
-            return;
-        }
+		}
     }
 
     @Nonnull

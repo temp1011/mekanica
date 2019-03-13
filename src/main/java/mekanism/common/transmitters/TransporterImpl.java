@@ -118,8 +118,7 @@ public class TransporterImpl extends TransmitterImpl<TileEntity, InventoryNetwor
 
                     if (!recalculate(stack, prevSet)) {
                         remove.add(stack);
-                        continue;
-                    } else {
+					} else {
                         if (prevSet != null) {
                             stack.progress = 0;
                         } else {
@@ -133,20 +132,17 @@ public class TransporterImpl extends TransmitterImpl<TileEntity, InventoryNetwor
                                     stack.getSide(this), false))) {
                             if (!recalculate(stack, null)) {
                                 remove.add(stack);
-                                continue;
-                            }
+							}
                         } else if (stack.pathType == Path.HOME && (!checkSideForInsert(stack) || !InventoryUtils
                               .canInsert(stack.getDest().getTileEntity(world()), stack.color, stack.itemStack,
                                     stack.getSide(this), true))) {
                             if (!recalculate(stack, null)) {
                                 remove.add(stack);
-                                continue;
-                            }
+							}
                         } else if (stack.pathType == Path.NONE) {
                             if (!recalculate(stack, null)) {
                                 remove.add(stack);
-                                continue;
-                            }
+							}
                         }
                     } else {
                         TileEntity next = stack.getNext(this).getTileEntity(world());
@@ -159,8 +155,7 @@ public class TransporterImpl extends TransmitterImpl<TileEntity, InventoryNetwor
                         if (recalculate) {
                             if (!recalculate(stack, null)) {
                                 remove.add(stack);
-                                continue;
-                            }
+							}
                         }
                     }
                 }

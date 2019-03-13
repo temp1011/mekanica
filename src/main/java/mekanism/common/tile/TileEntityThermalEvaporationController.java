@@ -341,8 +341,7 @@ public class TileEntityThermalEvaporationController extends TileEntityThermalEva
 
                 if (corner != -1) {
                     if (addSolarPanel(pointer.getTileEntity(world), corner)) {
-                        continue;
-                    } else if (pointer.offset(EnumFacing.UP)
+					} else if (pointer.offset(EnumFacing.UP)
                           .getTileEntity(world) instanceof TileEntityThermalEvaporationBlock || !addTankPart(
                           pointerTile)) {
                         return false;
