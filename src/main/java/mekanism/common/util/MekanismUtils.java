@@ -799,9 +799,8 @@ public final class MekanismUtils {
      * @return if any recipes were removed
      */
     public static boolean removeRecipes(ItemStack... itemStacks) {
-        boolean didRemove = false;
 
-//		for(Iterator itr = CraftingManager.getInstance().getRecipeList().iterator(); itr.hasNext();)
+		//		for(Iterator itr = CraftingManager.getInstance().getRecipeList().iterator(); itr.hasNext();)
 //		{
 //			Object obj = itr.next();
 //
@@ -819,7 +818,7 @@ public final class MekanismUtils {
 //			}
 //		}
 
-        return didRemove;
+        return false;
     }
 
     /**

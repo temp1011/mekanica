@@ -121,9 +121,7 @@ public class RenderBin extends TileEntitySpecialRenderer<TileEntityBin> {
         FontRenderer fontRenderer = getFontRenderer();
 
         int requiredWidth = Math.max(fontRenderer.getStringWidth(text), 1);
-        int lineHeight = fontRenderer.FONT_HEIGHT + 2;
-        int requiredHeight = lineHeight;
-        float scaler = 0.4F;
+		float scaler = 0.4F;
         float scaleX = (displayWidth / requiredWidth);
         float scale = scaleX * scaler;
 
@@ -138,7 +136,7 @@ public class RenderBin extends TileEntitySpecialRenderer<TileEntityBin> {
         int realWidth = (int) Math.floor(displayWidth / scale);
 
         int offsetX = (realWidth - requiredWidth) / 2;
-        int offsetY = (realHeight - requiredHeight) / 2;
+        int offsetY = (realHeight - (fontRenderer.FONT_HEIGHT + 2)) / 2;
 
         GlStateManager.disableLighting();
         fontRenderer.drawString("\u00a7f" + text, offsetX - (realWidth / 2), 1 + offsetY - (realHeight / 2), 1);

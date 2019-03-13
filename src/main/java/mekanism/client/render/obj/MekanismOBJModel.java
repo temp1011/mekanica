@@ -43,15 +43,13 @@ public class MekanismOBJModel extends OBJModel {
     @Nonnull
     @Override
     public IModel process(@Nonnull ImmutableMap<String, String> customData) {
-        MekanismOBJModel ret = new MekanismOBJModel(modelType, getMatLib(), location);
-        return ret;
+		return new MekanismOBJModel(modelType, getMatLib(), location);
     }
 
     @Nonnull
     @Override
     public IModel retexture(@Nonnull ImmutableMap<String, String> textures) {
-        MekanismOBJModel ret = new MekanismOBJModel(modelType, getMatLib().makeLibWithReplacements(textures), location);
-        return ret;
+		return new MekanismOBJModel(modelType, getMatLib().makeLibWithReplacements(textures), location);
     }
 
     public enum OBJModelType {

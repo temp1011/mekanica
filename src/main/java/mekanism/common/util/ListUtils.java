@@ -42,9 +42,7 @@ public class ListUtils {
 
     public static <V> List<V> copy(List<V> list) {
 
-        List<V> toReturn = new ArrayList<>(list);
-
-        return toReturn;
+		return new ArrayList<>(list);
     }
 
     public static <V> List<V> merge(List<V> listOne, List<V> listTwo) {

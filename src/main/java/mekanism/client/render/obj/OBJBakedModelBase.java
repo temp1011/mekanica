@@ -213,9 +213,7 @@ public abstract class OBJBakedModelBase extends OBJBakedModel {
             bakedQuads.add(quad);
         }
 
-        List<BakedQuad> quadList = Collections.synchronizedList(Lists.newArrayList(bakedQuads));
-
-        return quadList;
+		return Collections.synchronizedList(Lists.newArrayList(bakedQuads));
     }
 
     protected void updateStateVisibilityMap(OBJState state) {
