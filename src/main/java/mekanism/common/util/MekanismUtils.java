@@ -1045,6 +1045,10 @@ public final class MekanismUtils {
         return "[" + obj.x + ", " + obj.y + ", " + obj.z + "]";
     }
 
+    /**
+     * TODO - use {@link FontRenderer#listFormattedStringToWidth(String, int)}?
+     * seems to do the same job and would simplify this code quite a bit
+     */
     @SideOnly(Side.CLIENT)
     public static List<String> splitTooltip(String s, ItemStack stack) {
         s = s.trim();
