@@ -9,6 +9,7 @@ import java.util.Set;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.infuse.InfuseType;
+import mekanism.common.Mekanism;
 import mekanism.common.block.states.BlockStateMachine.MachineType;
 import mekanism.common.recipe.inputs.AdvancedMachineInput;
 import mekanism.common.recipe.inputs.ChemicalPairInput;
@@ -665,6 +666,7 @@ public final class RecipeHandler {
             }
         }
 
+        //static analysis says this shouldn't work...
         public <RECIPE, INPUT> RECIPE createRecipe(INPUT input, NBTTagCompound nbtTags) {
             try {
                 MachineOutput output = outputClass.newInstance();
@@ -680,6 +682,7 @@ public final class RecipeHandler {
                     return (RECIPE) construct.newInstance(input, output, nbtTags);
                 }
             } catch (Exception e) {
+                Mekanism.logger.error("error creating recipe", e);
                 return null;
             }
         }
