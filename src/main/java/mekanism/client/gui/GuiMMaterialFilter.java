@@ -32,17 +32,17 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiMMaterialFilter extends GuiMekanism {
 
-    public TileEntityDigitalMiner tileEntity;
+    private TileEntityDigitalMiner tileEntity;
 
-    public boolean isNew = false;
+    private boolean isNew = false;
 
-    public MMaterialFilter origFilter;
+    private MMaterialFilter origFilter;
 
-    public MMaterialFilter filter = new MMaterialFilter();
+    private MMaterialFilter filter = new MMaterialFilter();
 
-    public String status = EnumColor.DARK_GREEN + LangUtils.localize("gui.allOK");
+    private String status = EnumColor.DARK_GREEN + LangUtils.localize("gui.allOK");
 
-    public int ticker;
+    private int ticker;
 
     public GuiMMaterialFilter(EntityPlayer player, TileEntityDigitalMiner tentity, int index) {
         super(tentity, new ContainerFilter(player.inventory, tentity));

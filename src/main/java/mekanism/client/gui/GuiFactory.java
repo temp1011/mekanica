@@ -37,7 +37,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiFactory extends GuiMekanism {
 
-    public TileEntityFactory tileEntity;
+    private TileEntityFactory tileEntity;
 
     public GuiFactory(InventoryPlayer inventory, TileEntityFactory tentity) {
         super(tentity, new ContainerFactory(inventory, tentity));
@@ -98,9 +98,6 @@ public class GuiFactory extends GuiMekanism {
         int guiWidth = (width - xSize) / 2;
         int guiHeight = (height - ySize) / 2;
         drawTexturedModalRect(guiWidth, guiHeight, 0, 0, xSize, ySize);
-
-        int xAxis = mouseX - guiWidth;
-        int yAxis = mouseY - guiHeight;
 
         int displayInt;
 

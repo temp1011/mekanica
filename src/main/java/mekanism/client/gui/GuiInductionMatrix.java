@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiInductionMatrix extends GuiMekanism {
 
-    public TileEntityInductionCasing tileEntity;
+    private TileEntityInductionCasing tileEntity;
 
     public GuiInductionMatrix(InventoryPlayer inventory, TileEntityInductionCasing tentity) {
         super(tentity, new ContainerInductionMatrix(inventory, tentity));

@@ -26,7 +26,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiDoubleElectricMachine extends GuiMekanism {
 
-    public TileEntityDoubleElectricMachine tileEntity;
+    private TileEntityDoubleElectricMachine tileEntity;
 
     public GuiDoubleElectricMachine(InventoryPlayer inventory, TileEntityDoubleElectricMachine tentity) {
         super(tentity, new ContainerDoubleElectricMachine(inventory, tentity));

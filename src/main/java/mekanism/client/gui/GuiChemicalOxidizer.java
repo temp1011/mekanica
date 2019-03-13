@@ -26,7 +26,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiChemicalOxidizer extends GuiMekanism {
 
-    public TileEntityChemicalOxidizer tileEntity;
+    private TileEntityChemicalOxidizer tileEntity;
 
     public GuiChemicalOxidizer(InventoryPlayer inventory, TileEntityChemicalOxidizer tentity) {
         super(tentity, new ContainerChemicalOxidizer(inventory, tentity));
@@ -88,12 +88,7 @@ public class GuiChemicalOxidizer extends GuiMekanism {
         int guiHeight = (height - ySize) / 2;
         drawTexturedModalRect(guiWidth, guiHeight, 0, 0, xSize, ySize);
 
-        int xAxis = mouseX - guiWidth;
-        int yAxis = mouseY - guiHeight;
-
-        int displayInt;
-
-        displayInt = tileEntity.getScaledEnergyLevel(52);
+        int displayInt = tileEntity.getScaledEnergyLevel(52);
         drawTexturedModalRect(guiWidth + 116, guiHeight + 76, 176, 0, displayInt, 4);
 
         super.drawGuiContainerBackgroundLayer(partialTick, mouseX, mouseY);

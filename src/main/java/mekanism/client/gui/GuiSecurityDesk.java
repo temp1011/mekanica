@@ -19,7 +19,6 @@ import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
@@ -31,14 +30,12 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiSecurityDesk extends GuiMekanism {
 
-    public static final List<Character> SPECIAL_CHARS = Arrays.asList('-', '|', '_');
-    public static int MAX_LENGTH = 24;
-    public ResourceLocation resource;
-    public TileEntitySecurityDesk tileEntity;
-    public EntityPlayer entityPlayer;
-    public GuiButton removeButton;
-    public GuiScrollList scrollList;
-    public GuiTextField trustedField;
+    private static final List<Character> SPECIAL_CHARS = Arrays.asList('-', '|', '_');
+    private ResourceLocation resource;
+    private TileEntitySecurityDesk tileEntity;
+    private GuiButton removeButton;
+    private GuiScrollList scrollList;
+    private GuiTextField trustedField;
 
     public GuiSecurityDesk(InventoryPlayer inventory, TileEntitySecurityDesk tentity) {
         super(tentity, new ContainerSecurityDesk(inventory, tentity));
@@ -62,7 +59,8 @@ public class GuiSecurityDesk extends GuiMekanism {
         removeButton = new GuiButton(0, guiWidth + 13, guiHeight + 81, 122, 20, LangUtils.localize("gui.remove"));
 
         trustedField = new GuiTextField(1, fontRenderer, guiWidth + 35, guiHeight + 69, 86, 11);
-        trustedField.setMaxStringLength(MAX_LENGTH);
+        int max_length = 24;
+        trustedField.setMaxStringLength(max_length);
         trustedField.setEnableBackgroundDrawing(false);
 
         updateButtons();

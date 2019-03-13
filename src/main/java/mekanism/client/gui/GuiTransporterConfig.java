@@ -1,8 +1,7 @@
 package mekanism.client.gui;
 
+import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import mekanism.api.Coord4D;
 import mekanism.api.EnumColor;
 import mekanism.api.transmitters.TransmissionType;
@@ -34,9 +33,16 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiTransporterConfig extends GuiMekanism {
 
-    public Map<Integer, GuiPos> slotPosMap = new HashMap<>();
+    private static final ImmutableMap<Integer, GuiPos> slotPosMap = ImmutableMap.<Integer, GuiPos>builder()
+        .put(0, new GuiPos(54, 64))
+        .put(1, new GuiPos(54, 34))
+        .put(2, new GuiPos(54, 49))
+        .put(3, new GuiPos(39, 64))
+        .put(4, new GuiPos(39, 49))
+        .put(5, new GuiPos(69, 49))
+          .build();
 
-    public ISideConfiguration configurable;
+    private ISideConfiguration configurable;
 
     public GuiTransporterConfig(EntityPlayer player, ISideConfiguration tile) {
         super((TileEntityContainerBlock) tile, new ContainerNull(player, (TileEntityContainerBlock) tile));
@@ -44,13 +50,6 @@ public class GuiTransporterConfig extends GuiMekanism {
         ySize = 95;
 
         configurable = tile;
-
-        slotPosMap.put(0, new GuiPos(54, 64));
-        slotPosMap.put(1, new GuiPos(54, 34));
-        slotPosMap.put(2, new GuiPos(54, 49));
-        slotPosMap.put(3, new GuiPos(39, 64));
-        slotPosMap.put(4, new GuiPos(39, 49));
-        slotPosMap.put(5, new GuiPos(69, 49));
     }
 
     @Override

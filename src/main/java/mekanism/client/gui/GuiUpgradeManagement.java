@@ -27,19 +27,19 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiUpgradeManagement extends GuiMekanism {
 
-    public IUpgradeTile tileEntity;
+    private IUpgradeTile tileEntity;
 
-    public Upgrade selectedType;
+    private Upgrade selectedType;
 
-    public boolean isDragging = false;
+    private boolean isDragging = false;
 
-    public int dragOffset = 0;
+    private int dragOffset = 0;
 
-    public int supportedIndex;
+    private int supportedIndex;
 
-    public int delay;
+    private int delay;
 
-    public float scroll;
+    private float scroll;
 
     public GuiUpgradeManagement(InventoryPlayer inventory, IUpgradeTile tile) {
         super(new ContainerUpgradeManagement(inventory, tile));
@@ -108,7 +108,6 @@ public class GuiUpgradeManagement extends GuiMekanism {
 
             int xPos = 25;
             int yPos = 7 + (i * 12);
-            int yRender = 0;
 
             fontRenderer.drawString(upgrade.getName(), xPos + 12, yPos + 2, 0x404040);
 
@@ -279,7 +278,6 @@ public class GuiUpgradeManagement extends GuiMekanism {
             for (Upgrade upgrade : getCurrentUpgrades()) {
                 int xPos = 25;
                 int yPos = 7 + (counter++ * 12);
-                int yRender = 0;
 
                 if (xAxis >= xPos && xAxis <= xPos + 58 && yAxis >= yPos && yAxis <= yPos + 12) {
                     selectedType = upgrade;

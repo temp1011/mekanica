@@ -40,11 +40,11 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiDigitalMiner extends GuiMekanism {
 
-    public TileEntityDigitalMiner tileEntity;
+    private TileEntityDigitalMiner tileEntity;
 
-    public GuiButton startButton;
-    public GuiButton stopButton;
-    public GuiButton configButton;
+    private GuiButton startButton;
+    private GuiButton stopButton;
+    private GuiButton configButton;
 
     public GuiDigitalMiner(InventoryPlayer inventory, TileEntityDigitalMiner tentity) {
         super(tentity, new ContainerDigitalMiner(inventory, tentity));

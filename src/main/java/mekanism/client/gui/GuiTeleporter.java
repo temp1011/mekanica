@@ -48,36 +48,37 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiTeleporter extends GuiMekanism {
 
-    public EnumHand currentHand;
+    private EnumHand currentHand;
 
-    public ResourceLocation resource;
+    private ResourceLocation resource;
 
-    public TileEntityTeleporter tileEntity;
+    private TileEntityTeleporter tileEntity;
     public ItemStack itemStack = ItemStack.EMPTY;
 
-    public EntityPlayer entityPlayer;
+    private EntityPlayer entityPlayer;
 
-    public GuiButton publicButton;
-    public GuiButton privateButton;
+    private GuiButton publicButton;
+    private GuiButton privateButton;
 
-    public GuiButton setButton;
-    public GuiButton deleteButton;
+    private GuiButton setButton;
+    private GuiButton deleteButton;
 
-    public GuiButton teleportButton;
+    private GuiButton teleportButton;
 
-    public GuiScrollList scrollList;
+    private GuiScrollList scrollList;
 
-    public GuiTextField frequencyField;
+    private GuiTextField frequencyField;
 
-    public boolean privateMode;
+    private boolean privateMode;
 
+    //this is weirdly racy
     public Frequency clientFreq;
     public byte clientStatus;
 
     public List<Frequency> clientPublicCache = new ArrayList<>();
     public List<Frequency> clientPrivateCache = new ArrayList<>();
 
-    public boolean isInit = true;
+    private boolean isInit = true;
 
     public GuiTeleporter(InventoryPlayer inventory, TileEntityTeleporter tentity) {
         super(tentity, new ContainerTeleporter(inventory, tentity));

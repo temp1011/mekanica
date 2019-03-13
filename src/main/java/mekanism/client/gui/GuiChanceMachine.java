@@ -26,7 +26,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiChanceMachine extends GuiMekanism {
 
-    public TileEntityChanceMachine tileEntity;
+    private TileEntityChanceMachine tileEntity;
 
     public GuiChanceMachine(InventoryPlayer inventory, TileEntityChanceMachine tentity) {
         super(tentity, new ContainerChanceMachine(inventory, tentity));

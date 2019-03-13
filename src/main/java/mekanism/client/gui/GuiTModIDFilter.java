@@ -37,19 +37,19 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiTModIDFilter extends GuiMekanism {
 
-    public TileEntityLogisticalSorter tileEntity;
+    private TileEntityLogisticalSorter tileEntity;
 
-    public boolean isNew = false;
+    private boolean isNew = false;
 
-    public TModIDFilter origFilter;
+    private TModIDFilter origFilter;
 
-    public TModIDFilter filter = new TModIDFilter();
-    public ItemStack renderStack = ItemStack.EMPTY;
-    public int ticker = 0;
-    public int stackSwitch = 0;
-    public int stackIndex = 0;
-    public List<ItemStack> iterStacks;
-    public String status = EnumColor.DARK_GREEN + LangUtils.localize("gui.allOK");
+    private TModIDFilter filter = new TModIDFilter();
+    private ItemStack renderStack = ItemStack.EMPTY;
+    private int ticker = 0;
+    private int stackSwitch = 0;
+    private int stackIndex = 0;
+    private List<ItemStack> iterStacks;
+    private String status = EnumColor.DARK_GREEN + LangUtils.localize("gui.allOK");
     private GuiTextField modIDText;
 
     public GuiTModIDFilter(EntityPlayer player, TileEntityLogisticalSorter tentity, int index) {

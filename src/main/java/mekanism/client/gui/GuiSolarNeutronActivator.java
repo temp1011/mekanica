@@ -24,7 +24,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiSolarNeutronActivator extends GuiMekanism {
 
-    public TileEntitySolarNeutronActivator tileEntity;
+    private TileEntitySolarNeutronActivator tileEntity;
 
     public GuiSolarNeutronActivator(InventoryPlayer inventory, TileEntitySolarNeutronActivator tentity) {
         super(tentity, new ContainerSolarNeutronActivator(inventory, tentity));

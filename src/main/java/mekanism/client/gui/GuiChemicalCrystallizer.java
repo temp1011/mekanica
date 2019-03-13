@@ -39,17 +39,17 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiChemicalCrystallizer extends GuiMekanism {
 
-    public TileEntityChemicalCrystallizer tileEntity;
+    private TileEntityChemicalCrystallizer tileEntity;
 
-    public Gas prevGas;
+    private Gas prevGas;
 
-    public ItemStack renderStack = ItemStack.EMPTY;
+    private ItemStack renderStack = ItemStack.EMPTY;
 
-    public int stackSwitch = 0;
+    private int stackSwitch = 0;
 
-    public int stackIndex = 0;
+    private int stackIndex = 0;
 
-    public List<ItemStack> iterStacks = new ArrayList<>();
+    private List<ItemStack> iterStacks = new ArrayList<>();
 
     public GuiChemicalCrystallizer(InventoryPlayer inventory, TileEntityChemicalCrystallizer tentity) {
         super(tentity, new ContainerChemicalCrystallizer(inventory, tentity));
@@ -96,8 +96,6 @@ public class GuiChemicalCrystallizer extends GuiMekanism {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        int xAxis = (mouseX - (width - xSize) / 2);
-        int yAxis = (mouseY - (height - ySize) / 2);
 
         fontRenderer.drawString(tileEntity.getName(), 37, 4, 0x404040);
 

@@ -878,7 +878,7 @@ public class ClientProxy extends CommonProxy {
                 ItemStack itemStack1 = player.getHeldItem(EnumHand.values()[pos.getX()]);
 
                 if (!itemStack1.isEmpty() && itemStack1.getItem() instanceof ItemSeismicReader) {
-                    return new GuiSeismicReader(world, new Coord4D(player), itemStack1.copy());
+                    return new GuiSeismicReader(world, new Coord4D(player));
                 }
 
                 return null;

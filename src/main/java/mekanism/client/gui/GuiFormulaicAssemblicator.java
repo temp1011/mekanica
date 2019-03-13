@@ -38,9 +38,9 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiFormulaicAssemblicator extends GuiMekanism {
 
-    public TileEntityFormulaicAssemblicator tileEntity;
+    private TileEntityFormulaicAssemblicator tileEntity;
 
-    public ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiFormulaicAssemblicator.png");
+    private ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiFormulaicAssemblicator.png");
 
     public GuiFormulaicAssemblicator(InventoryPlayer inventory, TileEntityFormulaicAssemblicator tentity) {
         super(tentity, new ContainerFormulaicAssemblicator(inventory, tentity));

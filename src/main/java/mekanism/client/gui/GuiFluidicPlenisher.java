@@ -25,9 +25,9 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiFluidicPlenisher extends GuiMekanism {
 
-    public TileEntityFluidicPlenisher tileEntity;
+    private TileEntityFluidicPlenisher tileEntity;
 
-    public ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiElectricPump.png");
+    private ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiElectricPump.png");
 
     public GuiFluidicPlenisher(InventoryPlayer inventory, TileEntityFluidicPlenisher tentity) {
         super(tentity, new ContainerFluidicPlenisher(inventory, tentity));

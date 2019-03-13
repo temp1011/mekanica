@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiMFilterSelect extends GuiMekanism {
 
-    public TileEntityDigitalMiner tileEntity;
+    private TileEntityDigitalMiner tileEntity;
 
     public GuiMFilterSelect(EntityPlayer player, TileEntityDigitalMiner tentity) {
         super(tentity, new ContainerNull(player, tentity));
@@ -64,9 +64,6 @@ public class GuiMFilterSelect extends GuiMekanism {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        int xAxis = (mouseX - (width - xSize) / 2);
-        int yAxis = (mouseY - (height - ySize) / 2);
-
         fontRenderer.drawString(LangUtils.localize("gui.filterSelect.title"), 43, 6, 0x404040);
 
         super.drawGuiContainerForegroundLayer(mouseX, mouseY);

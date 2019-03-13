@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiTFilterSelect extends GuiMekanism {
 
-    public TileEntityLogisticalSorter tileEntity;
+    private TileEntityLogisticalSorter tileEntity;
 
     public GuiTFilterSelect(EntityPlayer player, TileEntityLogisticalSorter tentity) {
         super(tentity, new ContainerNull(player, tentity));
@@ -64,9 +64,6 @@ public class GuiTFilterSelect extends GuiMekanism {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        int xAxis = (mouseX - (width - xSize) / 2);
-        int yAxis = (mouseY - (height - ySize) / 2);
-
         fontRenderer.drawString(LangUtils.localize("gui.filterSelect.title"), 43, 6, 0x404040);
 
         super.drawGuiContainerForegroundLayer(mouseX, mouseY);

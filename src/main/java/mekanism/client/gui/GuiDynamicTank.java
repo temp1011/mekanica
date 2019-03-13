@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiDynamicTank extends GuiMekanism {
 
-    public TileEntityDynamicTank tileEntity;
+    private TileEntityDynamicTank tileEntity;
 
     public GuiDynamicTank(InventoryPlayer inventory, TileEntityDynamicTank tentity) {
         super(tentity, new ContainerDynamicTank(inventory, tentity));

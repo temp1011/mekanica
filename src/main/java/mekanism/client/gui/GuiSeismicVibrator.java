@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiSeismicVibrator extends GuiMekanism {
 
-    public TileEntitySeismicVibrator tileEntity;
+    private TileEntitySeismicVibrator tileEntity;
 
     public GuiSeismicVibrator(InventoryPlayer inventory, TileEntitySeismicVibrator tentity) {
         super(tentity, new ContainerSeismicVibrator(inventory, tentity));

@@ -23,7 +23,6 @@ public class GuiConfigTypeTab extends GuiElement {
     public GuiConfigTypeTab(IGuiWrapper gui, TileEntity tile, TransmissionType type, ResourceLocation def) {
         super(getResource(type), gui, def);
 
-		TileEntity tileEntity = tile;
         transmission = type;
     }
 

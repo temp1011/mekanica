@@ -23,7 +23,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiEnergyCube extends GuiMekanism {
 
-    public TileEntityEnergyCube tileEntity;
+    private TileEntityEnergyCube tileEntity;
 
     public GuiEnergyCube(InventoryPlayer inventory, TileEntityEnergyCube tentity) {
         super(tentity, new ContainerEnergyCube(inventory, tentity));

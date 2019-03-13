@@ -36,7 +36,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiElectrolyticSeparator extends GuiMekanism {
 
-    public TileEntityElectrolyticSeparator tileEntity;
+    private TileEntityElectrolyticSeparator tileEntity;
 
     public GuiElectrolyticSeparator(InventoryPlayer inventory, TileEntityElectrolyticSeparator tentity) {
         super(tentity, new ContainerElectrolyticSeparator(inventory, tentity));

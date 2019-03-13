@@ -23,21 +23,19 @@ import org.lwjgl.util.Rectangle;
 @SideOnly(Side.CLIENT)
 public class GuiSeismicReader extends GuiScreen {
 
-    public ItemStack itemStack;
-    public Coord4D pos;
-    protected int xSize = 137;
-    protected int ySize = 182;
+    private Coord4D pos;
+    private int xSize = 137;
+    private int ySize = 182;
     private World worldObj;
     private ArrayList<Pair<Integer, Block>> blockList = new ArrayList<>();
     private Rectangle upButton, downButton, tooltip;
 
     private int currentLayer;
 
-    public GuiSeismicReader(World world, Coord4D coord, ItemStack stack) {
+    public GuiSeismicReader(World world, Coord4D coord) {
         pos = new Coord4D(coord.x, Math.min(255, coord.y), coord.z, world.provider.getDimension());
         worldObj = world;
 
-        itemStack = stack;
         calculate();
         currentLayer = Math.max(0, blockList.size() - 1);
     }
@@ -152,7 +150,7 @@ public class GuiSeismicReader extends GuiScreen {
             if (blockList.get(currentLayer - 1) != null) {
                 Block block = blockList.get(currentLayer - 1).getRight();
 
-                if (pair.getRight() == block && pair.getLeft() == blockList.get(currentLayer - 1).getLeft()) {
+                if (pair.getRight() == block && pair.getLeft().equals(blockList.get(currentLayer - 1).getLeft())) {
                     frequency++;
                 }
             }
@@ -164,18 +162,6 @@ public class GuiSeismicReader extends GuiScreen {
         fontRenderer.drawString(LangUtils.localize("gui.abundancy") + ": " + frequency, 0, 0, 0x919191);
         GlStateManager.popMatrix();
         super.drawScreen(mouseX, mouseY, partialTick);
-    }
-
-    public String wrapString(String str, int index) {
-        String string = str;
-
-        for (int i = 0; i < string.length(); i++) {
-            if (i == index) {
-                string = string.substring(0, i) + "\n" + string.substring(i);
-            }
-        }
-
-        return string;
     }
 
     @Override

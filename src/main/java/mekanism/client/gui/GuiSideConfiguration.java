@@ -35,13 +35,13 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiSideConfiguration extends GuiMekanism {
 
-    public Map<Integer, GuiPos> slotPosMap = new HashMap<>();
+    private Map<Integer, GuiPos> slotPosMap = new HashMap<>();
 
-    public ISideConfiguration configurable;
+    private ISideConfiguration configurable;
 
     public TransmissionType currentType;
 
-    public List<GuiConfigTypeTab> configTabs = new ArrayList<>();
+    private List<GuiConfigTypeTab> configTabs = new ArrayList<>();
 
     public GuiSideConfiguration(EntityPlayer player, ISideConfiguration tile) {
         super((TileEntityContainerBlock) tile, new ContainerNull(player, (TileEntityContainerBlock) tile));

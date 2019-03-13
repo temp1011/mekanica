@@ -34,17 +34,17 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiTItemStackFilter extends GuiMekanism {
 
-    public TileEntityLogisticalSorter tileEntity;
+    private TileEntityLogisticalSorter tileEntity;
 
-    public boolean isNew = false;
+    private boolean isNew = false;
 
-    public TItemStackFilter origFilter;
+    private TItemStackFilter origFilter;
 
-    public TItemStackFilter filter = new TItemStackFilter();
+    private TItemStackFilter filter = new TItemStackFilter();
 
-    public String status = EnumColor.DARK_GREEN + LangUtils.localize("gui.allOK");
+    private String status = EnumColor.DARK_GREEN + LangUtils.localize("gui.allOK");
 
-    public int ticker;
+    private int ticker;
 
     private GuiTextField minField;
     private GuiTextField maxField;

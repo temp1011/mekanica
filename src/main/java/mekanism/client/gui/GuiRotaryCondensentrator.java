@@ -34,7 +34,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiRotaryCondensentrator extends GuiMekanism {
 
-    public TileEntityRotaryCondensentrator tileEntity;
+    private TileEntityRotaryCondensentrator tileEntity;
 
     public GuiRotaryCondensentrator(InventoryPlayer inventory, TileEntityRotaryCondensentrator tentity) {
         super(tentity, new ContainerRotaryCondensentrator(inventory, tentity));

@@ -35,7 +35,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiMetallurgicInfuser extends GuiMekanism {
 
-    public TileEntityMetallurgicInfuser tileEntity;
+    private TileEntityMetallurgicInfuser tileEntity;
 
     public GuiMetallurgicInfuser(InventoryPlayer inventory, TileEntityMetallurgicInfuser tentity) {
         super(tentity, new ContainerMetallurgicInfuser(inventory, tentity));

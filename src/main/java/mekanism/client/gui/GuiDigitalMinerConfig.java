@@ -33,6 +33,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
@@ -42,23 +43,19 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiDigitalMinerConfig extends GuiMekanism {
 
-	private final int scrollW = 12;
-    private final int scrollH = 138;
     // Filter dimensions
     private final int filterX = 56;
-    private final int filterY = 18;
     private final int filterW = 96;
-    private final int filterH = 29;
-    public TileEntityDigitalMiner tileEntity;
-    public boolean isDragging = false;
-    public int dragOffset = 0;
+    private TileEntityDigitalMiner tileEntity;
+    private boolean isDragging = false;
+    private int dragOffset = 0;
 
-    public int stackSwitch = 0;
+    private int stackSwitch = 0;
 
-    public Map<MOreDictFilter, StackData> oreDictStacks = new HashMap<>();
-    public Map<MModIDFilter, StackData> modIDStacks = new HashMap<>();
+    private Map<MOreDictFilter, StackData> oreDictStacks = new HashMap<>();
+    private Map<MModIDFilter, StackData> modIDStacks = new HashMap<>();
 
-    public float scroll;
+    private float scroll;
 
     private GuiTextField radiusField;
     private GuiTextField minField;
@@ -70,7 +67,7 @@ public class GuiDigitalMinerConfig extends GuiMekanism {
     }
 
     public int getScroll() {
-        return Math.max(Math.min((int) (scroll * 123), 123), 0);
+        return MathHelper.clamp((int) (scroll * 123), 0, 123);
     }
 
     public int getFilterIndex() {
@@ -270,7 +267,6 @@ public class GuiDigitalMinerConfig extends GuiMekanism {
     protected void mouseClickMove(int mouseX, int mouseY, int button, long ticks) {
         super.mouseClickMove(mouseX, mouseY, button, ticks);
 
-        int xAxis = (mouseX - (width - xSize) / 2);
         int yAxis = (mouseY - (height - ySize) / 2);
 
         if (isDragging) {

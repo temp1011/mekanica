@@ -22,7 +22,6 @@ import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
@@ -34,23 +33,21 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiQuantumEntangloporter extends GuiMekanism {
 
-    public ResourceLocation resource;
+    private ResourceLocation resource;
 
-    public TileEntityQuantumEntangloporter tileEntity;
+    private TileEntityQuantumEntangloporter tileEntity;
 
-    public EntityPlayer entityPlayer;
+    private GuiButton publicButton;
+    private GuiButton privateButton;
 
-    public GuiButton publicButton;
-    public GuiButton privateButton;
+    private GuiButton setButton;
+    private GuiButton deleteButton;
 
-    public GuiButton setButton;
-    public GuiButton deleteButton;
+    private GuiScrollList scrollList;
 
-    public GuiScrollList scrollList;
+    private GuiTextField frequencyField;
 
-    public GuiTextField frequencyField;
-
-    public boolean privateMode;
+    private boolean privateMode;
 
     public GuiQuantumEntangloporter(InventoryPlayer inventory, TileEntityQuantumEntangloporter tentity) {
         super(tentity, new ContainerQuantumEntangloporter(inventory, tentity));

@@ -27,7 +27,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiGasTank extends GuiMekanism {
 
-    public TileEntityGasTank tileEntity;
+    private TileEntityGasTank tileEntity;
 
     public GuiGasTank(InventoryPlayer inventory, TileEntityGasTank tentity) {
         super(tentity, new ContainerGasTank(inventory, tentity));
@@ -50,9 +50,6 @@ public class GuiGasTank extends GuiMekanism {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        int xAxis = (mouseX - (width - xSize) / 2);
-        int yAxis = (mouseY - (height - ySize) / 2);
-
         String stored = "" + (tileEntity.gasTank.getStored() == Integer.MAX_VALUE ? LangUtils.localize("gui.infinite")
               : tileEntity.gasTank.getStored());
         String capacityInfo =

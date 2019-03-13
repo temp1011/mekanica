@@ -29,7 +29,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiChemicalWasher extends GuiMekanism {
 
-    public TileEntityChemicalWasher tileEntity;
+    private TileEntityChemicalWasher tileEntity;
 
     public GuiChemicalWasher(InventoryPlayer inventory, TileEntityChemicalWasher tentity) {
         super(tentity, new ContainerChemicalWasher(inventory, tentity));
@@ -93,9 +93,7 @@ public class GuiChemicalWasher extends GuiMekanism {
         int guiHeight = (height - ySize) / 2;
         drawTexturedModalRect(guiWidth, guiHeight, 0, 0, xSize, ySize);
 
-        int displayInt;
-
-        displayInt = tileEntity.getScaledEnergyLevel(52);
+        int displayInt = tileEntity.getScaledEnergyLevel(52);
         drawTexturedModalRect(guiWidth + 116, guiHeight + 76, 176, 0, displayInt, 4);
 
         super.drawGuiContainerBackgroundLayer(partialTick, mouseX, mouseY);

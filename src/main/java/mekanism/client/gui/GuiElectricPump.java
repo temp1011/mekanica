@@ -25,9 +25,9 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiElectricPump extends GuiMekanism {
 
-    public TileEntityElectricPump tileEntity;
+    private TileEntityElectricPump tileEntity;
 
-    public ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiElectricPump.png");
+    private ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiElectricPump.png");
 
     public GuiElectricPump(InventoryPlayer inventory, TileEntityElectricPump tentity) {
         super(tentity, new ContainerElectricPump(inventory, tentity));
