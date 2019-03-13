@@ -45,10 +45,7 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiLogisticalSorter extends GuiMekanism {
 
-    // Scrollbar dimensions
-    private final int scrollX = 154;
-    private final int scrollY = 18;
-    private final int scrollW = 12;
+	private final int scrollW = 12;
     private final int scrollH = 138;
     // Filter dimensions
     private final int filterX = 56;
@@ -531,7 +528,9 @@ public class GuiLogisticalSorter extends GuiMekanism {
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
         // Draw scrollbar
-        drawTexturedModalRect(guiLeft + scrollX, guiTop + scrollY + getScroll(), 232 + (needsScrollBars() ? 0 : 12), 0,
+		int scrollY = 18;// Scrollbar dimensions
+		int scrollX = 154;
+		drawTexturedModalRect(guiLeft + scrollX, guiTop + scrollY + getScroll(), 232 + (needsScrollBars() ? 0 : 12), 0,
               12, 15);
 
         // Get mouse position relative to gui

@@ -16,10 +16,7 @@ public class ThermalEvaporationRecipeCategory extends BaseRecipeCategory {
 
     private final IDrawable background;
 
-    @Nullable
-    private ThermalEvaporationRecipe tempRecipe;
-
-    public ThermalEvaporationRecipeCategory(IGuiHelper helper) {
+	public ThermalEvaporationRecipeCategory(IGuiHelper helper) {
         super(helper, "mekanism:gui/nei/GuiThermalEvaporationController.png", "thermal_evaporation_plant",
               "gui.thermalEvaporationController.short", null);
 
@@ -47,7 +44,7 @@ public class ThermalEvaporationRecipeCategory extends BaseRecipeCategory {
             return;
         }
 
-        tempRecipe = ((ThermalEvaporationRecipeWrapper) recipeWrapper).getRecipe();
+		ThermalEvaporationRecipe tempRecipe = ((ThermalEvaporationRecipeWrapper) recipeWrapper).getRecipe();
 
         IGuiFluidStackGroup fluidStacks = recipeLayout.getFluidStacks();
 

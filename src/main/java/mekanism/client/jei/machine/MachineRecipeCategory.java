@@ -25,10 +25,7 @@ public class MachineRecipeCategory extends BaseRecipeCategory {
 
     private final IDrawable background;
 
-    @Nullable
-    private BasicMachineRecipe tempRecipe;
-
-    public MachineRecipeCategory(IGuiHelper helper, String name, String unlocalized, ProgressBar progress) {
+	public MachineRecipeCategory(IGuiHelper helper, String name, String unlocalized, ProgressBar progress) {
         super(helper, "mekanism:gui/GuiBasicMachine.png", name, unlocalized, progress);
 
         background = guiHelper.createDrawable(new ResourceLocation(guiTexture), 28, 16, 144, 54);
@@ -71,7 +68,7 @@ public class MachineRecipeCategory extends BaseRecipeCategory {
             return;
         }
 
-        tempRecipe = ((MachineRecipeWrapper) recipeWrapper).getRecipe();
+		BasicMachineRecipe tempRecipe = ((MachineRecipeWrapper) recipeWrapper).getRecipe();
 
         IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 

@@ -16,9 +16,8 @@ public class GuiPowerBar extends GuiElement {
 
     private int width = 6;
     private int height = 56;
-    private int innerOffsetY = 2;
 
-    private IStrictEnergyStorage tileEntity;
+	private IStrictEnergyStorage tileEntity;
     private IPowerInfoHandler handler;
 
     public GuiPowerBar(IGuiWrapper gui, IStrictEnergyStorage tile, ResourceLocation def, int x, int y) {
@@ -63,7 +62,8 @@ public class GuiPowerBar extends GuiElement {
         guiObj.drawTexturedRect(guiWidth + xLocation, guiHeight + yLocation, 0, 0, width, height);
 
         if (handler.getLevel() > 0) {
-            int displayInt = (int) (handler.getLevel() * 52) + innerOffsetY;
+			int innerOffsetY = 2;
+			int displayInt = (int) (handler.getLevel() * 52) + innerOffsetY;
             guiObj.drawTexturedRect(guiWidth + xLocation, guiHeight + yLocation + height - displayInt, 6,
                   height - displayInt, width, displayInt);
         }

@@ -13,10 +13,7 @@ public abstract class PlayerSound extends PositionedSound implements ITickableSo
 
     protected EntityPlayer player;
 
-    private float fadeUpStep = 0.1f;
-    private float fadeDownStep = 0.1f;
-
-    private boolean donePlaying = false;
+	private boolean donePlaying = false;
 
     public PlayerSound(EntityPlayer player, ResourceLocation sound) {
         super(sound, SoundCategory.PLAYERS);
@@ -55,12 +52,14 @@ public abstract class PlayerSound extends PositionedSound implements ITickableSo
         if (shouldPlaySound()) {
             if (volume < 1.0f) {
                 // If we weren't max volume, start fading up
-                volume = Math.max(1.0f, (volume + fadeUpStep));
+				float fadeUpStep = 0.1f;
+				volume = Math.max(1.0f, (volume + fadeUpStep));
             }
         } else {
             // Not yet fully muted, fade down
             if (volume > 0.0f) {
-                volume = Math.max(0.0f, (volume - fadeDownStep));
+				float fadeDownStep = 0.1f;
+				volume = Math.max(0.0f, (volume - fadeDownStep));
             }
         }
     }

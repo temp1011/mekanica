@@ -29,9 +29,6 @@ public class AdvancedMachineRecipeCategory extends BaseRecipeCategory {
 
     private final IDrawable background;
 
-    @Nullable
-    private AdvancedMachineRecipe tempRecipe;
-
     public AdvancedMachineRecipeCategory(IGuiHelper helper, String name, String unlocalized, ProgressBar progress) {
         super(helper, "mekanism:gui/GuiAdvancedMachine.png", name, unlocalized, progress);
 
@@ -78,7 +75,7 @@ public class AdvancedMachineRecipeCategory extends BaseRecipeCategory {
             return;
         }
 
-        tempRecipe = ((AdvancedMachineRecipeWrapper) recipeWrapper).getRecipe();
+        AdvancedMachineRecipe tempRecipe = ((AdvancedMachineRecipeWrapper) recipeWrapper).getRecipe();
 
         AdvancedMachineInput input = (AdvancedMachineInput) tempRecipe.recipeInput;
 

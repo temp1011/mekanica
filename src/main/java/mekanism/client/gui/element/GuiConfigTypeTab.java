@@ -18,13 +18,12 @@ public class GuiConfigTypeTab extends GuiElement {
     public TransmissionType transmission;
     public boolean visible;
     public boolean left;
-    private TileEntity tileEntity;
-    private int yPos;
+	private int yPos;
 
     public GuiConfigTypeTab(IGuiWrapper gui, TileEntity tile, TransmissionType type, ResourceLocation def) {
         super(getResource(type), gui, def);
 
-        tileEntity = tile;
+		TileEntity tileEntity = tile;
         transmission = type;
     }
 

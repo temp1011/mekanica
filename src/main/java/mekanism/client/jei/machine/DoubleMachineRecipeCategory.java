@@ -27,10 +27,7 @@ public class DoubleMachineRecipeCategory extends BaseRecipeCategory {
 
     private final IDrawable background;
 
-    @Nullable
-    private DoubleMachineRecipe tempRecipe;
-
-    public DoubleMachineRecipeCategory(IGuiHelper helper, String name, String unlocalized, ProgressBar progress) {
+	public DoubleMachineRecipeCategory(IGuiHelper helper, String name, String unlocalized, ProgressBar progress) {
         super(helper, "mekanism:gui/guibasicmachine.png", name, unlocalized, progress);
 
         background = guiHelper.createDrawable(new ResourceLocation(guiTexture), 28, 16, 144, 54);
@@ -76,7 +73,7 @@ public class DoubleMachineRecipeCategory extends BaseRecipeCategory {
             return;
         }
 
-        tempRecipe = ((DoubleMachineRecipeWrapper) recipeWrapper).getRecipe();
+		DoubleMachineRecipe tempRecipe = ((DoubleMachineRecipeWrapper) recipeWrapper).getRecipe();
 
         DoubleMachineInput input = (DoubleMachineInput) tempRecipe.recipeInput;
 

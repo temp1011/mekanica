@@ -27,10 +27,7 @@ public class ChanceMachineRecipeCategory extends BaseRecipeCategory {
 
     private final IDrawable background;
 
-    @Nullable
-    private ChanceMachineRecipe tempRecipe;
-
-    public ChanceMachineRecipeCategory(IGuiHelper helper, String name, String unlocalized, ProgressBar progress) {
+	public ChanceMachineRecipeCategory(IGuiHelper helper, String name, String unlocalized, ProgressBar progress) {
         super(helper, "mekanism:gui/GuiBasicMachine.png", name, unlocalized, progress);
 
         background = guiHelper.createDrawable(new ResourceLocation(guiTexture), 28, 16, 144, 54);
@@ -73,7 +70,7 @@ public class ChanceMachineRecipeCategory extends BaseRecipeCategory {
             return;
         }
 
-        tempRecipe = ((ChanceMachineRecipeWrapper) recipeWrapper).getRecipe();
+		ChanceMachineRecipe tempRecipe = ((ChanceMachineRecipeWrapper) recipeWrapper).getRecipe();
 
         IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 
