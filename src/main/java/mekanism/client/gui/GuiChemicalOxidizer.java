@@ -30,7 +30,7 @@ public class GuiChemicalOxidizer extends GuiMekanismPlus {
         guiElements.add(new GuiGasGauge(() -> tileEntity.gasTank, GuiGauge.Type.STANDARD, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 133, 13));
 
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
+        guiElements.add(new GuiSlot(SlotType.POWER, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 154, 4).with(SlotOverlay.POWER));
         guiElements.add(new GuiSlot(SlotType.NORMAL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 25, 35));

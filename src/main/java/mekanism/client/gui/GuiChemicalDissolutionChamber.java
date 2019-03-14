@@ -41,7 +41,7 @@ public class GuiChemicalDissolutionChamber extends GuiMekanismPlus {
         guiElements.add(new GuiGasGauge(() -> tileEntity.outputTank, GuiGauge.Type.STANDARD, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 133, 13));
 
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
+        guiElements.add(new GuiSlot(SlotType.POWER, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 154, 4)
               .with(SlotOverlay.POWER));
 

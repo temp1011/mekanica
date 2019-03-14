@@ -47,7 +47,7 @@ public class GuiRotaryCondensentrator extends GuiMekanismPlus {
         guiElements.add(new GuiSlot(SlotType.NORMAL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"), 154, 55));
 
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
+        guiElements.add(new GuiSlot(SlotType.POWER, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"), 154, 4)
               .with(SlotOverlay.POWER));
 

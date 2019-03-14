@@ -34,7 +34,7 @@ public class GuiChemicalInfuser extends GuiMekanismPlus {
         guiElements.add(new GuiGasGauge(() -> tileEntity.rightTank, GuiGauge.Type.STANDARD, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 133, 13));
 
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
+        guiElements.add(new GuiSlot(SlotType.POWER, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 154, 4).with(SlotOverlay.POWER));
         guiElements.add(new GuiSlot(SlotType.NORMAL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 154, 55).with(SlotOverlay.MINUS));

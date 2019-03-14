@@ -53,7 +53,7 @@ public class GuiElectrolyticSeparator extends GuiMekanismPlus {
               MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 58, 51));
         guiElements.add(new GuiSlot(SlotType.NORMAL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 100, 51));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
+        guiElements.add(new GuiSlot(SlotType.POWER, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 142, 34)
               .with(SlotOverlay.POWER));
 
