@@ -3,7 +3,6 @@ package mekanism.client.gui;
 import mekanism.client.gui.element.GuiGasGauge;
 import mekanism.client.gui.element.GuiGauge;
 import mekanism.client.gui.element.GuiProgress;
-import mekanism.client.gui.element.GuiProgress.IProgressInfoHandler;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
@@ -37,12 +36,7 @@ public class GuiChemicalOxidizer extends GuiMekanismPlus {
         guiElements.add(new GuiSlot(SlotType.NORMAL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 154, 24).with(SlotOverlay.PLUS));
 
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.getScaledProgress();
-            }
-        }, ProgressBar.LARGE_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 62,
+        guiElements.add(new GuiProgress(() -> tileEntity.getScaledProgress(), ProgressBar.LARGE_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 62,
               39));
     }
 

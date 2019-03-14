@@ -3,7 +3,6 @@ package mekanism.client.gui;
 import mekanism.client.gui.element.GuiGasGauge;
 import mekanism.client.gui.element.GuiGauge;
 import mekanism.client.gui.element.GuiProgress;
-import mekanism.client.gui.element.GuiProgress.IProgressInfoHandler;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
@@ -43,19 +42,9 @@ public class GuiChemicalInfuser extends GuiMekanismPlus {
         guiElements.add(new GuiSlot(SlotType.NORMAL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 79, 64).with(SlotOverlay.PLUS));
 
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.isActive ? 1 : 0;
-            }
-        }, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 45,
+        guiElements.add(new GuiProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 45,
               38));
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.isActive ? 1 : 0;
-            }
-        }, ProgressBar.SMALL_LEFT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 99,
+        guiElements.add(new GuiProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.SMALL_LEFT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 99,
               38));
     }
 

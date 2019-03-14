@@ -5,7 +5,6 @@ import java.util.List;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.OreGas;
 import mekanism.client.gui.element.GuiGauge.Type;
-import mekanism.client.gui.element.GuiProgress.IProgressInfoHandler;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
@@ -48,12 +47,7 @@ public class GuiChemicalCrystallizer extends GuiMekanismPlus {
               new ElementBuilder(tileEntity, this, "GuiChemicalCrystallizer.png")
                     .addSlot(SlotType.EXTRA, SlotOverlay.PLUS, 5, 64)
                     .addSlotPower(154, 4)
-                    .addProgress(new IProgressInfoHandler() {
-                        @Override
-                        public double getProgress() {
-                            return tileEntity.getScaledProgress();
-                        }
-                    }, ProgressBar.LARGE_RIGHT, 51, 60)
+                    .addProgress(() -> tileEntity.getScaledProgress(), ProgressBar.LARGE_RIGHT, 51, 60)
                     .addPowerBar(160, 23)
                     .addSideConfiguration()
                     .addTransporter(34)

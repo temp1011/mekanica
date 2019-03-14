@@ -6,7 +6,6 @@ import mekanism.client.gui.element.GuiGasGauge;
 import mekanism.client.gui.element.GuiGauge;
 import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.gui.element.GuiProgress;
-import mekanism.client.gui.element.GuiProgress.IProgressInfoHandler;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.gui.element.GuiRedstoneControl;
 import mekanism.client.gui.element.GuiSecurityTab;
@@ -75,12 +74,7 @@ public class GuiPRC extends GuiMekanism {
               .add(new GuiSlot(SlotType.OUTPUT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiBlank.png"), 115,
                     34));
 
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.getScaledProgress();
-            }
-        }, getProgressType(), this, MekanismUtils.getResource(ResourceType.GUI, "GuiBlank.png"), 75, 37));
+        guiElements.add(new GuiProgress(() -> tileEntity.getScaledProgress(), getProgressType(), this, MekanismUtils.getResource(ResourceType.GUI, "GuiBlank.png"), 75, 37));
     }
 
     @Override

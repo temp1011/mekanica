@@ -3,7 +3,6 @@ package mekanism.client.gui;
 import mekanism.client.gui.element.GuiGasGauge;
 import mekanism.client.gui.element.GuiGauge;
 import mekanism.client.gui.element.GuiProgress;
-import mekanism.client.gui.element.GuiProgress.IProgressInfoHandler;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
@@ -27,12 +26,7 @@ public class GuiChemicalDissolutionChamber extends GuiMekanismPlus {
         super(tentity, new ContainerChemicalDissolutionChamber(inventory, tentity), "GuiChemicalDissolutionChamber.png", tentity.energyPerTick);
         tileEntity = tentity;
 
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.getScaledProgress();
-            }
-        }, ProgressBar.LARGE_RIGHT, this,
+        guiElements.add(new GuiProgress(() -> tileEntity.getScaledProgress(), ProgressBar.LARGE_RIGHT, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 62, 39));
 
         guiElements.add(new GuiGasGauge(() -> tileEntity.injectTank, GuiGauge.Type.STANDARD, this,

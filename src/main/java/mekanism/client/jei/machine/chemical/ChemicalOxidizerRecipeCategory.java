@@ -47,12 +47,7 @@ public class ChemicalOxidizerRecipeCategory extends BaseRecipeCategory {
         guiElements.add(new GuiSlot(SlotType.NORMAL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 25, 35));
 
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return (double) timer.getValue() / 20F;
-            }
-        }, progressBar, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 62, 39));
+        guiElements.add(new GuiProgress(() -> (double) timer.getValue() / 20F, progressBar, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 62, 39));
     }
 
     @Override

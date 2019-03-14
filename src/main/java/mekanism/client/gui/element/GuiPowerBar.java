@@ -91,12 +91,12 @@ public class GuiPowerBar extends GuiElement {
     public void mouseClicked(int xAxis, int yAxis, int button) {
     }
 
-    public static abstract class IPowerInfoHandler {
+    public interface IPowerInfoHandler {
 
-        public String getTooltip() {
+        default String getTooltip() {
             return null;
         }
 
-        public abstract double getLevel();
+        double getLevel();
     }
 }

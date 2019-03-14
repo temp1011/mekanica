@@ -70,12 +70,7 @@ public class GuiReactorHeat extends GuiMekanism {
                 return "Plasma: " + MekanismUtils.getTemperatureDisplay(level, TemperatureUnit.KELVIN);
             }
         }, Type.STANDARD, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 7, 50));
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.getPlasmaTemp() > tileEntity.getCaseTemp() ? 1 : 0;
-            }
-        }, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 27, 75));
+        guiElements.add(new GuiProgress(() -> tileEntity.getPlasmaTemp() > tileEntity.getCaseTemp() ? 1 : 0, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 27, 75));
         guiElements.add(new GuiNumberGauge(new INumberInfoHandler() {
             @Override
             public TextureAtlasSprite getIcon() {
@@ -97,19 +92,9 @@ public class GuiReactorHeat extends GuiMekanism {
                 return "Case: " + MekanismUtils.getTemperatureDisplay(level, TemperatureUnit.KELVIN);
             }
         }, Type.STANDARD, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 61, 50));
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.getCaseTemp() > 0 ? 1 : 0;
-            }
-        }, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 81, 60));
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return (tileEntity.getCaseTemp() > 0 && tileEntity.waterTank.getFluidAmount() > 0
-                      && tileEntity.steamTank.getFluidAmount() < tileEntity.steamTank.getCapacity()) ? 1 : 0;
-            }
-        }, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 81, 90));
+        guiElements.add(new GuiProgress(() -> tileEntity.getCaseTemp() > 0 ? 1 : 0, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 81, 60));
+        guiElements.add(new GuiProgress(() -> (tileEntity.getCaseTemp() > 0 && tileEntity.waterTank.getFluidAmount() > 0
+              && tileEntity.steamTank.getFluidAmount() < tileEntity.steamTank.getCapacity()) ? 1 : 0, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 81, 90));
         guiElements.add(new GuiFluidGauge(() -> tentity.waterTank, Type.SMALL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 115, 84));
         guiElements.add(new GuiFluidGauge(() -> tentity.steamTank, Type.SMALL, this,

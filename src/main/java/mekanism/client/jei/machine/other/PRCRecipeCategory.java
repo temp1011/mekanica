@@ -52,18 +52,8 @@ public class PRCRecipeCategory extends BaseRecipeCategory {
         guiElements.add(GuiGasGauge.getDummy(GuiGauge.Type.STANDARD_RED, this, guiLocation, 28, 10));
         guiElements.add(GuiGasGauge.getDummy(GuiGauge.Type.SMALL_BLUE, this, guiLocation, 140, 40));
 
-        guiElements.add(new GuiPowerBar(this, new IPowerInfoHandler() {
-            @Override
-            public double getLevel() {
-                return 1F;
-            }
-        }, guiLocation, 164, 15));
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return (float) timer.getValue() / 20F;
-            }
-        }, progressBar, this, guiLocation, 75, 37));
+        guiElements.add(new GuiPowerBar(this, () -> 1F, guiLocation, 164, 15));
+        guiElements.add(new GuiProgress(() -> (float) timer.getValue() / 20F, progressBar, this, guiLocation, 75, 37));
     }
 
     @Override

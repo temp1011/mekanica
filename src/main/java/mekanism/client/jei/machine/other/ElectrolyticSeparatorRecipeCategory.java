@@ -52,12 +52,7 @@ public class ElectrolyticSeparatorRecipeCategory extends BaseRecipeCategory {
               MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 58, 18));
         guiElements.add(GuiGasGauge.getDummy(GuiGauge.Type.SMALL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 100, 18));
-        guiElements.add(new GuiPowerBar(this, new IPowerInfoHandler() {
-            @Override
-            public double getLevel() {
-                return 1F;
-            }
-        }, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 164, 15));
+        guiElements.add(new GuiPowerBar(this, () -> 1F, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 164, 15));
 
         guiElements.add(new GuiSlot(SlotType.NORMAL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 25, 34));
@@ -69,12 +64,8 @@ public class ElectrolyticSeparatorRecipeCategory extends BaseRecipeCategory {
               MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 142, 34)
               .with(SlotOverlay.POWER));
 
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return 1;
-            }
-        }, progressBar, this, MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 78, 29));
+        guiElements.add(new GuiProgress(
+              () -> 1, progressBar, this, MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 78, 29));
     }
 
     @Override

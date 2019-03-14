@@ -68,18 +68,8 @@ public class MetallurgicInfuserRecipeCategory extends BaseRecipeCategory {
               .add(new GuiSlot(SlotType.OUTPUT, this, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 108,
                     42));
 
-        guiElements.add(new GuiPowerBar(this, new IPowerInfoHandler() {
-            @Override
-            public double getLevel() {
-                return 1F;
-            }
-        }, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 164, 15));
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return (double) timer.getValue() / 20F;
-            }
-        }, ProgressBar.MEDIUM, this, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 70, 46));
+        guiElements.add(new GuiPowerBar(this, () -> 1F, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 164, 15));
+        guiElements.add(new GuiProgress(() -> (double) timer.getValue() / 20F, ProgressBar.MEDIUM, this, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 70, 46));
     }
 
     @Override

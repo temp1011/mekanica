@@ -53,18 +53,8 @@ public class AdvancedMachineRecipeCategory extends BaseRecipeCategory {
               .add(new GuiSlot(SlotType.OUTPUT_LARGE, this, MekanismUtils.getResource(ResourceType.GUI, stripTexture()),
                     111, 30));
 
-        guiElements.add(new GuiPowerBar(this, new IPowerInfoHandler() {
-            @Override
-            public double getLevel() {
-                return 1F;
-            }
-        }, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 164, 15));
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return (double) timer.getValue() / 20F;
-            }
-        }, progressBar, this, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 77, 37));
+        guiElements.add(new GuiPowerBar(this, () -> 1F, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 164, 15));
+        guiElements.add(new GuiProgress(() -> (double) timer.getValue() / 20F, progressBar, this, MekanismUtils.getResource(ResourceType.GUI, stripTexture()), 77, 37));
     }
 
     @Override

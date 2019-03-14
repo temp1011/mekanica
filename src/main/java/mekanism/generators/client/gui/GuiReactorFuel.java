@@ -53,18 +53,8 @@ public class GuiReactorFuel extends GuiMekanism {
               MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 79, 50));
         guiElements.add(new GuiGasGauge(() -> tentity.tritiumTank, Type.SMALL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 133, 64));
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.getActive() ? 1 : 0;
-            }
-        }, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 45, 75));
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.getActive() ? 1 : 0;
-            }
-        }, ProgressBar.SMALL_LEFT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 99, 75));
+        guiElements.add(new GuiProgress(() -> tileEntity.getActive() ? 1 : 0, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 45, 75));
+        guiElements.add(new GuiProgress(() -> tileEntity.getActive() ? 1 : 0, ProgressBar.SMALL_LEFT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 99, 75));
         guiElements.add(new GuiHeatTab(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png")));
         guiElements.add(new GuiStatTab(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png")));
     }
