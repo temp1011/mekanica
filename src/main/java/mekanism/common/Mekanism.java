@@ -142,6 +142,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.text.WordUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -816,12 +817,6 @@ public class Mekanism {
         proxy.loadConfiguration();
         proxy.onConfigSync(false);
 
-        if (config.getAbsolutePath().contains("voltz")) {
-            logger.info("Detected Voltz in root directory - hello, fellow user!");
-        } else if (config.getAbsolutePath().contains("tekkit")) {
-            logger.info("Detected Tekkit in root directory - hello, fellow user!");
-        }
-
         MinecraftForge.EVENT_BUS.register(MekanismItems.GasMask);
         MinecraftForge.EVENT_BUS.register(MekanismItems.FreeRunners);
 
@@ -834,25 +829,13 @@ public class Mekanism {
 
         Mekanism.proxy.preInit();
 
-        //Register infuses
-        InfuseRegistry.registerInfuseType(
-              new InfuseType("CARBON", new ResourceLocation("mekanism:blocks/infuse/Carbon"))
-                    .setTranslationKey("carbon"));
-        InfuseRegistry.registerInfuseType(
-              new InfuseType("TIN", new ResourceLocation("mekanism:blocks/infuse/Tin")).setTranslationKey("tin"));
-        InfuseRegistry.registerInfuseType(
-              new InfuseType("DIAMOND", new ResourceLocation("mekanism:blocks/infuse/Diamond"))
-                    .setTranslationKey("diamond"));
-        InfuseRegistry.registerInfuseType(
-              new InfuseType("REDSTONE", new ResourceLocation("mekanism:blocks/infuse/Redstone"))
-                    .setTranslationKey("redstone"));
-        InfuseRegistry.registerInfuseType(
-              new InfuseType("FUNGI", new ResourceLocation("mekanism:blocks/infuse/Fungi")).setTranslationKey("fungi"));
-        InfuseRegistry.registerInfuseType(
-              new InfuseType("BIO", new ResourceLocation("mekanism:blocks/infuse/Bio")).setTranslationKey("bio"));
-        InfuseRegistry.registerInfuseType(
-              new InfuseType("OBSIDIAN", new ResourceLocation("mekanism:blocks/infuse/Obsidian"))
-                    .setTranslationKey("obsidian"));
+        //register infuses
+        String[] infuses = new String[] {"carbon", "tin", "diamond", "redstone", "fungi", "bio", "obsidian"};
+        for(String s : infuses) {
+            InfuseRegistry.registerInfuseType(
+                  new InfuseType(s.toUpperCase(Locale.ROOT), new ResourceLocation("mekanism:blocks/infuse/"+WordUtils.capitalize(s)))
+                  .setTranslationKey(s));
+        }
 
         Capabilities.registerCapabilities();
     }
