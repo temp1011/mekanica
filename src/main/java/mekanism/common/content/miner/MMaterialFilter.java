@@ -3,7 +3,6 @@ package mekanism.common.content.miner;
 import io.netty.buffer.ByteBuf;
 import mekanism.common.base.TileNetworkList;
 import mekanism.common.content.transporter.Finder.MaterialFinder;
-import mekanism.common.util.InventoryUtils;
 import mekanism.common.util.MekanismUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -44,7 +43,7 @@ public class MMaterialFilter extends MinerFilter {
     protected void read(NBTTagCompound nbtTags) {
         super.read(nbtTags);
 
-        materialItem = InventoryUtils.loadFromNBT(nbtTags);
+        materialItem = new ItemStack(nbtTags);
     }
 
     @Override

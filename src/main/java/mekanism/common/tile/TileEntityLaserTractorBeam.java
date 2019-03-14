@@ -2,6 +2,7 @@ package mekanism.common.tile;
 
 import io.netty.buffer.ByteBuf;
 import java.util.List;
+import java.util.stream.IntStream;
 import javax.annotation.Nonnull;
 import mekanism.api.Coord4D;
 import mekanism.api.lasers.ILaserReceptor;
@@ -15,7 +16,6 @@ import mekanism.common.network.PacketTileEntity.TileEntityMessage;
 import mekanism.common.security.ISecurityTile;
 import mekanism.common.tile.component.TileComponentSecurity;
 import mekanism.common.tile.prefab.TileEntityContainerBlock;
-import mekanism.common.util.InventoryUtils;
 import mekanism.common.util.StackUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -30,7 +30,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 public class TileEntityLaserTractorBeam extends TileEntityContainerBlock implements ILaserReceptor, ISecurityTile {
 
     public static final double MAX_ENERGY = 5E9;
-    public static int[] availableSlotIDs = InventoryUtils.getIntRange(0, 26);
+    public static int[] availableSlotIDs = IntStream.rangeClosed(0, 26).toArray();
     public double collectedEnergy = 0;
     public double lastFired = 0;
     public boolean on = false;

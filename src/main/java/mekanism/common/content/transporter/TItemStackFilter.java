@@ -3,7 +3,6 @@ package mekanism.common.content.transporter;
 import io.netty.buffer.ByteBuf;
 import mekanism.common.base.TileNetworkList;
 import mekanism.common.content.transporter.Finder.ItemStackFinder;
-import mekanism.common.util.InventoryUtils;
 import mekanism.common.util.MekanismUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -66,7 +65,7 @@ public class TItemStackFilter extends TransporterFilter {
         min = nbtTags.getInteger("min");
         max = nbtTags.getInteger("max");
 
-        itemType = InventoryUtils.loadFromNBT(nbtTags);
+        itemType = new ItemStack(nbtTags);
     }
 
     @Override

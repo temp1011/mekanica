@@ -13,7 +13,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
@@ -23,16 +22,6 @@ import net.minecraftforge.items.IItemHandler;
 public final class InventoryUtils {
 
     public static final int[] EMPTY = new int[]{};
-
-    public static int[] getIntRange(int start, int end) {
-        int[] ret = new int[1 + end - start];
-
-        for (int i = start; i <= end; i++) {
-            ret[i - start] = i;
-        }
-
-        return ret;
-    }
 
     public static IInventory checkChestInv(IInventory inv) {
         if (inv instanceof TileEntityChest) {
@@ -316,6 +305,36 @@ public final class InventoryUtils {
         return null;
     }
 
+    private static boolean canInsertSided(ISidedInventory sidedInventory, int[] slots, ItemStack itemStack, EnumFacing side, boolean force) {
+        if (slots.length != 0) {
+            if (force && sidedInventory instanceof TileEntityBin && side == EnumFacing.UP) {
+                slots = sidedInventory.getSlotsForFace(EnumFacing.UP);
+            }
+
+            for (int slotID : slots) {
+                if (!force) {
+                    if (!sidedInventory.isItemValidForSlot(slotID, itemStack) || !sidedInventory
+                          .canInsertItem(slotID, itemStack, side.getOpposite())) {
+                        continue;
+                    }
+                }
+
+                ItemStack inSlot = sidedInventory.getStackInSlot(slotID);
+                if (inSlot.isEmpty()) {
+                    return true;
+                }
+
+                int max = Math.min(inSlot.getMaxStackSize(),
+                      sidedInventory.getInventoryStackLimit());
+
+                if (areItemsStackable(itemStack, inSlot) && inSlot.getCount() < max) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static boolean canInsert(TileEntity tileEntity, EnumColor color, ItemStack itemStack, EnumFacing side,
           boolean force) {
         if (force && tileEntity instanceof TileEntityLogisticalSorter) {
@@ -347,50 +366,9 @@ public final class InventoryUtils {
             ISidedInventory sidedInventory = (ISidedInventory) tileEntity;
             int[] slots = sidedInventory.getSlotsForFace(side.getOpposite());
 
-            if (slots.length != 0) {
-                if (force && sidedInventory instanceof TileEntityBin && side == EnumFacing.UP) {
-                    slots = sidedInventory.getSlotsForFace(EnumFacing.UP);
-                }
-
-                for (int get = 0; get <= slots.length - 1; get++) {
-                    int slotID = slots[get];
-
-                    if (!force) {
-                        if (!sidedInventory.isItemValidForSlot(slotID, itemStack) || !sidedInventory
-                              .canInsertItem(slotID, itemStack, side.getOpposite())) {
-                            continue;
-                        }
-                    }
-
-                    ItemStack inSlot = sidedInventory.getStackInSlot(slotID);
-
-                    if (inSlot.isEmpty()) {
-                        if (itemStack.getCount() <= sidedInventory.getInventoryStackLimit()) {
-                            return true;
-                        } else {
-                            int rejects = itemStack.getCount() - sidedInventory.getInventoryStackLimit();
-
-                            if (rejects < itemStack.getCount()) {
-                                return true;
-                            }
-                        }
-                    } else if (areItemsStackable(itemStack, inSlot) && inSlot.getCount() < Math
-                          .min(inSlot.getMaxStackSize(), sidedInventory.getInventoryStackLimit())) {
-                        int max = Math.min(inSlot.getMaxStackSize(), sidedInventory.getInventoryStackLimit());
-
-                        if (inSlot.getCount() + itemStack.getCount() <= max) {
-                            return true;
-                        } else {
-                            int rejects = (inSlot.getCount() + itemStack.getCount()) - max;
-
-                            if (rejects < itemStack.getCount()) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
+            return canInsertSided(sidedInventory, slots, itemStack, side, force);
         } else if (tileEntity instanceof IInventory) {
+            //TODO - this is almost the same as above?
             IInventory inventory = checkChestInv((IInventory) tileEntity);
 
             for (int i = 0; i <= inventory.getSizeInventory() - 1; i++) {
@@ -432,24 +410,11 @@ public final class InventoryUtils {
         return false;
     }
 
-    public static ItemStack loadFromNBT(NBTTagCompound nbtTags) {
-		return new ItemStack(nbtTags);
-    }
-
     public static boolean isItemHandler(TileEntity tile, EnumFacing side) {
         return CapabilityUtils.hasCapability(tile, CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
     }
 
     public static IItemHandler getItemHandler(TileEntity tile, EnumFacing side) {
         return CapabilityUtils.getCapability(tile, CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
-    }
-
-    /*TODO From CCLib -- go back to that version when we're using dependencies again*/
-    public static boolean canStack(ItemStack stack1, ItemStack stack2) {
-        return stack1.isEmpty() || stack2.isEmpty() ||
-              (stack1.getItem() == stack2.getItem() &&
-                    (!stack2.getHasSubtypes() || stack2.getItemDamage() == stack1.getItemDamage()) &&
-                    ItemStack.areItemStackTagsEqual(stack2, stack1)) &&
-                    stack1.isStackable();
     }
 }
