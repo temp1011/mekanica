@@ -52,10 +52,13 @@ public class GuiDigitalMiner extends GuiMekanism {
 
         guiElements.add(new GuiRedstoneControl(this, tileEntity,
               MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png")));
+
         guiElements.add(new GuiSecurityTab(this, tileEntity,
               MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png")));
+
         guiElements.add(new GuiUpgradeTab(this, tileEntity,
               MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png")));
+
         guiElements
               .add(new GuiPowerBar(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png"),
                     163, 23));

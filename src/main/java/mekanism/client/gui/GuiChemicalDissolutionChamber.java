@@ -1,21 +1,16 @@
 package mekanism.client.gui;
 
-import mekanism.client.gui.element.GuiEnergyInfo;
 import mekanism.client.gui.element.GuiGasGauge;
 import mekanism.client.gui.element.GuiGauge;
 import mekanism.client.gui.element.GuiProgress;
 import mekanism.client.gui.element.GuiProgress.IProgressInfoHandler;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
 import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
-import mekanism.client.gui.element.GuiUpgradeTab;
 import mekanism.common.inventory.container.ContainerChemicalDissolutionChamber;
 import mekanism.common.tile.TileEntityChemicalDissolutionChamber;
 import mekanism.common.util.LangUtils;
-import mekanism.common.util.ListUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -24,43 +19,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiChemicalDissolutionChamber extends GuiMekanism {
+public class GuiChemicalDissolutionChamber extends GuiMekanismPlus {
 
     public TileEntityChemicalDissolutionChamber tileEntity;
 
     public GuiChemicalDissolutionChamber(InventoryPlayer inventory, TileEntityChemicalDissolutionChamber tentity) {
-        super(tentity, new ContainerChemicalDissolutionChamber(inventory, tentity));
+        super(tentity, new ContainerChemicalDissolutionChamber(inventory, tentity), "GuiChemicalDissolutionChamber.png", tentity.energyPerTick);
         tileEntity = tentity;
-
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png")));
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png")));
-        guiElements.add(new GuiUpgradeTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png")));
-        guiElements.add(new GuiEnergyInfo(() ->
-        {
-            String multiplier = MekanismUtils.getEnergyDisplay(tileEntity.energyPerTick);
-            return ListUtils.asList(LangUtils.localize("gui.using") + ": " + multiplier + "/t",
-                  LangUtils.localize("gui.needed") + ": " + MekanismUtils
-                        .getEnergyDisplay(tileEntity.getMaxEnergy() - tileEntity.getEnergy()));
-        }, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png")));
-        guiElements.add(new GuiGasGauge(() -> tileEntity.injectTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 5, 4));
-        guiElements.add(new GuiGasGauge(() -> tileEntity.outputTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 133, 13));
-
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 154, 4)
-              .with(SlotOverlay.POWER));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 25, 35));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 154, 24)
-              .with(SlotOverlay.PLUS));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 5, 64)
-              .with(SlotOverlay.MINUS));
 
         guiElements.add(new GuiProgress(new IProgressInfoHandler() {
             @Override
@@ -69,6 +34,27 @@ public class GuiChemicalDissolutionChamber extends GuiMekanism {
             }
         }, ProgressBar.LARGE_RIGHT, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 62, 39));
+
+        guiElements.add(new GuiGasGauge(() -> tileEntity.injectTank, GuiGauge.Type.STANDARD, this,
+              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 5, 4));
+
+        guiElements.add(new GuiGasGauge(() -> tileEntity.outputTank, GuiGauge.Type.STANDARD, this,
+              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 133, 13));
+
+        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
+              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 154, 4)
+              .with(SlotOverlay.POWER));
+
+        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
+              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 25, 35));
+
+        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
+              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 154, 24)
+              .with(SlotOverlay.PLUS));
+
+        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
+              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalDissolutionChamber.png"), 5, 64)
+              .with(SlotOverlay.MINUS));
     }
 
     @Override
