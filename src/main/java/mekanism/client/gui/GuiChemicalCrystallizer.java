@@ -4,17 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.OreGas;
-import mekanism.client.gui.element.GuiGasGauge;
-import mekanism.client.gui.element.GuiGauge;
-import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiProgress;
+import mekanism.client.gui.element.GuiGauge.Type;
 import mekanism.client.gui.element.GuiProgress.IProgressInfoHandler;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
-import mekanism.client.gui.element.GuiSideConfigurationTab;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
-import mekanism.client.gui.element.GuiTransporterConfigTab;
 import mekanism.common.inventory.container.ContainerChemicalCrystallizer;
 import mekanism.common.recipe.machines.CrystallizerRecipe;
 import mekanism.common.tile.TileEntityChemicalCrystallizer;
@@ -36,48 +30,37 @@ public class GuiChemicalCrystallizer extends GuiMekanismPlus {
 
     public TileEntityChemicalCrystallizer tileEntity;
 
-    public Gas prevGas;
+    private Gas prevGas;
 
-    public ItemStack renderStack = ItemStack.EMPTY;
+    private ItemStack renderStack = ItemStack.EMPTY;
 
-    public int stackSwitch = 0;
+    private int stackSwitch = 0;
 
-    public int stackIndex = 0;
+    private int stackIndex = 0;
 
-    public List<ItemStack> iterStacks = new ArrayList<>();
+    private List<ItemStack> iterStacks = new ArrayList<>();
 
     public GuiChemicalCrystallizer(InventoryPlayer inventory, TileEntityChemicalCrystallizer tentity) {
         super(tentity, new ContainerChemicalCrystallizer(inventory, tentity), "GuiChemicalCrystallizer.png", tentity.energyPerTick);
         tileEntity = tentity;
 
-        guiElements.add(new GuiSlot(SlotType.EXTRA, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalCrystallizer.png"), 5, 64)
-              .with(SlotOverlay.PLUS));
-        guiElements.add(new GuiSlot(SlotType.POWER, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalCrystallizer.png"), 154, 4)
-              .with(SlotOverlay.POWER));
-
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.getScaledProgress();
-            }
-        }, ProgressBar.LARGE_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalCrystallizer.png"),
-              51, 60));
-
-        guiElements.add(new GuiPowerBar(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalCrystallizer.png"), 160, 23));
-
-        guiElements.add(new GuiSideConfigurationTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalCrystallizer.png")));
-
-        guiElements.add(new GuiTransporterConfigTab(this, 34, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalCrystallizer.png")));
-
-        guiElements.add(new GuiGasGauge(() -> tileEntity.inputTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalCrystallizer.png"), 5, 4));
-        guiElements.add(new GuiSlot(SlotType.OUTPUT, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalCrystallizer.png"), 130, 56));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiChemicalCrystallizer.png")
+                    .addSlot(SlotType.EXTRA, SlotOverlay.PLUS, 5, 64)
+                    .addSlotPower(154, 4)
+                    .addProgress(new IProgressInfoHandler() {
+                        @Override
+                        public double getProgress() {
+                            return tileEntity.getScaledProgress();
+                        }
+                    }, ProgressBar.LARGE_RIGHT, 51, 60)
+                    .addPowerBar(160, 23)
+                    .addSideConfiguration()
+                    .addTransporter(34)
+                    .addGasGauge(() -> tileEntity.inputTank, Type.STANDARD, 5, 4)
+                    .addSlot(SlotType.OUTPUT, SlotOverlay.OUTPUT, 130, 56)
+                    .build()
+        );
     }
 
     @Override

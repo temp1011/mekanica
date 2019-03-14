@@ -1,9 +1,6 @@
 package mekanism.client.gui;
 
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiUpgradeTab;
 import mekanism.common.tile.prefab.TileEntityMachine;
 import mekanism.common.util.LangUtils;
 import mekanism.common.util.ListUtils;
@@ -18,14 +15,13 @@ public class GuiMekanismPlus extends GuiMekanism {
     public GuiMekanismPlus(TileEntityMachine tileEntity, Container container, String imageName, double energy) {
         super(container);
 
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, imageName)));
-
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, imageName)));
-
-        guiElements.add(new GuiUpgradeTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, imageName)));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, imageName)
+              .addSecurity()
+              .addRedstone()
+              .addUpgrade()
+              .build()
+        );
 
         guiElements.add(new GuiEnergyInfo(() ->
         {
