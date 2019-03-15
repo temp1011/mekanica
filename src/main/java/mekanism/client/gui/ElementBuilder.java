@@ -107,7 +107,6 @@ public class ElementBuilder {
             String environment = UnitDisplayUtils.getDisplayShort(loss * unit.intervalSize, false, unit);
             return Collections.singletonList(LangUtils.localize("gui.dissipated") + ": " + environment + "/t");
         }, gui, def));
-
         return this;
     }
 

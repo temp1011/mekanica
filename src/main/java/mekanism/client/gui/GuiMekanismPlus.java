@@ -1,9 +1,9 @@
 package mekanism.client.gui;
 
+import java.util.Arrays;
 import mekanism.client.gui.element.GuiEnergyInfo;
 import mekanism.common.tile.prefab.TileEntityElectricBlock;
 import mekanism.common.util.LangUtils;
-import mekanism.common.util.ListUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
 import net.minecraft.inventory.Container;
@@ -31,7 +31,7 @@ public class GuiMekanismPlus extends GuiMekanism {
         guiElements.add(new GuiEnergyInfo(() ->
         {
             String usage = MekanismUtils.getEnergyDisplay(energy);
-            return ListUtils.asList(LangUtils.localize("gui.using") + ": " + usage + "/t",
+            return Arrays.asList(LangUtils.localize("gui.using") + ": " + usage + "/t",
                   LangUtils.localize("gui.needed") + ": " + MekanismUtils
                         .getEnergyDisplay(tileEntity.getMaxEnergy() - tileEntity.getEnergy()));
         }, this, def));
