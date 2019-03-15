@@ -42,16 +42,9 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiDigitalMinerConfig extends GuiMekanism {
 
-    // Scrollbar dimensions
-    private final int scrollX = 154;
-    private final int scrollY = 18;
-    private final int scrollW = 12;
-    private final int scrollH = 138;
     // Filter dimensions
     private final int filterX = 56;
-    private final int filterY = 18;
     private final int filterW = 96;
-    private final int filterH = 29;
     public TileEntityDigitalMiner tileEntity;
     public boolean isDragging = false;
     public int dragOffset = 0;
@@ -273,7 +266,6 @@ public class GuiDigitalMinerConfig extends GuiMekanism {
     protected void mouseClickMove(int mouseX, int mouseY, int button, long ticks) {
         super.mouseClickMove(mouseX, mouseY, button, ticks);
 
-        int xAxis = (mouseX - (width - xSize) / 2);
         int yAxis = (mouseY - (height - ySize) / 2);
 
         if (isDragging) {
@@ -472,6 +464,8 @@ public class GuiDigitalMinerConfig extends GuiMekanism {
         int guiHeight = (height - ySize) / 2;
         drawTexturedModalRect(guiWidth, guiHeight, 0, 0, xSize, ySize);
 
+        int scrollY = 18;// Scrollbar dimensions
+        int scrollX = 154;
         drawTexturedModalRect(guiLeft + scrollX, guiTop + scrollY + getScroll(), 232 + (needsScrollBars() ? 0 : 12), 0,
               12, 15);
 

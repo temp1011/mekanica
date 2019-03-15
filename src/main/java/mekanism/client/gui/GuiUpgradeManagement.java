@@ -108,7 +108,6 @@ public class GuiUpgradeManagement extends GuiMekanism {
 
             int xPos = 25;
             int yPos = 7 + (i * 12);
-            int yRender = 0;
 
             fontRenderer.drawString(upgrade.getName(), xPos + 12, yPos + 2, 0x404040);
 
@@ -225,7 +224,6 @@ public class GuiUpgradeManagement extends GuiMekanism {
     protected void mouseClickMove(int mouseX, int mouseY, int button, long ticks) {
         super.mouseClickMove(mouseX, mouseY, button, ticks);
 
-        int xAxis = (mouseX - (width - xSize) / 2);
         int yAxis = (mouseY - (height - ySize) / 2);
 
         if (isDragging) {
@@ -279,7 +277,6 @@ public class GuiUpgradeManagement extends GuiMekanism {
             for (Upgrade upgrade : getCurrentUpgrades()) {
                 int xPos = 25;
                 int yPos = 7 + (counter++ * 12);
-                int yRender = 0;
 
                 if (xAxis >= xPos && xAxis <= xPos + 58 && yAxis >= yPos && yAxis <= yPos + 12) {
                     selectedType = upgrade;

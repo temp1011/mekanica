@@ -94,11 +94,7 @@ public class GuiOredictionificator extends GuiMekanism {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        int xAxis = (mouseX - (width - xSize) / 2);
-        int yAxis = (mouseY - (height - ySize) / 2);
-
-        fontRenderer
-              .drawString(tileEntity.getName(), (xSize / 2) - (fontRenderer.getStringWidth(tileEntity.getName()) / 2),
+        fontRenderer.drawString(tileEntity.getName(), (xSize / 2) - (fontRenderer.getStringWidth(tileEntity.getName()) / 2),
                     6, 0x404040);
         fontRenderer.drawString(LangUtils.localize("container.inventory"), 8, (ySize - 96) + 2, 0x404040);
 
@@ -182,8 +178,6 @@ public class GuiOredictionificator extends GuiMekanism {
                     int yStart = i * 22 + 18;
 
                     if (xAxis > 10 && xAxis <= 152 && yAxis > yStart && yAxis <= yStart + 22) {
-                        OredictionificatorFilter filter = tileEntity.filters.get(getFilterIndex() + i);
-
                         SoundHandler.playSound(SoundEvents.UI_BUTTON_CLICK);
                         Mekanism.packetHandler.sendToServer(
                               new OredictionificatorGuiMessage(OredictionificatorGuiPacket.SERVER_INDEX,
@@ -198,7 +192,6 @@ public class GuiOredictionificator extends GuiMekanism {
     protected void mouseClickMove(int mouseX, int mouseY, int button, long ticks) {
         super.mouseClickMove(mouseX, mouseY, button, ticks);
 
-        int xAxis = (mouseX - (width - xSize) / 2);
         int yAxis = (mouseY - (height - ySize) / 2);
 
         if (isDragging) {

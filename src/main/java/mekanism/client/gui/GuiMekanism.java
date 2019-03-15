@@ -14,7 +14,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -221,10 +220,6 @@ public abstract class GuiMekanism extends GuiContainer implements IGuiWrapper {
         }
     }
 
-    public void handleMouse(Slot slot, int slotIndex, int button, ClickType modifier) {
-        handleMouseClick(slot, slotIndex, button, modifier);
-    }
-
     @Override
     public void handleMouseInput() throws java.io.IOException {
         super.handleMouseInput();
@@ -250,10 +245,6 @@ public abstract class GuiMekanism extends GuiContainer implements IGuiWrapper {
 
     public int getYPos() {
         return (height - ySize) / 2;
-    }
-
-    protected FontRenderer getFontRenderer() {
-        return fontRenderer;
     }
 
     @Override

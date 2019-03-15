@@ -45,11 +45,6 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiLogisticalSorter extends GuiMekanism {
 
-    // Scrollbar dimensions
-    private final int scrollX = 154;
-    private final int scrollY = 18;
-    private final int scrollW = 12;
-    private final int scrollH = 138;
     // Filter dimensions
     private final int filterX = 56;
     private final int filterY = 18;
@@ -73,7 +68,6 @@ public class GuiLogisticalSorter extends GuiMekanism {
     /**
      * True if the left mouse button was held down last time drawScreen was called.
      */
-    private boolean wasClicking;
 
     public GuiLogisticalSorter(EntityPlayer player, TileEntityLogisticalSorter entity) {
         super(entity, new ContainerNull(player, entity));
@@ -295,7 +289,6 @@ public class GuiLogisticalSorter extends GuiMekanism {
         super.mouseClickMove(mouseX, mouseY, button, ticks);
 
         // Get mouse position relative to gui
-        final int xAxis = mouseX - guiLeft;
         final int yAxis = mouseY - guiTop;
 
         if (isDragging) {
@@ -531,6 +524,8 @@ public class GuiLogisticalSorter extends GuiMekanism {
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
         // Draw scrollbar
+        int scrollY = 18;// Scrollbar dimensions
+        int scrollX = 154;
         drawTexturedModalRect(guiLeft + scrollX, guiTop + scrollY + getScroll(), 232 + (needsScrollBars() ? 0 : 12), 0,
               12, 15);
 

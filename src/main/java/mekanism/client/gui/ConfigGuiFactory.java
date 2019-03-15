@@ -7,6 +7,7 @@ import net.minecraftforge.fml.client.IModGuiFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+//TODO - unused?
 @SideOnly(Side.CLIENT)
 public class ConfigGuiFactory implements IModGuiFactory {
 

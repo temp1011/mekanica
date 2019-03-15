@@ -13,7 +13,6 @@ import mekanism.common.security.ISecurityItem;
 import mekanism.common.security.ISecurityTile;
 import mekanism.common.security.ISecurityTile.SecurityMode;
 import mekanism.common.security.SecurityData;
-import mekanism.common.security.SecurityFrequency;
 import mekanism.common.util.LangUtils;
 import mekanism.common.util.ListUtils;
 import mekanism.common.util.MekanismUtils;
@@ -101,19 +100,6 @@ public class GuiSecurityTab extends GuiElement {
         }
 
         mc.renderEngine.bindTexture(defaultLocation);
-    }
-
-    private SecurityFrequency getFrequency() {
-        if (isItem) {
-            if (getItem().isEmpty() || !(getItem().getItem() instanceof ISecurityItem)) {
-                mc.player.closeScreen();
-                return null;
-            }
-
-            return SecurityUtils.getFrequency(getOwner());
-        } else {
-            return ((ISecurityTile) tileEntity).getSecurity().getFrequency();
-        }
     }
 
     private SecurityMode getSecurity() {
