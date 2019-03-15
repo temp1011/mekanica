@@ -1,7 +1,6 @@
 package mekanism.client.gui;
 
 import mekanism.client.gui.element.GuiGauge.Type;
-import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
@@ -26,7 +25,8 @@ public class GuiPRC extends GuiMekanismPlus {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, "GuiBlank.png")
+              new ElementBuilderPowered(tileEntity, this, "GuiBlank.png")
+                    .addPowerBar(164, 15)
                     .addSideConfiguration()
                     .addTransporter()
                     .addGasGauge(() -> tileEntity.inputGasTank, Type.STANDARD_RED, 28, 10)
@@ -38,8 +38,6 @@ public class GuiPRC extends GuiMekanismPlus {
                     .addProgress(tileEntity::getScaledProgress, getProgressType(), 75, 37)
                     .build()
         );
-        guiElements.add(new GuiPowerBar(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiBlank.png"),
-               164,15));
     }
 
     @Override

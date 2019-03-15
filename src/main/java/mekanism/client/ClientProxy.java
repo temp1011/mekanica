@@ -134,7 +134,6 @@ import mekanism.common.item.ItemBlockMachine;
 import mekanism.common.item.ItemBlockTransmitter;
 import mekanism.common.item.ItemCraftingFormula;
 import mekanism.common.item.ItemPortableTeleporter;
-import mekanism.common.item.ItemSeismicReader;
 import mekanism.common.item.ItemWalkieTalkie;
 import mekanism.common.multiblock.MultiblockManager;
 import mekanism.common.network.PacketPortableTeleporter.PortableTeleporterMessage;

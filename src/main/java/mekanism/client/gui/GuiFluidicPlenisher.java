@@ -1,7 +1,6 @@
 package mekanism.client.gui;
 
 import mekanism.client.gui.element.GuiGauge.Type;
-import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.inventory.container.ContainerFluidicPlenisher;
 import mekanism.common.tile.TileEntityFluidicPlenisher;
@@ -26,14 +25,14 @@ public class GuiFluidicPlenisher extends GuiMekanismPlus {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, guiLocation)
+              new ElementBuilderPowered(tileEntity, this, guiLocation)
+                    .addPowerBar(164, 15)
                     .addFluidGauge(() -> tileEntity.fluidTank, Type.STANDARD, 6, 13)
                     .addSlotNoOverlay(SlotType.NORMAL, 27, 19)
                     .addSlotNoOverlay(SlotType.NORMAL, 27, 50)
                     .addSlotPower(142, 34)
                     .build()
         );
-        guiElements.add(new GuiPowerBar(this, tileEntity, guiLocation, 164, 15));
     }
 
     @Override

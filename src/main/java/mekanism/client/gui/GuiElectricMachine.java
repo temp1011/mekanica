@@ -1,6 +1,5 @@
 package mekanism.client.gui;
 
-import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
@@ -22,7 +21,8 @@ public class GuiElectricMachine extends GuiMekanismPlus {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, tileEntity.guiLocation)
+              new ElementBuilderPowered(tileEntity, this, tileEntity.guiLocation)
+                    .addPowerBar(164, 15)
                     .addSideConfiguration()
                     .addTransporter()
                     .addSlot(SlotType.INPUT, SlotOverlay.INPUT, 55, 16)
@@ -31,7 +31,6 @@ public class GuiElectricMachine extends GuiMekanismPlus {
                     .addProgress(tileEntity::getScaledProgress, getProgressType(), 77, 37)
                     .build()
         );
-        guiElements.add(new GuiPowerBar(this, tileEntity, tileEntity.guiLocation, 164, 15));
     }
 
     public ProgressBar getProgressType() {

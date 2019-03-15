@@ -2,7 +2,6 @@ package mekanism.client.gui;
 
 import java.io.IOException;
 import mekanism.api.Coord4D;
-import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
@@ -32,7 +31,8 @@ public class GuiMetallurgicInfuser extends GuiMekanismPlus {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, "GuiMetallurgicInfuser.png")
+              new ElementBuilderPowered(tileEntity, this, "GuiMetallurgicInfuser.png")
+                    .addPowerBar(164, 15)
                     .addSideConfiguration()
                     .addTransporter()
                     .addSlotNoOverlay(SlotType.EXTRA, 16, 34)
@@ -42,8 +42,6 @@ public class GuiMetallurgicInfuser extends GuiMekanismPlus {
                     .addProgress(tileEntity::getScaledProgress, ProgressBar.MEDIUM, 70, 46)
                     .build()
         );
-        guiElements.add(new GuiPowerBar(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiMetallurgicInfuser.png"), 164, 15));
     }
 
     @Override

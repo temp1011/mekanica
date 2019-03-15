@@ -1,7 +1,6 @@
 package mekanism.client.gui;
 
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.common.config.MekanismConfig.usage;
 import mekanism.common.inventory.container.ContainerSeismicVibrator;
 import mekanism.common.tile.TileEntitySeismicVibrator;
@@ -24,14 +23,13 @@ public class GuiSeismicVibrator extends GuiMekanism {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, "GuiSeismicVibrator.png")
+              new ElementBuilderPowered(tileEntity, this, "GuiSeismicVibrator.png")
+                    .addPowerBar(164, 15)
                     .addSecurity()
                     .addRedstone()
                     .addSlotPower(142, 34)
                     .build()
         );
-        guiElements.add(new GuiPowerBar(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiSeismicVibrator.png"), 164, 15));
         guiElements.add(new GuiEnergyInfo(() ->
         {
             String multiplier = MekanismUtils.getEnergyDisplay(usage.seismicVibratorUsage);

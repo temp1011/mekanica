@@ -3,12 +3,9 @@ package mekanism.client.gui;
 import java.io.IOException;
 import mekanism.api.Coord4D;
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiHeatInfo;
-import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.sound.SoundHandler;
 import mekanism.common.Mekanism;
 import mekanism.common.base.TileNetworkList;
-import mekanism.common.config.MekanismConfig.general;
 import mekanism.common.inventory.container.ContainerResistiveHeater;
 import mekanism.common.network.PacketTileEntity.TileEntityMessage;
 import mekanism.common.tile.TileEntityResistiveHeater;
@@ -16,7 +13,6 @@ import mekanism.common.util.LangUtils;
 import mekanism.common.util.ListUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
-import mekanism.common.util.UnitDisplayUtils;
 import mekanism.common.util.UnitDisplayUtils.TemperatureUnit;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -38,28 +34,20 @@ public class GuiResistiveHeater extends GuiMekanism {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, "GuiResistiveHeater.png")
+              new ElementBuilderPowered(tileEntity, this, "GuiResistiveHeater.png")
+                    .addPowerBar(164, 15)
                     .addSlotPower(14, 14)
                     .addSecurity()
                     .addRedstone()
+                    .addHeatInfo(tileEntity.lastEnvironmentLoss)
                     .build()
         );
-
-        guiElements.add(new GuiPowerBar(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiResistiveHeater.png"), 164, 15));
         guiElements.add(new GuiEnergyInfo(() ->
         {
             String multiplier = MekanismUtils.getEnergyDisplay(tileEntity.energyUsage);
             return ListUtils.asList(LangUtils.localize("gui.using") + ": " + multiplier + "/t",
                   LangUtils.localize("gui.needed") + ": " + MekanismUtils
                         .getEnergyDisplay(tileEntity.getMaxEnergy() - tileEntity.getEnergy()));
-        }, this, MekanismUtils.getResource(ResourceType.GUI, "GuiResistiveHeater.png")));
-        guiElements.add(new GuiHeatInfo(() ->
-        {
-            TemperatureUnit unit = TemperatureUnit.values()[general.tempUnit.ordinal()];
-            String environment = UnitDisplayUtils
-                  .getDisplayShort(tileEntity.lastEnvironmentLoss * unit.intervalSize, false, unit);
-            return ListUtils.asList(LangUtils.localize("gui.dissipated") + ": " + environment + "/t");
         }, this, MekanismUtils.getResource(ResourceType.GUI, "GuiResistiveHeater.png")));
     }
 

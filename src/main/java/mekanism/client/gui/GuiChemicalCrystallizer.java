@@ -44,11 +44,11 @@ public class GuiChemicalCrystallizer extends GuiMekanismPlus {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, "GuiChemicalCrystallizer.png")
+              new ElementBuilderPowered(tileEntity, this, "GuiChemicalCrystallizer.png")
+                    .addPowerBar(160, 23)
                     .addSlot(SlotType.EXTRA, SlotOverlay.PLUS, 5, 64)
                     .addSlotPower(154, 4)
                     .addProgress(() -> tileEntity.getScaledProgress(), ProgressBar.LARGE_RIGHT, 51, 60)
-                    .addPowerBar(160, 23)
                     .addSideConfiguration()
                     .addTransporter()
                     .addGasGauge(() -> tileEntity.inputTank, Type.STANDARD, 5, 4)

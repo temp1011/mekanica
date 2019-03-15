@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import mekanism.api.Coord4D;
 import mekanism.api.EnumColor;
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.client.gui.element.GuiVisualsTab;
@@ -47,7 +46,8 @@ public class GuiDigitalMiner extends GuiMekanism {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, "GuiDigitalMiner.png")
+              new ElementBuilderPowered(tileEntity, this, "GuiDigitalMiner.png")
+                    .addPowerBar(163, 23)
                     .addRedstone()
                     .addSecurity()
                     .addUpgrade()
@@ -55,9 +55,6 @@ public class GuiDigitalMiner extends GuiMekanism {
                     .addSlotNoOverlay(SlotType.NORMAL, 143, 26)
                     .build()
         );
-
-        guiElements.add(new GuiPowerBar(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png"),
-                    163, 23));
         guiElements.add(new GuiVisualsTab(this, tileEntity,
               MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png")));
 

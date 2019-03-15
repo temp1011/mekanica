@@ -1,11 +1,13 @@
 package mekanism.client.gui;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import mekanism.client.gui.element.GuiElement;
 import mekanism.client.gui.element.GuiFluidGauge;
 import mekanism.client.gui.element.GuiGasGauge;
 import mekanism.client.gui.element.GuiGauge;
+import mekanism.client.gui.element.GuiHeatInfo;
 import mekanism.client.gui.element.GuiProgress;
 import mekanism.client.gui.element.GuiRedstoneControl;
 import mekanism.client.gui.element.GuiSecurityTab;
@@ -15,17 +17,21 @@ import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.client.gui.element.GuiTransporterConfigTab;
 import mekanism.client.gui.element.GuiUpgradeTab;
+import mekanism.common.config.MekanismConfig.general;
+import mekanism.common.util.LangUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
+import mekanism.common.util.UnitDisplayUtils;
+import mekanism.common.util.UnitDisplayUtils.TemperatureUnit;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
 public class ElementBuilder {
 
-    private IGuiWrapper gui;
-    private ResourceLocation def;
+    protected IGuiWrapper gui;
+    protected ResourceLocation def;
     private TileEntity tile;
-    private Set<GuiElement> elements = new HashSet<>();
+    protected Set<GuiElement> elements = new HashSet<>();
 
     public ElementBuilder(TileEntity tile, IGuiWrapper gui, String textureName) {
         this(tile, gui, MekanismUtils.getResource(ResourceType.GUI, textureName));
@@ -55,13 +61,6 @@ public class ElementBuilder {
 
     public ElementBuilder addSideConfiguration() {
         elements.add(new GuiSideConfigurationTab(gui, tile, def));
-        return this;
-    }
-
-    //TODO - mekanism really needs a baseline machine, or I maybe can't have this here
-    public ElementBuilder addPowerBar(int x, int y) {
-//        elements.add(new GuiPowerBar(gui, tile,
-//              def, 160, 23));
         return this;
     }
 
@@ -97,6 +96,18 @@ public class ElementBuilder {
 
     public ElementBuilder addProgress(GuiProgress.IProgressInfoHandler handler, GuiProgress.ProgressBar type, int x, int y) {
         elements.add(new GuiProgress(handler, type, gui, def, x, y));
+        return this;
+    }
+
+    //this seems to be the standard heat builder
+    public ElementBuilder addHeatInfo(double loss) {
+        elements.add(new GuiHeatInfo(() ->
+        {
+            TemperatureUnit unit = TemperatureUnit.values()[general.tempUnit.ordinal()];
+            String environment = UnitDisplayUtils.getDisplayShort(loss * unit.intervalSize, false, unit);
+            return Collections.singletonList(LangUtils.localize("gui.dissipated") + ": " + environment + "/t");
+        }, gui, def));
+
         return this;
     }
 

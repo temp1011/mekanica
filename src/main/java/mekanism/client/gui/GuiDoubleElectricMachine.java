@@ -1,34 +1,28 @@
 package mekanism.client.gui;
 
-import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.inventory.container.ContainerDoubleElectricMachine;
 import mekanism.common.tile.prefab.TileEntityDoubleElectricMachine;
 import mekanism.common.util.LangUtils;
-import mekanism.common.util.ListUtils;
-import mekanism.common.util.MekanismUtils;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiDoubleElectricMachine extends GuiMekanism {
+public class GuiDoubleElectricMachine extends GuiMekanismPlus {
 
     public TileEntityDoubleElectricMachine tileEntity;
 
     public GuiDoubleElectricMachine(InventoryPlayer inventory, TileEntityDoubleElectricMachine tentity) {
-        super(tentity, new ContainerDoubleElectricMachine(inventory, tentity));
+        super(tentity, new ContainerDoubleElectricMachine(inventory, tentity), tentity.guiLocation, tentity.energyPerTick);
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, tileEntity.guiLocation)
-                    .addRedstone()
-                    .addUpgrade()
-                    .addSecurity()
+              new ElementBuilderPowered(tileEntity, this, tileEntity.guiLocation)
+                    .addPowerBar(164, 15)
                     .addSideConfiguration()
                     .addTransporter()
                     .addSlot(SlotType.INPUT, SlotOverlay.INPUT, 55, 16)
@@ -38,14 +32,6 @@ public class GuiDoubleElectricMachine extends GuiMekanism {
                     .addProgress(() -> tileEntity.getScaledProgress(), getProgressType(), 77, 37)
                     .build()
         );
-        guiElements.add(new GuiPowerBar(this, tileEntity, tileEntity.guiLocation, 164, 15));
-        guiElements.add(new GuiEnergyInfo(() ->
-        {
-            String multiplier = MekanismUtils.getEnergyDisplay(tileEntity.energyPerTick);
-            return ListUtils.asList(LangUtils.localize("gui.using") + ": " + multiplier + "/t",
-                  LangUtils.localize("gui.needed") + ": " + MekanismUtils
-                        .getEnergyDisplay(tileEntity.getMaxEnergy() - tileEntity.getEnergy()));
-        }, this, tileEntity.guiLocation));
     }
 
     public ProgressBar getProgressType() {

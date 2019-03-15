@@ -23,10 +23,10 @@ public class GuiAdvancedElectricMachine extends GuiMekanismPlus {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, tileEntity.guiLocation)
+              new ElementBuilderPowered(tileEntity, this, tileEntity.guiLocation)
+                    .addPowerBar(164, 15)
                     .addSideConfiguration()
                     .addTransporter()
-                    .addPowerBar(164, 15)
                     .addSlot(SlotType.INPUT, SlotOverlay.INPUT, 55, 16)
                     .addSlotPower(30, 34)
                     .addSlotNoOverlay(SlotType.EXTRA, 55, 52)

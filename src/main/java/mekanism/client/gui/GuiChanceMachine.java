@@ -21,10 +21,10 @@ public class GuiChanceMachine extends GuiMekanismPlus {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, tileEntity.guiLocation)
+              new ElementBuilderPowered(tileEntity, this, tileEntity.guiLocation)
+                    .addPowerBar(164, 15)
                     .addSideConfiguration()
                     .addTransporter()
-                    .addPowerBar(164, 15)
                     .addSlot(SlotType.INPUT, SlotOverlay.INPUT, 55, 16)
                     .addSlotPower(55, 52)
                     .addSlot(SlotType.OUTPUT_WIDE, SlotOverlay.OUTPUT, 111, 30)

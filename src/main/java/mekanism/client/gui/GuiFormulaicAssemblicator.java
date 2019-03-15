@@ -2,7 +2,6 @@ package mekanism.client.gui;
 
 import java.io.IOException;
 import mekanism.api.Coord4D;
-import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.render.MekanismRenderer;
 import mekanism.client.sound.SoundHandler;
 import mekanism.common.Mekanism;
@@ -37,13 +36,13 @@ public class GuiFormulaicAssemblicator extends GuiMekanismPlus {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, guiLocation)
+              new ElementBuilderPowered(tileEntity, this, guiLocation)
+                    .addPowerBar(159, 15)
                     .addSideConfiguration()
                     .addTransporter()
                     .addSlotPower(151, 75)
                     .build()
         );
-        guiElements.add(new GuiPowerBar(this, tileEntity, guiLocation, 159, 15));
         ySize += 64;
     }
 

@@ -1,16 +1,11 @@
 package mekanism.client.gui;
 
-import mekanism.client.gui.element.GuiFluidGauge;
-import mekanism.client.gui.element.GuiGauge;
-import mekanism.client.gui.element.GuiHeatInfo;
-import mekanism.common.config.MekanismConfig.general;
+import mekanism.client.gui.element.GuiGauge.Type;
 import mekanism.common.inventory.container.ContainerThermalEvaporationController;
 import mekanism.common.tile.TileEntityThermalEvaporationController;
 import mekanism.common.util.LangUtils;
-import mekanism.common.util.ListUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
-import mekanism.common.util.UnitDisplayUtils;
 import mekanism.common.util.UnitDisplayUtils.TemperatureUnit;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,17 +21,13 @@ public class GuiThermalEvaporationController extends GuiMekanism {
         super(tentity, new ContainerThermalEvaporationController(inventory, tentity));
         tileEntity = tentity;
 
-        guiElements.add(new GuiFluidGauge(() -> tileEntity.inputTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiThermalEvaporationController.png"), 6, 13));
-        guiElements.add(new GuiFluidGauge(() -> tileEntity.outputTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiThermalEvaporationController.png"), 152, 13));
-        guiElements.add(new GuiHeatInfo(() ->
-        {
-            TemperatureUnit unit = TemperatureUnit.values()[general.tempUnit.ordinal()];
-            String environment = UnitDisplayUtils
-                  .getDisplayShort(tileEntity.totalLoss * unit.intervalSize, false, unit);
-            return ListUtils.asList(LangUtils.localize("gui.dissipated") + ": " + environment + "/t");
-        }, this, MekanismUtils.getResource(ResourceType.GUI, "GuiThermalEvaporationController.png")));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiThermalEvaporationController.png")
+                    .addFluidGauge(() -> tileEntity.inputTank, Type.STANDARD, 6, 13)
+                    .addFluidGauge(() -> tileEntity.outputTank, Type.STANDARD, 152, 13)
+                    .addHeatInfo(tileEntity.totalLoss)
+                    .build()
+        );
     }
 
     @Override

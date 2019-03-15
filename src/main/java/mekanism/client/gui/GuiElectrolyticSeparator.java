@@ -3,7 +3,6 @@ package mekanism.client.gui;
 import java.io.IOException;
 import mekanism.api.Coord4D;
 import mekanism.client.gui.element.GuiGauge.Type;
-import mekanism.client.gui.element.GuiPowerBar;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.client.sound.SoundHandler;
@@ -33,7 +32,8 @@ public class GuiElectrolyticSeparator extends GuiMekanismPlus {
         tileEntity = tentity;
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, "GuiElectrolyticSeparator.png")
+              new ElementBuilderPowered(tileEntity, this, "GuiElectrolyticSeparator.png")
+                    .addPowerBar(164, 15)
                     .addGasGauge(() -> tileEntity.leftTank, Type.SMALL, 58, 18)
                     .addGasGauge(() -> tileEntity.rightTank, Type.SMALL, 100, 18)
                     .addFluidGauge(() -> tileEntity.fluidTank, Type.STANDARD, 5, 10)
@@ -44,8 +44,6 @@ public class GuiElectrolyticSeparator extends GuiMekanismPlus {
                     .addProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.BI, 78, 29)
                     .build()
         );
-        guiElements.add(new GuiPowerBar(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 164, 15));
     }
 
     @Override

@@ -1,17 +1,11 @@
 package mekanism.client.gui;
 
-import mekanism.client.gui.element.GuiHeatInfo;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotType;
-import mekanism.common.config.MekanismConfig.general;
 import mekanism.common.inventory.container.ContainerFuelwoodHeater;
 import mekanism.common.tile.TileEntityFuelwoodHeater;
 import mekanism.common.util.LangUtils;
-import mekanism.common.util.ListUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
-import mekanism.common.util.UnitDisplayUtils;
 import mekanism.common.util.UnitDisplayUtils.TemperatureUnit;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,17 +21,13 @@ public class GuiFuelwoodHeater extends GuiMekanism {
         super(tentity, new ContainerFuelwoodHeater(inventory, tentity));
         tileEntity = tentity;
 
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiFuelwoodHeater.png"), 14, 28));
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiFuelwoodHeater.png")));
-        guiElements.add(new GuiHeatInfo(() ->
-        {
-            TemperatureUnit unit = TemperatureUnit.values()[general.tempUnit.ordinal()];
-            String environment = UnitDisplayUtils
-                  .getDisplayShort(tileEntity.lastEnvironmentLoss * unit.intervalSize, false, unit);
-            return ListUtils.asList(LangUtils.localize("gui.dissipated") + ": " + environment + "/t");
-        }, this, MekanismUtils.getResource(ResourceType.GUI, "GuiFuelwoodHeater.png")));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiFuelwoodHeater.png")
+                    .addSlotNoOverlay(SlotType.NORMAL, 14, 28)
+                    .addSecurity()
+                    .addHeatInfo(tileEntity.lastEnvironmentLoss)
+                    .build()
+        );
     }
 
     @Override
