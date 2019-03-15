@@ -875,13 +875,7 @@ public class ClientProxy extends CommonProxy {
             case 37:
                 return new GuiChemicalCrystallizer(player.inventory, (TileEntityChemicalCrystallizer) tileEntity);
             case 38:
-                ItemStack itemStack1 = player.getHeldItem(EnumHand.values()[pos.getX()]);
-
-                if (!itemStack1.isEmpty() && itemStack1.getItem() instanceof ItemSeismicReader) {
-                    return new GuiSeismicReader(world, new Coord4D(player), itemStack1.copy());
-                }
-
-                return null;
+                return new GuiSeismicReader(world, new Coord4D(player));
             case 39:
                 return new GuiSeismicVibrator(player.inventory, (TileEntitySeismicVibrator) tileEntity);
             case 40:
