@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiChemicalDissolutionChamber extends GuiMekanismPlus {
+public class GuiChemicalDissolutionChamber extends GuiMekanismBase {
 
     public TileEntityChemicalDissolutionChamber tileEntity;
 

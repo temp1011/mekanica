@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiFluidicPlenisher extends GuiMekanismPlus {
+public class GuiFluidicPlenisher extends GuiMekanismBase {
 
     public TileEntityFluidicPlenisher tileEntity;
 

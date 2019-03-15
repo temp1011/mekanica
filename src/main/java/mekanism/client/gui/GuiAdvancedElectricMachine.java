@@ -13,8 +13,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+//TODO - can this inherit from GuiElectricMachine? there is a lot of very similar code
+//to make this work need TileEntityAdvancedElectricMachine extends TileEntityElectricMachine
 @SideOnly(Side.CLIENT)
-public class GuiAdvancedElectricMachine extends GuiMekanismPlus {
+public class GuiAdvancedElectricMachine extends GuiMekanismBase {
 
     public TileEntityAdvancedElectricMachine tileEntity;
 

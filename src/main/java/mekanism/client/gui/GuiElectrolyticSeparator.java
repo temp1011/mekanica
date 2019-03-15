@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiElectrolyticSeparator extends GuiMekanismPlus {
+public class GuiElectrolyticSeparator extends GuiMekanismBase {
 
     public TileEntityElectrolyticSeparator tileEntity;
 

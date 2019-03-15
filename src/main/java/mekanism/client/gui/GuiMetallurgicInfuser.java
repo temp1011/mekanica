@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiMetallurgicInfuser extends GuiMekanismPlus {
+public class GuiMetallurgicInfuser extends GuiMekanismBase {
 
     public TileEntityMetallurgicInfuser tileEntity;
 

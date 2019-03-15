@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiElectricMachine extends GuiMekanismPlus {
+public class GuiElectricMachine extends GuiMekanismBase {
 
     public TileEntityElectricMachine tileEntity;
 

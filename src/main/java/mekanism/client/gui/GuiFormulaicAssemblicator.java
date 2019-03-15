@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiFormulaicAssemblicator extends GuiMekanismPlus {
+public class GuiFormulaicAssemblicator extends GuiMekanismBase {
 
     public TileEntityFormulaicAssemblicator tileEntity;
 

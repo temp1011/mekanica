@@ -25,7 +25,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiChemicalCrystallizer extends GuiMekanismPlus {
+public class GuiChemicalCrystallizer extends GuiMekanismBase {
 
     public TileEntityChemicalCrystallizer tileEntity;
 

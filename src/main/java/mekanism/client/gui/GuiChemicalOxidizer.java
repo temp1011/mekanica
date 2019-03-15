@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiChemicalOxidizer extends GuiMekanismPlus {
+public class GuiChemicalOxidizer extends GuiMekanismBase {
 
     public TileEntityChemicalOxidizer tileEntity;
 
