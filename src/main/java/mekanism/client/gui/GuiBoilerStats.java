@@ -22,10 +22,10 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiBoilerStats extends GuiMekanism {
 
-    public TileEntityBoilerCasing tileEntity;
+    private TileEntityBoilerCasing tileEntity;
 
-    public GuiGraph boilGraph;
-    public GuiGraph maxGraph;
+    private GuiGraph boilGraph;
+    private GuiGraph maxGraph;
 
     public GuiBoilerStats(InventoryPlayer inventory, TileEntityBoilerCasing tentity) {
         super(tentity, new ContainerNull(inventory.player, tentity));

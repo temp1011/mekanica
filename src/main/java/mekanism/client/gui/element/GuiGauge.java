@@ -20,11 +20,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public abstract class GuiGauge<T> extends GuiElement {
 
-    public EnumColor color;
+    private EnumColor color;
     protected int xLocation;
     protected int yLocation;
-    protected int texX;
-    protected int texY;
+    private int texX;
+    private int texY;
     protected int width;
     protected int height;
     protected int number;

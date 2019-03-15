@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiElectricPump extends GuiMekanismBase {
 
-    public TileEntityElectricPump tileEntity;
+    private TileEntityElectricPump tileEntity;
 
     public static final ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiElectricPump.png");
 

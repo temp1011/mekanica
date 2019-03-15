@@ -21,9 +21,9 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiDictionary extends GuiMekanism {
 
-    public ItemStack itemType = ItemStack.EMPTY;
+    private ItemStack itemType = ItemStack.EMPTY;
 
-    public GuiScrollList scrollList;
+    private GuiScrollList scrollList;
 
     public GuiDictionary(InventoryPlayer inventory) {
         super(new ContainerDictionary(inventory));

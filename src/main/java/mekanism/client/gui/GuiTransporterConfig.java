@@ -34,9 +34,9 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiTransporterConfig extends GuiMekanism {
 
-    public Map<Integer, GuiPos> slotPosMap = new HashMap<>();
+    private Map<Integer, GuiPos> slotPosMap = new HashMap<>();
 
-    public ISideConfiguration configurable;
+    private ISideConfiguration configurable;
 
     public GuiTransporterConfig(EntityPlayer player, ISideConfiguration tile) {
         super((TileEntityContainerBlock) tile, new ContainerNull(player, (TileEntityContainerBlock) tile));

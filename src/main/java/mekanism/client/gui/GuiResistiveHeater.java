@@ -25,7 +25,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiResistiveHeater extends GuiMekanism {
 
-    public TileEntityResistiveHeater tileEntity;
+    private TileEntityResistiveHeater tileEntity;
 
     private GuiTextField energyUsageField;
 

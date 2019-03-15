@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiRecipeType extends GuiElement {
 
-    public TileEntityFactory tileEntity;
+    private TileEntityFactory tileEntity;
 
     public GuiRecipeType(IGuiWrapper gui, TileEntityFactory tile, ResourceLocation def) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiRecipeType.png"), gui, def);

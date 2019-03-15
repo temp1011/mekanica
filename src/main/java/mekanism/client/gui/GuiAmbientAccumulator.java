@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiAmbientAccumulator extends GuiMekanism {
 
-    TileEntityAmbientAccumulator tileEntity;
+    private TileEntityAmbientAccumulator tileEntity;
 
     public GuiAmbientAccumulator(EntityPlayer player, TileEntityAmbientAccumulator tile) {
         super(tile, new ContainerNull(player, tile));

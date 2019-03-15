@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiRedstoneControl extends GuiElement {
 
-    TileEntity tileEntity;
+    private TileEntity tileEntity;
 
     public GuiRedstoneControl(IGuiWrapper gui, TileEntity tile, ResourceLocation def) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiRedstoneControl.png"), gui, def);

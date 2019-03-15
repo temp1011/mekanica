@@ -27,7 +27,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiFormulaicAssemblicator extends GuiMekanismBase {
 
-    public TileEntityFormulaicAssemblicator tileEntity;
+    private TileEntityFormulaicAssemblicator tileEntity;
 
     public static final ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiFormulaicAssemblicator.png");
 

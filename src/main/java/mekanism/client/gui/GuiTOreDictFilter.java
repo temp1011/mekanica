@@ -37,19 +37,19 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiTOreDictFilter extends GuiMekanism {
 
-    public TileEntityLogisticalSorter tileEntity;
+    private TileEntityLogisticalSorter tileEntity;
 
-    public boolean isNew = false;
+    private boolean isNew = false;
 
-    public TOreDictFilter origFilter;
+    private TOreDictFilter origFilter;
 
-    public TOreDictFilter filter = new TOreDictFilter();
-    public ItemStack renderStack = ItemStack.EMPTY;
-    public int ticker = 0;
-    public int stackSwitch = 0;
-    public int stackIndex = 0;
-    public List<ItemStack> iterStacks;
-    public String status = EnumColor.DARK_GREEN + LangUtils.localize("gui.allOK");
+    private TOreDictFilter filter = new TOreDictFilter();
+    private ItemStack renderStack = ItemStack.EMPTY;
+    private int ticker = 0;
+    private int stackSwitch = 0;
+    private int stackIndex = 0;
+    private List<ItemStack> iterStacks;
+    private String status = EnumColor.DARK_GREEN + LangUtils.localize("gui.allOK");
     private GuiTextField oreDictText;
 
     public GuiTOreDictFilter(EntityPlayer player, TileEntityLogisticalSorter tentity, int index) {

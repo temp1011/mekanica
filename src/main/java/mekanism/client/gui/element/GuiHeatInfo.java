@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiHeatInfo extends GuiElement {
 
-    public IInfoHandler infoHandler;
+    private IInfoHandler infoHandler;
 
     public GuiHeatInfo(IInfoHandler handler, IGuiWrapper gui, ResourceLocation def) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiHeatInfo.png"), gui, def);

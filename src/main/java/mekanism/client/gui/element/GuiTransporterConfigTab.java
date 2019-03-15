@@ -17,8 +17,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiTransporterConfigTab extends GuiElement {
 
-    public TileEntity tileEntity;
-    public int yPos;
+    private TileEntity tileEntity;
+    private int yPos;
 
     public GuiTransporterConfigTab(IGuiWrapper gui, int y, TileEntity tile, ResourceLocation def) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiTransporterConfigTab.png"), gui, def);

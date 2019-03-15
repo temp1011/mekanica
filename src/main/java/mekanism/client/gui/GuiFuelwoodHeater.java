@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiFuelwoodHeater extends GuiMekanism {
 
-    public TileEntityFuelwoodHeater tileEntity;
+    private TileEntityFuelwoodHeater tileEntity;
 
     public GuiFuelwoodHeater(InventoryPlayer inventory, TileEntityFuelwoodHeater tentity) {
         super(tentity, new ContainerFuelwoodHeater(inventory, tentity));

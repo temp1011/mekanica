@@ -20,12 +20,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+
+//TODO - extend GuiRobit?
 @SideOnly(Side.CLIENT)
 public class GuiRobitMain extends GuiMekanism {
 
-    public EntityRobit robit;
+    private EntityRobit robit;
 
-    public boolean displayNameChange;
+    private boolean displayNameChange;
 
     private GuiTextField nameChangeField;
     private GuiButton confirmName;

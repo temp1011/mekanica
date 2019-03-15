@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiAmplifierTab extends GuiElement {
 
-    public TileEntity tileEntity;
+    private TileEntity tileEntity;
 
     public GuiAmplifierTab(IGuiWrapper gui, TileEntity tile, ResourceLocation def) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiAmplifierTab.png"), gui, def);

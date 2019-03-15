@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiChemicalInfuser extends GuiMekanismBase {
 
-    public TileEntityChemicalInfuser tileEntity;
+    private TileEntityChemicalInfuser tileEntity;
 
     public GuiChemicalInfuser(InventoryPlayer inventory, TileEntityChemicalInfuser tentity) {
         super(tentity, new ContainerChemicalInfuser(inventory, tentity), "GuiChemicalInfuser.png", tentity.clientEnergyUsed);

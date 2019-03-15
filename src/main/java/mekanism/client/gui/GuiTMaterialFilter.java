@@ -36,17 +36,17 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiTMaterialFilter extends GuiMekanism {
 
-    public TileEntityLogisticalSorter tileEntity;
+    private TileEntityLogisticalSorter tileEntity;
 
-    public boolean isNew = false;
+    private boolean isNew = false;
 
-    public TMaterialFilter origFilter;
+    private TMaterialFilter origFilter;
 
-    public TMaterialFilter filter = new TMaterialFilter();
+    private TMaterialFilter filter = new TMaterialFilter();
 
-    public String status = EnumColor.DARK_GREEN + LangUtils.localize("gui.allOK");
+    private String status = EnumColor.DARK_GREEN + LangUtils.localize("gui.allOK");
 
-    public int ticker;
+    private int ticker;
 
     public GuiTMaterialFilter(EntityPlayer player, TileEntityLogisticalSorter tentity, int index) {
         super(tentity, new ContainerFilter(player.inventory, tentity));

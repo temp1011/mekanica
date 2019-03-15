@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiSideConfigurationTab extends GuiElement {
 
-    public TileEntity tileEntity;
+    private TileEntity tileEntity;
 
     public GuiSideConfigurationTab(IGuiWrapper gui, TileEntity tile, ResourceLocation def) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiConfigurationTab.png"), gui, def);

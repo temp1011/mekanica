@@ -10,16 +10,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiSlot extends GuiElement {
 
-    protected int xLocation;
-    protected int yLocation;
+    private int xLocation;
+    private int yLocation;
 
-    protected int textureX;
-    protected int textureY;
+    private int textureX;
+    private int textureY;
 
-    protected int width;
-    protected int height;
+    private int width;
+    private int height;
 
-    protected SlotOverlay overlay = null;
+    private SlotOverlay overlay = null;
 
     public GuiSlot(SlotType type, IGuiWrapper gui, ResourceLocation def, int x, int y) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiSlot.png"), gui, def);

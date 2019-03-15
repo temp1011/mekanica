@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public abstract class GuiRobit extends GuiMekanism {
 
-    public EntityRobit robit;
+    protected EntityRobit robit;
 
     protected GuiRobit(EntityRobit robit, Container container) {
         super(container);

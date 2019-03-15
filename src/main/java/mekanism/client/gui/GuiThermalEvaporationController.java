@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiThermalEvaporationController extends GuiMekanism {
 
-    public TileEntityThermalEvaporationController tileEntity;
+    private TileEntityThermalEvaporationController tileEntity;
 
     public GuiThermalEvaporationController(InventoryPlayer inventory, TileEntityThermalEvaporationController tentity) {
         super(tentity, new ContainerThermalEvaporationController(inventory, tentity));

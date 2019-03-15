@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiPersonalChest extends GuiMekanism {
 
-    public TileEntityPersonalChest tileEntity;
+    private TileEntityPersonalChest tileEntity;
 
     public GuiPersonalChest(InventoryPlayer inventory, TileEntityPersonalChest tentity) {
         super(tentity, new ContainerPersonalChest(inventory, tentity, null, true));

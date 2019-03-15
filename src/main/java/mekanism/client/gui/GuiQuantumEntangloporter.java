@@ -30,9 +30,9 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiQuantumEntangloporter extends GuiMekanism {
 
-    public ResourceLocation resource;
+    public static final ResourceLocation resource = MekanismUtils.getResource(ResourceType.GUI, "GuiTeleporter.png");
 
-    public TileEntityQuantumEntangloporter tileEntity;
+    private TileEntityQuantumEntangloporter tileEntity;
 
     private GuiButton publicButton;
     private GuiButton privateButton;
@@ -49,10 +49,9 @@ public class GuiQuantumEntangloporter extends GuiMekanism {
     public GuiQuantumEntangloporter(InventoryPlayer inventory, TileEntityQuantumEntangloporter tentity) {
         super(tentity, new ContainerQuantumEntangloporter(inventory, tentity));
         tileEntity = tentity;
-        resource = MekanismUtils.getResource(ResourceType.GUI, "GuiTeleporter.png");
 
         guiElements.addAll(
-              new ElementBuilder(tileEntity, this, "GuiTeleporter.png")
+              new ElementBuilder(tileEntity, this, resource)
                     .addSideConfiguration()
                     .addTransporter()
                     .addUpgrade()

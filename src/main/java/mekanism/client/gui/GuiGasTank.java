@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiGasTank extends GuiMekanism {
 
-    public TileEntityGasTank tileEntity;
+    private TileEntityGasTank tileEntity;
 
     public GuiGasTank(InventoryPlayer inventory, TileEntityGasTank tentity) {
         super(tentity, new ContainerGasTank(inventory, tentity));

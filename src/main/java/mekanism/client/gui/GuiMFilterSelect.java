@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiMFilterSelect extends GuiMekanism {
 
-    public TileEntityDigitalMiner tileEntity;
+    private TileEntityDigitalMiner tileEntity;
 
     public GuiMFilterSelect(EntityPlayer player, TileEntityDigitalMiner tentity) {
         super(tentity, new ContainerNull(player, tentity));

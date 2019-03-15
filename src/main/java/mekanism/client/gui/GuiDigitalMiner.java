@@ -35,7 +35,7 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiDigitalMiner extends GuiMekanism {
 
-    public TileEntityDigitalMiner tileEntity;
+    private TileEntityDigitalMiner tileEntity;
 
     private GuiButton startButton;
     private GuiButton stopButton;

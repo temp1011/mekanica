@@ -25,7 +25,7 @@ import org.lwjgl.input.Mouse;
 @SideOnly(Side.CLIENT)
 public abstract class GuiMekanism extends GuiContainer implements IGuiWrapper {
 
-    public Set<GuiElement> guiElements = new HashSet<>();
+    protected Set<GuiElement> guiElements = new HashSet<>();
 
     private TileEntityContainerBlock tileEntity;
 
@@ -252,5 +252,9 @@ public abstract class GuiMekanism extends GuiContainer implements IGuiWrapper {
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
+    }
+
+    public Set<GuiElement> getElements() {
+        return guiElements;
     }
 }

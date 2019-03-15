@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiChemicalWasher extends GuiMekanismBase {
 
-    public TileEntityChemicalWasher tileEntity;
+    private TileEntityChemicalWasher tileEntity;
 
     public GuiChemicalWasher(InventoryPlayer inventory, TileEntityChemicalWasher tentity) {
         super(tentity, new ContainerChemicalWasher(inventory, tentity), "GuiChemicalWasher.png", tentity.clientEnergyUsed);

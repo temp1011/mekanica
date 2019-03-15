@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiTFilterSelect extends GuiMekanism {
 
-    public TileEntityLogisticalSorter tileEntity;
+    private TileEntityLogisticalSorter tileEntity;
 
     public GuiTFilterSelect(EntityPlayer player, TileEntityLogisticalSorter tentity) {
         super(tentity, new ContainerNull(player, tentity));

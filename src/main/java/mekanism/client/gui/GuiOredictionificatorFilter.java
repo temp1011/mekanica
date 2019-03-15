@@ -31,17 +31,17 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiOredictionificatorFilter extends GuiMekanism {
 
-    public TileEntityOredictionificator tileEntity;
+    private TileEntityOredictionificator tileEntity;
 
-    public OredictionificatorFilter origFilter;
+    private OredictionificatorFilter origFilter;
 
-    public OredictionificatorFilter filter = new OredictionificatorFilter();
+    private OredictionificatorFilter filter = new OredictionificatorFilter();
 
-    public GuiTextField filterText;
+    private GuiTextField filterText;
 
-    public boolean isNew;
+    private boolean isNew;
 
-    public ItemStack renderStack = ItemStack.EMPTY;
+    private ItemStack renderStack = ItemStack.EMPTY;
 
     public GuiOredictionificatorFilter(EntityPlayer player, TileEntityOredictionificator tentity, int index) {
         super(tentity, new ContainerFilter(player.inventory, tentity));

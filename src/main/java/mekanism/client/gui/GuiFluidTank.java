@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiFluidTank extends GuiMekanism {
 
-    public TileEntityFluidTank tileEntity;
+    private TileEntityFluidTank tileEntity;
 
     public GuiFluidTank(InventoryPlayer inventory, TileEntityFluidTank tentity) {
         super(tentity, new ContainerFluidTank(inventory, tentity));

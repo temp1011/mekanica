@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiContainerEditMode extends GuiElement {
 
-    public TileEntity tileEntity;
+    private TileEntity tileEntity;
 
     public GuiContainerEditMode(IGuiWrapper gui, TileEntity tile, ResourceLocation def) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiContainerEditMode.png"), gui, def);

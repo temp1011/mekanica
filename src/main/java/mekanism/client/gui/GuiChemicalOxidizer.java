@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiChemicalOxidizer extends GuiMekanismBase {
 
-    public TileEntityChemicalOxidizer tileEntity;
+    private TileEntityChemicalOxidizer tileEntity;
 
     public GuiChemicalOxidizer(InventoryPlayer inventory, TileEntityChemicalOxidizer tentity) {
         super(tentity, new ContainerChemicalOxidizer(inventory, tentity), "GuiChemicalOxidizer.png", tentity.energyPerTick);

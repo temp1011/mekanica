@@ -29,10 +29,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiSecurityTab extends GuiElement {
 
-    public boolean isItem;
-    public EnumHand currentHand;
+    private boolean isItem;
+    private EnumHand currentHand;
 
-    public TileEntity tileEntity;
+    private TileEntity tileEntity;
 
     public GuiSecurityTab(IGuiWrapper gui, TileEntity tile, ResourceLocation def) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiSecurityTab.png"), gui, def);

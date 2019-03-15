@@ -27,7 +27,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiChemicalCrystallizer extends GuiMekanismBase {
 
-    public TileEntityChemicalCrystallizer tileEntity;
+    private TileEntityChemicalCrystallizer tileEntity;
 
     private Gas prevGas;
 

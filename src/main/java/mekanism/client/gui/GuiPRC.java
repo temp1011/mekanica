@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiPRC extends GuiMekanismBase {
 
-    public TileEntityPRC tileEntity;
+    private TileEntityPRC tileEntity;
 
     public GuiPRC(InventoryPlayer inventory, TileEntityPRC tentity) {
         super(tentity, new ContainerPRC(inventory, tentity), "GuiBlank.png",

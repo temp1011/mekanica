@@ -33,7 +33,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiOredictionificator extends GuiMekanism {
 
-    public TileEntityOredictionificator tileEntity;
+    private TileEntityOredictionificator tileEntity;
 
     private Map<OredictionificatorFilter, ItemStack> renderStacks = new HashMap<>();
 

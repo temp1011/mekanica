@@ -45,16 +45,16 @@ public class GuiDigitalMinerConfig extends GuiMekanism {
     // Filter dimensions
     private final int filterX = 56;
     private final int filterW = 96;
-    public TileEntityDigitalMiner tileEntity;
-    public boolean isDragging = false;
-    public int dragOffset = 0;
+    private TileEntityDigitalMiner tileEntity;
+    private boolean isDragging = false;
+    private int dragOffset = 0;
 
-    public int stackSwitch = 0;
+    private int stackSwitch = 0;
 
-    public Map<MOreDictFilter, StackData> oreDictStacks = new HashMap<>();
-    public Map<MModIDFilter, StackData> modIDStacks = new HashMap<>();
+    private Map<MOreDictFilter, StackData> oreDictStacks = new HashMap<>();
+    private Map<MModIDFilter, StackData> modIDStacks = new HashMap<>();
 
-    public float scroll;
+    private float scroll;
 
     private GuiTextField radiusField;
     private GuiTextField minField;

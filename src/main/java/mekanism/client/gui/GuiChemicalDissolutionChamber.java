@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiChemicalDissolutionChamber extends GuiMekanismBase {
 
-    public TileEntityChemicalDissolutionChamber tileEntity;
+    private TileEntityChemicalDissolutionChamber tileEntity;
 
     public GuiChemicalDissolutionChamber(InventoryPlayer inventory, TileEntityChemicalDissolutionChamber tentity) {
         super(tentity, new ContainerChemicalDissolutionChamber(inventory, tentity), "GuiChemicalDissolutionChamber.png", tentity.energyPerTick);

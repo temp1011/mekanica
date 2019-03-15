@@ -28,11 +28,11 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiLaserAmplifier extends GuiMekanism {
 
-    public TileEntityLaserAmplifier tileEntity;
+    private TileEntityLaserAmplifier tileEntity;
 
-    public GuiTextField minField;
-    public GuiTextField maxField;
-    public GuiTextField timerField;
+    private GuiTextField minField;
+    private GuiTextField maxField;
+    private GuiTextField timerField;
 
     public GuiLaserAmplifier(InventoryPlayer inventory, TileEntityLaserAmplifier tentity) {
         super(tentity, new ContainerLaserAmplifier(inventory, tentity));

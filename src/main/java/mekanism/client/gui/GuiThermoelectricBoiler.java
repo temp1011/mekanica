@@ -26,7 +26,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiThermoelectricBoiler extends GuiMekanism {
 
-    public TileEntityBoilerCasing tileEntity;
+    private TileEntityBoilerCasing tileEntity;
 
     public GuiThermoelectricBoiler(InventoryPlayer inventory, TileEntityBoilerCasing tentity) {
         super(tentity, new ContainerFilter(inventory, tentity));

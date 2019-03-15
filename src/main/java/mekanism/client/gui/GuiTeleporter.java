@@ -48,41 +48,40 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiTeleporter extends GuiMekanism {
 
-    public EnumHand currentHand;
+    private EnumHand currentHand;
 
-    public ResourceLocation resource;
+    public static final ResourceLocation resource = MekanismUtils.getResource(ResourceType.GUI, "GuiTeleporter.png");
 
-    public TileEntityTeleporter tileEntity;
-    public ItemStack itemStack = ItemStack.EMPTY;
+    private TileEntityTeleporter tileEntity;
+    private ItemStack itemStack = ItemStack.EMPTY;
 
-    public EntityPlayer entityPlayer;
+    private EntityPlayer entityPlayer;
 
-    public GuiButton publicButton;
-    public GuiButton privateButton;
+    private GuiButton publicButton;
+    private GuiButton privateButton;
 
-    public GuiButton setButton;
-    public GuiButton deleteButton;
+    private GuiButton setButton;
+    private GuiButton deleteButton;
 
-    public GuiButton teleportButton;
+    private GuiButton teleportButton;
 
-    public GuiScrollList scrollList;
+    private GuiScrollList scrollList;
 
-    public GuiTextField frequencyField;
+    private GuiTextField frequencyField;
 
-    public boolean privateMode;
+    private boolean privateMode;
 
-    public Frequency clientFreq;
-    public byte clientStatus;
+    private Frequency clientFreq;
+    private byte clientStatus;
 
-    public List<Frequency> clientPublicCache = new ArrayList<>();
-    public List<Frequency> clientPrivateCache = new ArrayList<>();
+    private List<Frequency> clientPublicCache = new ArrayList<>();
+    private List<Frequency> clientPrivateCache = new ArrayList<>();
 
-    public boolean isInit = true;
+    private boolean isInit = true;
 
     public GuiTeleporter(InventoryPlayer inventory, TileEntityTeleporter tentity) {
         super(tentity, new ContainerTeleporter(inventory, tentity));
         tileEntity = tentity;
-        resource = MekanismUtils.getResource(ResourceType.GUI, "GuiTeleporter.png");
 
         guiElements.add(new GuiRedstoneControl(this, tileEntity, resource));
         guiElements.add(new GuiUpgradeTab(this, tileEntity, resource));
@@ -112,7 +111,6 @@ public class GuiTeleporter extends GuiMekanism {
         currentHand = hand;
         itemStack = stack;
         entityPlayer = player;
-        resource = MekanismUtils.getResource(ResourceType.GUI, "GuiPortableTeleporter.png");
 
         guiElements.add(new GuiPowerBar(this, new IPowerInfoHandler() {
             @Override
@@ -472,5 +470,16 @@ public class GuiTeleporter extends GuiMekanism {
         }
 
         return tileEntity.getMaxEnergy();
+    }
+
+    public void handleUpdate(PortableTeleporterMessage message) {
+        clientStatus = message.status;
+        clientFreq = message.frequency;
+        clientPublicCache = message.publicCache;
+        clientPrivateCache = message.privateCache;
+    }
+
+    public boolean hasItemStack() {
+        return !itemStack.isEmpty();
     }
 }

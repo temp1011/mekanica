@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiFluidicPlenisher extends GuiMekanismBase {
 
-    public TileEntityFluidicPlenisher tileEntity;
+    private TileEntityFluidicPlenisher tileEntity;
 
     public static final ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiElectricPump.png");
 

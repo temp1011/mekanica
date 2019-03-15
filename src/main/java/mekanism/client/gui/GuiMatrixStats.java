@@ -20,7 +20,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiMatrixStats extends GuiMekanism {
 
-    public TileEntityInductionCasing tileEntity;
+    private TileEntityInductionCasing tileEntity;
 
     public GuiMatrixStats(InventoryPlayer inventory, TileEntityInductionCasing tentity) {
         super(tentity, new ContainerNull(inventory.player, tentity));

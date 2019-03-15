@@ -13,21 +13,21 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiScrollList extends GuiElement {
 
-    public int xSize;
-    public int size;
+    private int xSize;
+    private int size;
 
-    public int xPosition;
-    public int yPosition;
+    private int xPosition;
+    private int yPosition;
 
-    public List<String> textEntries = new ArrayList<>();
+    private List<String> textEntries = new ArrayList<>();
 
-    public int dragOffset = 0;
+    private int dragOffset = 0;
 
-    public int selected = -1;
+    private int selected = -1;
 
-    public float scroll;
+    private float scroll;
 
-    public boolean isDragging;
+    private boolean isDragging;
 
     public GuiScrollList(IGuiWrapper gui, ResourceLocation def, int x, int y, int sizeX, int sizeY) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiScrollList.png"), gui, def);

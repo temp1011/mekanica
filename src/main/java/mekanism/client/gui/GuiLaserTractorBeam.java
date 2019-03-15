@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiLaserTractorBeam extends GuiMekanism {
 
-    public TileEntityLaserTractorBeam tileEntity;
+    private TileEntityLaserTractorBeam tileEntity;
 
     public GuiLaserTractorBeam(InventoryPlayer inventory, TileEntityLaserTractorBeam tentity) {
         super(tentity, new ContainerLaserTractorBeam(inventory, tentity));
