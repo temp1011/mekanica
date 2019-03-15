@@ -1,9 +1,7 @@
 package mekanism.client.gui;
 
 import mekanism.client.gui.element.GuiContainerEditMode;
-import mekanism.client.gui.element.GuiFluidGauge;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
+import mekanism.client.gui.element.GuiGauge.Type;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.inventory.container.ContainerFluidTank;
@@ -24,18 +22,17 @@ public class GuiFluidTank extends GuiMekanism {
     public GuiFluidTank(InventoryPlayer inventory, TileEntityFluidTank tentity) {
         super(tentity, new ContainerFluidTank(inventory, tentity));
         tileEntity = tentity;
+
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiBlank.png")
+                    .addSecurity()
+                    .addFluidGauge(() -> tileEntity.fluidTank, Type.WIDE, 48, 18)
+                    .addSlot(SlotType.INPUT, SlotOverlay.INPUT, 145, 18)
+                    .addSlot(SlotType.OUTPUT, SlotOverlay.OUTPUT, 145, 50)
+                    .build()
+        );
         guiElements.add(new GuiContainerEditMode(this, tileEntity,
               MekanismUtils.getResource(ResourceType.GUI, "GuiBlank.png")));
-        guiElements
-              .add(new GuiSecurityTab(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiBlank.png")));
-        guiElements.add(new GuiFluidGauge(() -> tileEntity.fluidTank, GuiFluidGauge.Type.WIDE, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiBlank.png"), 48, 18));
-        guiElements
-              .add(new GuiSlot(SlotType.NORMAL, this, MekanismUtils.getResource(ResourceType.GUI, "GuiBlank.png"), 145,
-                    18).with(SlotOverlay.INPUT));
-        guiElements
-              .add(new GuiSlot(SlotType.NORMAL, this, MekanismUtils.getResource(ResourceType.GUI, "GuiBlank.png"), 145,
-                    50).with(SlotOverlay.OUTPUT));
     }
 
     @Override

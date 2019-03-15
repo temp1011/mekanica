@@ -5,12 +5,7 @@ import mekanism.api.Coord4D;
 import mekanism.api.gas.GasStack;
 import mekanism.client.gui.element.GuiEnergyInfo;
 import mekanism.client.gui.element.GuiRecipeType;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSideConfigurationTab;
 import mekanism.client.gui.element.GuiSortingTab;
-import mekanism.client.gui.element.GuiTransporterConfigTab;
-import mekanism.client.gui.element.GuiUpgradeTab;
 import mekanism.client.render.MekanismRenderer;
 import mekanism.client.sound.SoundHandler;
 import mekanism.common.Mekanism;
@@ -45,12 +40,16 @@ public class GuiFactory extends GuiMekanism {
 
         ySize += 11;
 
-        guiElements.add(new GuiRedstoneControl(this, tileEntity, tileEntity.tier.guiLocation));
-        guiElements.add(new GuiSecurityTab(this, tileEntity, tileEntity.tier.guiLocation));
-        guiElements.add(new GuiUpgradeTab(this, tileEntity, tileEntity.tier.guiLocation));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, tileEntity.tier.guiLocation)
+                    .addRedstone()
+                    .addSecurity()
+                    .addUpgrade()
+                    .addSideConfiguration()
+                    .addTransporter()
+                    .build()
+        );
         guiElements.add(new GuiRecipeType(this, tileEntity, tileEntity.tier.guiLocation));
-        guiElements.add(new GuiSideConfigurationTab(this, tileEntity, tileEntity.tier.guiLocation));
-        guiElements.add(new GuiTransporterConfigTab(this, 34, tileEntity, tileEntity.tier.guiLocation));
         guiElements.add(new GuiSortingTab(this, tileEntity, tileEntity.tier.guiLocation));
         guiElements.add(new GuiEnergyInfo(() ->
         {

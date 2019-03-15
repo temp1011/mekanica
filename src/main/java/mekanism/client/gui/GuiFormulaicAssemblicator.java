@@ -2,16 +2,7 @@ package mekanism.client.gui;
 
 import java.io.IOException;
 import mekanism.api.Coord4D;
-import mekanism.client.gui.element.GuiEnergyInfo;
 import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSideConfigurationTab;
-import mekanism.client.gui.element.GuiSlot;
-import mekanism.client.gui.element.GuiSlot.SlotOverlay;
-import mekanism.client.gui.element.GuiSlot.SlotType;
-import mekanism.client.gui.element.GuiTransporterConfigTab;
-import mekanism.client.gui.element.GuiUpgradeTab;
 import mekanism.client.render.MekanismRenderer;
 import mekanism.client.sound.SoundHandler;
 import mekanism.common.Mekanism;
@@ -21,7 +12,6 @@ import mekanism.common.item.ItemCraftingFormula;
 import mekanism.common.network.PacketTileEntity.TileEntityMessage;
 import mekanism.common.tile.TileEntityFormulaicAssemblicator;
 import mekanism.common.util.LangUtils;
-import mekanism.common.util.ListUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
 import net.minecraft.client.renderer.GlStateManager;
@@ -36,30 +26,24 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiFormulaicAssemblicator extends GuiMekanism {
+public class GuiFormulaicAssemblicator extends GuiMekanismPlus {
 
     public TileEntityFormulaicAssemblicator tileEntity;
 
-    public ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiFormulaicAssemblicator.png");
+    public static final ResourceLocation guiLocation = MekanismUtils.getResource(ResourceType.GUI, "GuiFormulaicAssemblicator.png");
 
     public GuiFormulaicAssemblicator(InventoryPlayer inventory, TileEntityFormulaicAssemblicator tentity) {
-        super(tentity, new ContainerFormulaicAssemblicator(inventory, tentity));
+        super(tentity, new ContainerFormulaicAssemblicator(inventory, tentity), guiLocation, tentity.energyPerTick);
         tileEntity = tentity;
-        guiElements.add(new GuiSecurityTab(this, tileEntity, guiLocation));
-        guiElements.add(new GuiUpgradeTab(this, tileEntity, guiLocation));
-        guiElements.add(new GuiRedstoneControl(this, tileEntity, guiLocation));
-        guiElements.add(new GuiSideConfigurationTab(this, tileEntity, guiLocation));
-        guiElements.add(new GuiTransporterConfigTab(this, 34, tileEntity, guiLocation));
-        guiElements.add(new GuiPowerBar(this, tileEntity, guiLocation, 159, 15));
-        guiElements.add(new GuiEnergyInfo(() ->
-        {
-            String multiplier = MekanismUtils.getEnergyDisplay(tileEntity.energyPerTick);
-            return ListUtils.asList(LangUtils.localize("gui.using") + ": " + multiplier + "/t",
-                  LangUtils.localize("gui.needed") + ": " + MekanismUtils
-                        .getEnergyDisplay(tileEntity.getMaxEnergy() - tileEntity.getEnergy()));
-        }, this, guiLocation));
-        guiElements.add(new GuiSlot(SlotType.POWER, this, guiLocation, 151, 75).with(SlotOverlay.POWER));
 
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, guiLocation)
+                    .addSideConfiguration()
+                    .addTransporter()
+                    .addSlotPower(151, 75)
+                    .build()
+        );
+        guiElements.add(new GuiPowerBar(this, tileEntity, guiLocation, 159, 15));
         ySize += 64;
     }
 

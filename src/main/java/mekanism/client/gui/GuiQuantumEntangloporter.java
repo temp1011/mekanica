@@ -6,9 +6,6 @@ import java.util.List;
 import mekanism.api.Coord4D;
 import mekanism.api.EnumColor;
 import mekanism.client.gui.element.GuiScrollList;
-import mekanism.client.gui.element.GuiSideConfigurationTab;
-import mekanism.client.gui.element.GuiTransporterConfigTab;
-import mekanism.client.gui.element.GuiUpgradeTab;
 import mekanism.client.sound.SoundHandler;
 import mekanism.common.Mekanism;
 import mekanism.common.base.TileNetworkList;
@@ -22,7 +19,6 @@ import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
@@ -38,31 +34,31 @@ public class GuiQuantumEntangloporter extends GuiMekanism {
 
     public TileEntityQuantumEntangloporter tileEntity;
 
-    public EntityPlayer entityPlayer;
+    private GuiButton publicButton;
+    private GuiButton privateButton;
 
-    public GuiButton publicButton;
-    public GuiButton privateButton;
+    private GuiButton setButton;
+    private GuiButton deleteButton;
 
-    public GuiButton setButton;
-    public GuiButton deleteButton;
+    private GuiScrollList scrollList;
 
-    public GuiScrollList scrollList;
+    private GuiTextField frequencyField;
 
-    public GuiTextField frequencyField;
-
-    public boolean privateMode;
+    private boolean privateMode;
 
     public GuiQuantumEntangloporter(InventoryPlayer inventory, TileEntityQuantumEntangloporter tentity) {
         super(tentity, new ContainerQuantumEntangloporter(inventory, tentity));
         tileEntity = tentity;
         resource = MekanismUtils.getResource(ResourceType.GUI, "GuiTeleporter.png");
 
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiTeleporter.png")
+                    .addSideConfiguration()
+                    .addTransporter()
+                    .addUpgrade()
+                    .build()
+        );
         guiElements.add(scrollList = new GuiScrollList(this, resource, 28, 37, 120, 4));
-        guiElements.add(new GuiSideConfigurationTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiTeleporter.png")));
-        guiElements.add(new GuiTransporterConfigTab(this, 34, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiTeleporter.png")));
-        guiElements.add(new GuiUpgradeTab(this, tileEntity, resource));
 
         if (tileEntity.frequency != null) {
             privateMode = !tileEntity.frequency.publicFreq;

@@ -1,15 +1,9 @@
 package mekanism.client.gui;
 
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiFluidGauge;
-import mekanism.client.gui.element.GuiGauge;
+import mekanism.client.gui.element.GuiGauge.Type;
 import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
-import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
-import mekanism.client.gui.element.GuiUpgradeTab;
 import mekanism.common.inventory.container.ContainerElectricPump;
 import mekanism.common.tile.TileEntityElectricPump;
 import mekanism.common.util.LangUtils;
@@ -33,12 +27,18 @@ public class GuiElectricPump extends GuiMekanism {
         super(tentity, new ContainerElectricPump(inventory, tentity));
         tileEntity = tentity;
 
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this, guiLocation, 27, 19));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this, guiLocation, 27, 50));
-        guiElements.add(new GuiSlot(SlotType.POWER, this, guiLocation, 142, 34).with(SlotOverlay.POWER));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, guiLocation)
+                    .addRedstone()
+                    .addSecurity()
+                    .addUpgrade()
+                    .addFluidGauge(() -> tileEntity.fluidTank, Type.STANDARD, 6, 13)
+                    .addSlotNoOverlay(SlotType.NORMAL, 27, 19)
+                    .addSlotNoOverlay(SlotType.NORMAL, 27, 50)
+                    .addSlotPower(142, 34)
+                    .build()
+        );
         guiElements.add(new GuiPowerBar(this, tileEntity, guiLocation, 164, 15));
-        guiElements
-              .add(new GuiFluidGauge(() -> tileEntity.fluidTank, GuiGauge.Type.STANDARD, this, guiLocation, 6, 13));
         guiElements.add(new GuiEnergyInfo(() ->
         {
             String multiplier = MekanismUtils.getEnergyDisplay(tileEntity.energyPerTick);
@@ -46,9 +46,6 @@ public class GuiElectricPump extends GuiMekanism {
                   LangUtils.localize("gui.needed") + ": " + MekanismUtils
                         .getEnergyDisplay(tileEntity.getMaxEnergy() - tileEntity.getEnergy()));
         }, this, guiLocation));
-        guiElements.add(new GuiSecurityTab(this, tileEntity, guiLocation));
-        guiElements.add(new GuiRedstoneControl(this, tileEntity, guiLocation));
-        guiElements.add(new GuiUpgradeTab(this, tileEntity, guiLocation));
     }
 
     @Override

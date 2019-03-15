@@ -3,6 +3,7 @@ package mekanism.client.gui;
 import java.util.HashSet;
 import java.util.Set;
 import mekanism.client.gui.element.GuiElement;
+import mekanism.client.gui.element.GuiFluidGauge;
 import mekanism.client.gui.element.GuiGasGauge;
 import mekanism.client.gui.element.GuiGauge;
 import mekanism.client.gui.element.GuiProgress;
@@ -27,14 +28,24 @@ public class ElementBuilder {
     private Set<GuiElement> elements = new HashSet<>();
 
     public ElementBuilder(TileEntity tile, IGuiWrapper gui, String textureName) {
+        this(tile, gui, MekanismUtils.getResource(ResourceType.GUI, textureName));
+    }
+
+    public ElementBuilder(TileEntity tile, IGuiWrapper gui, ResourceLocation def) {
         this.tile = tile;
         this.gui = gui;
-        this.def = MekanismUtils.getResource(ResourceType.GUI, textureName);
+        this.def = def;
     }
 
     public ElementBuilder addSlot(SlotType type, SlotOverlay overlay, int x, int y) {
         elements.add(new GuiSlot(type, gui, def, x, y)
               .with(overlay));
+        return this;
+    }
+
+    //maybe there should be SlotOverlay.NONE for this?
+    public ElementBuilder addSlotNoOverlay(SlotType type, int x, int y) {
+        elements.add(new GuiSlot(type, gui, def, x, y));
         return this;
     }
 
@@ -54,13 +65,18 @@ public class ElementBuilder {
         return this;
     }
 
-    public ElementBuilder addTransporter(int y) {
-        elements.add(new GuiTransporterConfigTab(gui, y, tile, def));
+    public ElementBuilder addTransporter() {
+        elements.add(new GuiTransporterConfigTab(gui, 34, tile, def));  //always seems to be called with 34
         return this;
     }
 
     public ElementBuilder addGasGauge(GuiGasGauge.IGasInfoHandler handler, GuiGauge.Type type, int x, int y) {
         elements.add(new GuiGasGauge(handler, type, gui, def, x, y));
+        return this;
+    }
+
+    public ElementBuilder addFluidGauge(GuiFluidGauge.IFluidInfoHandler handler, GuiGauge.Type type, int x, int y) {
+        elements.add(new GuiFluidGauge(handler, type, gui, def, x, y));
         return this;
     }
 

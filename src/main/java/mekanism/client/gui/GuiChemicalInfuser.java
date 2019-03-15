@@ -1,10 +1,7 @@
 package mekanism.client.gui;
 
-import mekanism.client.gui.element.GuiGasGauge;
-import mekanism.client.gui.element.GuiGauge;
-import mekanism.client.gui.element.GuiProgress;
+import mekanism.client.gui.element.GuiGauge.Type;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.inventory.container.ContainerChemicalInfuser;
@@ -26,26 +23,19 @@ public class GuiChemicalInfuser extends GuiMekanismPlus {
         super(tentity, new ContainerChemicalInfuser(inventory, tentity), "GuiChemicalInfuser.png", tentity.clientEnergyUsed);
         tileEntity = tentity;
 
-        guiElements.add(new GuiGasGauge(() -> tileEntity.leftTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 25, 13));
-        guiElements.add(new GuiGasGauge(() -> tileEntity.centerTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 79, 4));
-        guiElements.add(new GuiGasGauge(() -> tileEntity.rightTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 133, 13));
-
-        guiElements.add(new GuiSlot(SlotType.POWER, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 154, 4).with(SlotOverlay.POWER));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 154, 55).with(SlotOverlay.MINUS));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 4, 55).with(SlotOverlay.MINUS));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 79, 64).with(SlotOverlay.PLUS));
-
-        guiElements.add(new GuiProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 45,
-              38));
-        guiElements.add(new GuiProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.SMALL_LEFT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalInfuser.png"), 99,
-              38));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiChemicalInfuser.png")
+                    .addGasGauge(() -> tileEntity.leftTank, Type.STANDARD, 25, 13)
+                    .addGasGauge(() -> tileEntity.centerTank, Type.STANDARD, 79, 4)
+                    .addGasGauge(() -> tileEntity.rightTank, Type.STANDARD, 133, 13)
+                    .addSlotPower(154, 4)
+                    .addSlot(SlotType.NORMAL, SlotOverlay.MINUS, 154, 55)
+                    .addSlot(SlotType.NORMAL, SlotOverlay.MINUS, 4, 55)
+                    .addSlot(SlotType.NORMAL, SlotOverlay.PLUS, 79, 64)
+                    .addProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.SMALL_RIGHT, 45, 38)
+                    .addProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.SMALL_LEFT, 99, 38)
+                    .build()
+        );
     }
 
     @Override

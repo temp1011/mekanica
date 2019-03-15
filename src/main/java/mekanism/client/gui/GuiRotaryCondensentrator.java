@@ -2,13 +2,9 @@ package mekanism.client.gui;
 
 import java.io.IOException;
 import mekanism.api.Coord4D;
-import mekanism.client.gui.element.GuiFluidGauge;
-import mekanism.client.gui.element.GuiGasGauge;
-import mekanism.client.gui.element.GuiGauge;
-import mekanism.client.gui.element.GuiProgress;
+import mekanism.client.gui.element.GuiGauge.Type;
 import mekanism.client.gui.element.GuiProgress.IProgressInfoHandler;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.client.sound.SoundHandler;
@@ -35,51 +31,39 @@ public class GuiRotaryCondensentrator extends GuiMekanismPlus {
         super(tentity, new ContainerRotaryCondensentrator(inventory, tentity), "GuiRotaryCondensentrator.png", tentity.clientEnergyUsed);
         tileEntity = tentity;
 
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"), 4, 24)
-              .with(SlotOverlay.PLUS));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"), 4, 55)
-              .with(SlotOverlay.MINUS));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiRotaryCondensentrator.png")
+                    .addSlot(SlotType.NORMAL, SlotOverlay.PLUS, 4, 24)
+                    .addSlot(SlotType.NORMAL, SlotOverlay.MINUS, 4, 55)
+                    .addSlotNoOverlay(SlotType.NORMAL, 154, 24)
+                    .addSlotNoOverlay(SlotType.NORMAL, 154, 55)
+                    .addSlotPower(154,4)
+                    .addGasGauge(() -> tileEntity.gasTank, Type.STANDARD, 25, 13)
+                    .addFluidGauge(() -> tileEntity.fluidTank, Type.STANDARD, 133, 13)
+                    .addProgress(new IProgressInfoHandler() {
+                        @Override
+                        public double getProgress() {
+                      return tileEntity.isActive ? 1 : 0;
+                  }
 
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"), 154, 24));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"), 154, 55));
+                        @Override
+                        public boolean isActive() {
+                            return tileEntity.mode == 0;
+                        }
+                        }, ProgressBar.LARGE_RIGHT, 62, 38)
+                    .addProgress(new IProgressInfoHandler() {
+                        @Override
+                        public double getProgress() {
+                            return tileEntity.isActive ? 1 : 0;
+                        }
 
-        guiElements.add(new GuiSlot(SlotType.POWER, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"), 154, 4)
-              .with(SlotOverlay.POWER));
-
-        guiElements.add(new GuiFluidGauge(() -> tileEntity.fluidTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"), 133, 13));
-        guiElements.add(new GuiGasGauge(() -> tileEntity.gasTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"), 25, 13));
-
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.isActive ? 1 : 0;
-            }
-
-            @Override
-            public boolean isActive() {
-                return tileEntity.mode == 0;
-            }
-        }, ProgressBar.LARGE_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"),
-              62, 38));
-        guiElements.add(new GuiProgress(new IProgressInfoHandler() {
-            @Override
-            public double getProgress() {
-                return tileEntity.isActive ? 1 : 0;
-            }
-
-            @Override
-            public boolean isActive() {
-                return tileEntity.mode == 1;
-            }
-        }, ProgressBar.LARGE_LEFT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiRotaryCondensentrator.png"),
-              62, 38));
+                        @Override
+                        public boolean isActive() {
+                            return tileEntity.mode == 1;
+                        }
+                        }, ProgressBar.LARGE_LEFT, 62, 38)
+                    .build()
+        );
     }
 
     @Override

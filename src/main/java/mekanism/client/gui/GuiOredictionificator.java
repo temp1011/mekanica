@@ -6,11 +6,7 @@ import java.util.List;
 import java.util.Map;
 import mekanism.api.Coord4D;
 import mekanism.api.EnumColor;
-import mekanism.client.gui.element.GuiProgress;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.client.render.MekanismRenderer;
 import mekanism.client.sound.SoundHandler;
@@ -39,29 +35,26 @@ public class GuiOredictionificator extends GuiMekanism {
 
     public TileEntityOredictionificator tileEntity;
 
-    public Map<OredictionificatorFilter, ItemStack> renderStacks = new HashMap<>();
+    private Map<OredictionificatorFilter, ItemStack> renderStacks = new HashMap<>();
 
-    public boolean isDragging = false;
+    private boolean isDragging = false;
 
-    public int dragOffset = 0;
+    private int dragOffset = 0;
 
-    public float scroll;
+    private float scroll;
 
     public GuiOredictionificator(InventoryPlayer inventory, TileEntityOredictionificator tentity) {
         super(tentity, new ContainerOredictionificator(inventory, tentity));
         tileEntity = tentity;
 
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiOredictionificator.png")));
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiOredictionificator.png")));
-        guiElements.add(new GuiProgress(() -> tileEntity.didProcess ? 1 : 0, ProgressBar.LARGE_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiOredictionificator.png"), 62,
-              118));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiOredictionificator.png"), 25, 114));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiOredictionificator.png"), 133, 114));
-
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiOredictionificator.png")
+                    .addRedstone()
+                    .addSecurity()
+                    .addProgress(() -> tileEntity.didProcess ? 1 : 0, ProgressBar.LARGE_RIGHT, 62, 118)
+                    .addSlotNoOverlay(SlotType.NORMAL, 25, 114)
+                    .addSlotNoOverlay(SlotType.NORMAL, 133, 114).build()
+        );
         ySize += 64;
     }
 

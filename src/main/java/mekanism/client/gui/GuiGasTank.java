@@ -2,13 +2,8 @@ package mekanism.client.gui;
 
 import java.io.IOException;
 import mekanism.api.Coord4D;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSideConfigurationTab;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
-import mekanism.client.gui.element.GuiTransporterConfigTab;
 import mekanism.client.sound.SoundHandler;
 import mekanism.common.Mekanism;
 import mekanism.common.base.TileNetworkList;
@@ -32,20 +27,17 @@ public class GuiGasTank extends GuiMekanism {
     public GuiGasTank(InventoryPlayer inventory, TileEntityGasTank tentity) {
         super(tentity, new ContainerGasTank(inventory, tentity));
         tileEntity = tentity;
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiGasTank.png")));
-        guiElements
-              .add(new GuiSecurityTab(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiGasTank.png")));
-        guiElements.add(new GuiSideConfigurationTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiGasTank.png")));
-        guiElements.add(new GuiTransporterConfigTab(this, 34, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiGasTank.png")));
-        guiElements
-              .add(new GuiSlot(SlotType.OUTPUT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiGasTank.png"), 7,
-                    7).with(SlotOverlay.PLUS));
-        guiElements
-              .add(new GuiSlot(SlotType.INPUT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiGasTank.png"), 7,
-                    39).with(SlotOverlay.MINUS));
+
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiGasTank.png")
+                    .addRedstone()
+                    .addSecurity()
+                    .addSideConfiguration()
+                    .addTransporter()
+                    .addSlot(SlotType.OUTPUT, SlotOverlay.PLUS, 7, 7)
+                    .addSlot(SlotType.INPUT, SlotOverlay.MINUS, 7, 39)
+                    .build()
+        );
     }
 
     @Override

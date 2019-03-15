@@ -2,11 +2,6 @@ package mekanism.client.gui;
 
 import mekanism.client.gui.element.GuiEnergyInfo;
 import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
-import mekanism.client.gui.element.GuiSlot.SlotOverlay;
-import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.config.MekanismConfig.usage;
 import mekanism.common.inventory.container.ContainerSeismicVibrator;
 import mekanism.common.tile.TileEntitySeismicVibrator;
@@ -28,10 +23,13 @@ public class GuiSeismicVibrator extends GuiMekanism {
         super(tentity, new ContainerSeismicVibrator(inventory, tentity));
         tileEntity = tentity;
 
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiSeismicVibrator.png")));
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiSeismicVibrator.png")));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiSeismicVibrator.png")
+                    .addSecurity()
+                    .addRedstone()
+                    .addSlotPower(142, 34)
+                    .build()
+        );
         guiElements.add(new GuiPowerBar(this, tileEntity,
               MekanismUtils.getResource(ResourceType.GUI, "GuiSeismicVibrator.png"), 164, 15));
         guiElements.add(new GuiEnergyInfo(() ->
@@ -41,9 +39,6 @@ public class GuiSeismicVibrator extends GuiMekanism {
                   LangUtils.localize("gui.needed") + ": " + MekanismUtils
                         .getEnergyDisplay(tileEntity.getMaxEnergy() - tileEntity.getEnergy()));
         }, this, MekanismUtils.getResource(ResourceType.GUI, "GuiSeismicVibrator.png")));
-
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiSeismicVibrator.png"), 142, 34).with(SlotOverlay.POWER));
     }
 
     @Override

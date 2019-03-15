@@ -50,7 +50,7 @@ public class GuiChemicalCrystallizer extends GuiMekanismPlus {
                     .addProgress(() -> tileEntity.getScaledProgress(), ProgressBar.LARGE_RIGHT, 51, 60)
                     .addPowerBar(160, 23)
                     .addSideConfiguration()
-                    .addTransporter(34)
+                    .addTransporter()
                     .addGasGauge(() -> tileEntity.inputTank, Type.STANDARD, 5, 4)
                     .addSlot(SlotType.OUTPUT, SlotOverlay.OUTPUT, 130, 56)
                     .build()

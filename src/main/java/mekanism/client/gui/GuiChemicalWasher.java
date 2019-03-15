@@ -1,13 +1,8 @@
 package mekanism.client.gui;
 
 import mekanism.client.gui.element.GuiBucketIO;
-import mekanism.client.gui.element.GuiFluidGauge;
-import mekanism.client.gui.element.GuiGasGauge;
-import mekanism.client.gui.element.GuiGauge;
 import mekanism.client.gui.element.GuiGauge.Type;
-import mekanism.client.gui.element.GuiProgress;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.inventory.container.ContainerChemicalWasher;
@@ -28,21 +23,18 @@ public class GuiChemicalWasher extends GuiMekanismPlus {
         super(tentity, new ContainerChemicalWasher(inventory, tentity), "GuiChemicalWasher.png", tentity.clientEnergyUsed);
         tileEntity = tentity;
 
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiChemicalWasher.png")
+                    .addGasGauge(() -> tileEntity.inputTank, Type.STANDARD, 26 , 13)
+                    .addGasGauge(() -> tileEntity.outputTank, Type.STANDARD, 133, 13)
+                    .addFluidGauge(() -> tileEntity.fluidTank, Type.STANDARD, 5, 4)
+                    .addSlotPower(154, 4)
+                    .addSlot(SlotType.NORMAL, SlotOverlay.MINUS, 154, 55)
+                    .addProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.LARGE_RIGHT, 62, 38)
+                    .build()
+        );
+
         guiElements.add(new GuiBucketIO(this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalWasher.png")));
-        guiElements.add(new GuiFluidGauge(() -> tileEntity.fluidTank, Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalWasher.png"), 5, 4));
-        guiElements.add(new GuiGasGauge(() -> tileEntity.inputTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalWasher.png"), 26, 13));
-        guiElements.add(new GuiGasGauge(() -> tileEntity.outputTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalWasher.png"), 133, 13));
-
-        guiElements.add(new GuiSlot(SlotType.POWER, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalWasher.png"), 154, 4).with(SlotOverlay.POWER));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalWasher.png"), 154, 55).with(SlotOverlay.MINUS));
-
-        guiElements.add(new GuiProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.LARGE_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalWasher.png"), 62,
-              38));
     }
 
     @Override

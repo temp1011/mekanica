@@ -1,10 +1,7 @@
 package mekanism.client.gui;
 
-import mekanism.client.gui.element.GuiGasGauge;
-import mekanism.client.gui.element.GuiGauge;
-import mekanism.client.gui.element.GuiProgress;
+import mekanism.client.gui.element.GuiGauge.Type;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.inventory.container.ContainerChemicalOxidizer;
@@ -26,18 +23,15 @@ public class GuiChemicalOxidizer extends GuiMekanismPlus {
         super(tentity, new ContainerChemicalOxidizer(inventory, tentity), "GuiChemicalOxidizer.png", tentity.energyPerTick);
         tileEntity = tentity;
 
-        guiElements.add(new GuiGasGauge(() -> tileEntity.gasTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 133, 13));
-
-        guiElements.add(new GuiSlot(SlotType.POWER, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 154, 4).with(SlotOverlay.POWER));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 25, 35));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 154, 24).with(SlotOverlay.PLUS));
-
-        guiElements.add(new GuiProgress(() -> tileEntity.getScaledProgress(), ProgressBar.LARGE_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiChemicalOxidizer.png"), 62,
-              39));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiChemicalOxidizer.png")
+                    .addGasGauge(() -> tileEntity.gasTank, Type.STANDARD, 133, 13)
+                    .addSlotPower(154, 4)
+                    .addSlotNoOverlay(SlotType.NORMAL, 25, 35)
+                    .addSlot(SlotType.NORMAL, SlotOverlay.PLUS, 154, 24)
+                    .addProgress(() -> tileEntity.getScaledProgress(), ProgressBar.LARGE_RIGHT, 62, 39)
+                    .build()
+        );
     }
 
     @Override

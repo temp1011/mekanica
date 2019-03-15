@@ -6,12 +6,8 @@ import mekanism.api.Coord4D;
 import mekanism.api.EnumColor;
 import mekanism.client.gui.element.GuiEnergyInfo;
 import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
-import mekanism.client.gui.element.GuiUpgradeTab;
 import mekanism.client.gui.element.GuiVisualsTab;
 import mekanism.client.render.MekanismRenderer;
 import mekanism.client.sound.SoundHandler;
@@ -42,28 +38,29 @@ public class GuiDigitalMiner extends GuiMekanism {
 
     public TileEntityDigitalMiner tileEntity;
 
-    public GuiButton startButton;
-    public GuiButton stopButton;
-    public GuiButton configButton;
+    private GuiButton startButton;
+    private GuiButton stopButton;
+    private GuiButton configButton;
 
     public GuiDigitalMiner(InventoryPlayer inventory, TileEntityDigitalMiner tentity) {
         super(tentity, new ContainerDigitalMiner(inventory, tentity));
         tileEntity = tentity;
 
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png")));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiDigitalMiner.png")
+                    .addRedstone()
+                    .addSecurity()
+                    .addUpgrade()
+                    .addSlotPower(151, 5)
+                    .addSlotNoOverlay(SlotType.NORMAL, 143, 26)
+                    .build()
+        );
 
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png")));
-
-        guiElements.add(new GuiUpgradeTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png")));
-
-        guiElements
-              .add(new GuiPowerBar(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png"),
+        guiElements.add(new GuiPowerBar(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png"),
                     163, 23));
         guiElements.add(new GuiVisualsTab(this, tileEntity,
               MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png")));
+
         guiElements.add(new GuiEnergyInfo(() ->
         {
             double perTick = tileEntity.getPerTick();
@@ -79,11 +76,6 @@ public class GuiDigitalMiner extends GuiMekanism {
                   .getEnergyDisplay(tileEntity.getMaxEnergy() - tileEntity.getEnergy()));
             return ret;
         }, this, MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png")));
-
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png"), 151, 5).with(SlotOverlay.POWER));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiDigitalMiner.png"), 143, 26));
 
         ySize += 64;
     }

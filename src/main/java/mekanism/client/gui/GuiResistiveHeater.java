@@ -5,11 +5,6 @@ import mekanism.api.Coord4D;
 import mekanism.client.gui.element.GuiEnergyInfo;
 import mekanism.client.gui.element.GuiHeatInfo;
 import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
-import mekanism.client.gui.element.GuiSlot.SlotOverlay;
-import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.client.sound.SoundHandler;
 import mekanism.common.Mekanism;
 import mekanism.common.base.TileNetworkList;
@@ -42,14 +37,16 @@ public class GuiResistiveHeater extends GuiMekanism {
         super(tentity, new ContainerResistiveHeater(inventory, tentity));
         tileEntity = tentity;
 
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiResistiveHeater.png")
+                    .addSlotPower(14, 14)
+                    .addSecurity()
+                    .addRedstone()
+                    .build()
+        );
+
         guiElements.add(new GuiPowerBar(this, tileEntity,
               MekanismUtils.getResource(ResourceType.GUI, "GuiResistiveHeater.png"), 164, 15));
-        guiElements.add(new GuiSlot(SlotType.POWER, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiResistiveHeater.png"), 14, 34).with(SlotOverlay.POWER));
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiResistiveHeater.png")));
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiResistiveHeater.png")));
         guiElements.add(new GuiEnergyInfo(() ->
         {
             String multiplier = MekanismUtils.getEnergyDisplay(tileEntity.energyUsage);

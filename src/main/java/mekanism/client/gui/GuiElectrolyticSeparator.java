@@ -2,14 +2,9 @@ package mekanism.client.gui;
 
 import java.io.IOException;
 import mekanism.api.Coord4D;
-import mekanism.client.gui.element.GuiFluidGauge;
-import mekanism.client.gui.element.GuiGasGauge;
-import mekanism.client.gui.element.GuiGauge;
+import mekanism.client.gui.element.GuiGauge.Type;
 import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiProgress;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
-import mekanism.client.gui.element.GuiSlot;
-import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.client.sound.SoundHandler;
 import mekanism.common.Mekanism;
@@ -37,26 +32,20 @@ public class GuiElectrolyticSeparator extends GuiMekanismPlus {
 
         tileEntity = tentity;
 
-        guiElements.add(new GuiFluidGauge(() -> tileEntity.fluidTank, GuiGauge.Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 5, 10));
-        guiElements.add(new GuiGasGauge(() -> tileEntity.leftTank, GuiGauge.Type.SMALL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 58, 18));
-        guiElements.add(new GuiGasGauge(() -> tileEntity.rightTank, GuiGauge.Type.SMALL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 100, 18));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiElectrolyticSeparator.png")
+                    .addGasGauge(() -> tileEntity.leftTank, Type.SMALL, 58, 18)
+                    .addGasGauge(() -> tileEntity.rightTank, Type.SMALL, 100, 18)
+                    .addFluidGauge(() -> tileEntity.fluidTank, Type.STANDARD, 5, 10)
+                    .addSlotNoOverlay(SlotType.NORMAL, 25, 34)
+                    .addSlotNoOverlay(SlotType.NORMAL, 58, 51)
+                    .addSlotNoOverlay(SlotType.NORMAL, 100, 51)
+                    .addSlotPower(142, 34)
+                    .addProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.BI, 78, 29)
+                    .build()
+        );
         guiElements.add(new GuiPowerBar(this, tileEntity,
               MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 164, 15));
-
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 25, 34));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 58, 51));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 100, 51));
-        guiElements.add(new GuiSlot(SlotType.POWER, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 142, 34)
-              .with(SlotOverlay.POWER));
-
-        guiElements.add(new GuiProgress(() -> tileEntity.isActive ? 1 : 0, ProgressBar.BI, this, MekanismUtils.getResource(ResourceType.GUI, "GuiElectrolyticSeparator.png"), 78, 29));
     }
 
     @Override

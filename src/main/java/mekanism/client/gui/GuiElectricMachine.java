@@ -1,55 +1,37 @@
 package mekanism.client.gui;
 
-import mekanism.client.gui.element.GuiEnergyInfo;
 import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiProgress;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSideConfigurationTab;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
-import mekanism.client.gui.element.GuiTransporterConfigTab;
-import mekanism.client.gui.element.GuiUpgradeTab;
 import mekanism.common.inventory.container.ContainerElectricMachine;
 import mekanism.common.tile.prefab.TileEntityElectricMachine;
 import mekanism.common.util.LangUtils;
-import mekanism.common.util.ListUtils;
-import mekanism.common.util.MekanismUtils;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiElectricMachine extends GuiMekanism {
+public class GuiElectricMachine extends GuiMekanismPlus {
 
     public TileEntityElectricMachine tileEntity;
 
     public GuiElectricMachine(InventoryPlayer inventory, TileEntityElectricMachine tentity) {
-        super(tentity, new ContainerElectricMachine(inventory, tentity));
+        super(tentity, new ContainerElectricMachine(inventory, tentity), tentity.guiLocation, tentity.energyPerTick);
         tileEntity = tentity;
 
-        guiElements.add(new GuiRedstoneControl(this, tileEntity, tileEntity.guiLocation));
-        guiElements.add(new GuiUpgradeTab(this, tileEntity, tileEntity.guiLocation));
-        guiElements.add(new GuiSecurityTab(this, tileEntity, tileEntity.guiLocation));
-        guiElements.add(new GuiSideConfigurationTab(this, tileEntity, tileEntity.guiLocation));
-        guiElements.add(new GuiTransporterConfigTab(this, 34, tileEntity, tileEntity.guiLocation));
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, tileEntity.guiLocation)
+                    .addSideConfiguration()
+                    .addTransporter()
+                    .addSlot(SlotType.INPUT, SlotOverlay.INPUT, 55, 16)
+                    .addSlotPower(55, 52)
+                    .addSlot(SlotType.OUTPUT_LARGE, SlotOverlay.OUTPUT, 111, 30)
+                    .addProgress(tileEntity::getScaledProgress, getProgressType(), 77, 37)
+                    .build()
+        );
         guiElements.add(new GuiPowerBar(this, tileEntity, tileEntity.guiLocation, 164, 15));
-        guiElements.add(new GuiEnergyInfo(() ->
-        {
-            String multiplier = MekanismUtils.getEnergyDisplay(tileEntity.energyPerTick);
-            return ListUtils.asList(LangUtils.localize("gui.using") + ": " + multiplier + "/t",
-                  LangUtils.localize("gui.needed") + ": " + MekanismUtils
-                        .getEnergyDisplay(tileEntity.getMaxEnergy() - tileEntity.getEnergy()));
-        }, this, tileEntity.guiLocation));
-
-        guiElements.add(new GuiSlot(SlotType.INPUT, this, tileEntity.guiLocation, 55, 16));
-        guiElements.add(new GuiSlot(SlotType.POWER, this, tileEntity.guiLocation, 55, 52).with(SlotOverlay.POWER));
-        guiElements.add(new GuiSlot(SlotType.OUTPUT_LARGE, this, tileEntity.guiLocation, 111, 30));
-
-        guiElements.add(new GuiProgress(() -> tileEntity.getScaledProgress(), getProgressType(), this, tileEntity.guiLocation, 77, 37));
     }
 
     public ProgressBar getProgressType() {
