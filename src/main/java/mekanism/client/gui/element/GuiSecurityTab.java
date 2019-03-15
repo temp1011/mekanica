@@ -1,5 +1,6 @@
 package mekanism.client.gui.element;
 
+import java.util.Arrays;
 import java.util.UUID;
 import mekanism.api.Coord4D;
 import mekanism.api.EnumColor;
@@ -14,7 +15,6 @@ import mekanism.common.security.ISecurityTile;
 import mekanism.common.security.ISecurityTile.SecurityMode;
 import mekanism.common.security.SecurityData;
 import mekanism.common.util.LangUtils;
-import mekanism.common.util.ListUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
 import mekanism.common.util.SecurityUtils;
@@ -93,9 +93,9 @@ public class GuiSecurityTab extends GuiElement {
 
             if (isItem ? SecurityUtils.isOverridden(getItem(), Side.CLIENT)
                   : SecurityUtils.isOverridden(tileEntity, Side.CLIENT)) {
-                displayTooltips(ListUtils.asList(securityText, ownerText, overrideText), xAxis, yAxis);
+                displayTooltips(Arrays.asList(securityText, ownerText, overrideText), xAxis, yAxis);
             } else {
-                displayTooltips(ListUtils.asList(securityText, ownerText), xAxis, yAxis);
+                displayTooltips(Arrays.asList(securityText, ownerText), xAxis, yAxis);
             }
         }
 
