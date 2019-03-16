@@ -23,7 +23,7 @@ public class GuiScrollList extends GuiElement {
 
     private int dragOffset = 0;
 
-    private int selected = -1;
+    public int selected = -1;
 
     private float scroll;
 

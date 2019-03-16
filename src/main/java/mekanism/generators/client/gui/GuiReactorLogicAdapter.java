@@ -27,7 +27,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiReactorLogicAdapter extends GuiMekanism {
 
-    public TileEntityReactorLogicAdapter tileEntity;
+    private TileEntityReactorLogicAdapter tileEntity;
 
     public GuiReactorLogicAdapter(InventoryPlayer inventory, final TileEntityReactorLogicAdapter tentity) {
         super(new ContainerNull(inventory.player, tentity));

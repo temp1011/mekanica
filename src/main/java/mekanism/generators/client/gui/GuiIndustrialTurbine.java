@@ -35,7 +35,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiIndustrialTurbine extends GuiMekanism {
 
-    public TileEntityTurbineCasing tileEntity;
+    private TileEntityTurbineCasing tileEntity;
 
     public GuiIndustrialTurbine(InventoryPlayer inventory, TileEntityTurbineCasing tentity) {
         super(tentity, new ContainerFilter(inventory, tentity));

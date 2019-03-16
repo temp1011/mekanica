@@ -1,13 +1,9 @@
 package mekanism.generators.client.gui;
 
 import java.util.Arrays;
+import mekanism.client.gui.ElementBuilderPowered;
 import mekanism.client.gui.GuiMekanism;
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
-import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.config.MekanismConfig.generators;
 import mekanism.common.util.LangUtils;
@@ -28,22 +24,22 @@ public class GuiBioGenerator extends GuiMekanism {
     public GuiBioGenerator(InventoryPlayer inventory, TileEntityBioGenerator tentity) {
         super(new ContainerBioGenerator(inventory, tentity));
         tileEntity = tentity;
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiBioGenerator.png")));
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiBioGenerator.png")));
+
+        guiElements.addAll(
+              new ElementBuilderPowered(tileEntity, this, "GuiBioGenerator.png")
+                    .addPowerBar(164, 15)
+                    .addRedstone()
+                    .addSecurity()
+                    .addSlotNoOverlay(SlotType.NORMAL, 16, 34)
+                    .addSlotPower(142, 34)
+                    .build()
+        );
+
         guiElements.add(new GuiEnergyInfo(() -> Arrays.asList(
               LangUtils.localize("gui.producing") + ": " + MekanismUtils
                     .getEnergyDisplay(tileEntity.isActive ? generators.bioGeneration : 0) + "/t",
               LangUtils.localize("gui.maxOutput") + ": " + MekanismUtils.getEnergyDisplay(tileEntity.getMaxOutput())
                     + "/t"), this, MekanismUtils.getResource(ResourceType.GUI, "GuiBioGenerator.png")));
-        guiElements
-              .add(new GuiPowerBar(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiBioGenerator.png"),
-                    164, 15));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiBioGenerator.png"), 16, 34));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiBioGenerator.png"), 142, 34).with(SlotOverlay.POWER));
     }
 
     @Override

@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiStatTab extends GuiElement {
 
-    TileEntity tileEntity;
+    private TileEntity tileEntity;
 
     public GuiStatTab(IGuiWrapper gui, TileEntity tile, ResourceLocation def) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiStatsTab.png"), gui, def);

@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiHeatTab extends GuiElement {
 
-    TileEntity tileEntity;
+    private TileEntity tileEntity;
 
     public GuiHeatTab(IGuiWrapper gui, TileEntity tile, ResourceLocation def) {
         super(MekanismUtils.getResource(ResourceType.GUI_ELEMENT, "GuiHeatTab.png"), gui, def);

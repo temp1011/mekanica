@@ -1,14 +1,10 @@
 package mekanism.generators.client.gui;
 
 import java.util.Arrays;
+import mekanism.client.gui.ElementBuilderPowered;
 import mekanism.client.gui.GuiMekanism;
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiGasGauge;
 import mekanism.client.gui.element.GuiGauge.Type;
-import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
 import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.util.LangUtils;
@@ -29,24 +25,22 @@ public class GuiGasGenerator extends GuiMekanism {
     public GuiGasGenerator(InventoryPlayer inventory, TileEntityGasGenerator tentity) {
         super(new ContainerGasGenerator(inventory, tentity));
         tileEntity = tentity;
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiGasGenerator.png")));
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiGasGenerator.png")));
+
+        guiElements.addAll(
+              new ElementBuilderPowered(tileEntity, this, "GuiGasGenerator.png")
+                    .addPowerBar(164, 15)
+                    .addRedstone()
+                    .addSecurity()
+                    .addGasGauge(() -> tileEntity.fuelTank, Type.WIDE, 55, 18)
+                    .addSlot(SlotType.NORMAL, SlotOverlay.MINUS, 16, 34)
+                    .addSlotPower(142, 34)
+                    .build()
+        );
         guiElements.add(new GuiEnergyInfo(() -> Arrays.asList(
               LangUtils.localize("gui.producing") + ": " + MekanismUtils
                     .getEnergyDisplay(tileEntity.generationRate * tileEntity.clientUsed) + "/t",
               LangUtils.localize("gui.maxOutput") + ": " + MekanismUtils.getEnergyDisplay(tileEntity.getMaxOutput())
                     + "/t"), this, MekanismUtils.getResource(ResourceType.GUI, "GuiGasGenerator.png")));
-        guiElements.add(new GuiGasGauge(() -> tileEntity.fuelTank, Type.WIDE, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiGasGenerator.png"), 55, 18));
-        guiElements
-              .add(new GuiPowerBar(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiGasGenerator.png"),
-                    164, 15));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiGasGenerator.png"), 16, 34).with(SlotOverlay.MINUS));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiGasGenerator.png"), 142, 34).with(SlotOverlay.POWER));
     }
 
     @Override

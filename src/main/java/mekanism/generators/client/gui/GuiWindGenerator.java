@@ -25,7 +25,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiWindGenerator extends GuiMekanism {
 
-    public TileEntityWindGenerator tileEntity;
+    private TileEntityWindGenerator tileEntity;
 
     private DecimalFormat powerFormat = new DecimalFormat("0.##");
 

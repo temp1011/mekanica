@@ -1,16 +1,11 @@
 package mekanism.generators.client.gui;
 
 import java.util.Arrays;
+import mekanism.client.gui.ElementBuilderPowered;
 import mekanism.client.gui.GuiMekanism;
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiFluidGauge;
 import mekanism.client.gui.element.GuiGauge.Type;
 import mekanism.client.gui.element.GuiHeatInfo;
-import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
-import mekanism.client.gui.element.GuiSlot.SlotOverlay;
 import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.config.MekanismConfig.general;
 import mekanism.common.util.LangUtils;
@@ -33,23 +28,24 @@ public class GuiHeatGenerator extends GuiMekanism {
     public GuiHeatGenerator(InventoryPlayer inventory, TileEntityHeatGenerator tentity) {
         super(new ContainerHeatGenerator(inventory, tentity));
         tileEntity = tentity;
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiHeatGenerator.png")));
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiHeatGenerator.png")));
+
+        guiElements.addAll(
+              new ElementBuilderPowered(tileEntity, this, "GuiHeatGenerator.png")
+                    .addPowerBar(164, 15)
+                    .addRedstone()
+                    .addSecurity()
+                    .addFluidGauge(() -> tileEntity.lavaTank, Type.WIDE, 55, 18)
+                    .addSlotNoOverlay(SlotType.NORMAL,16, 34)
+                    .addSlotPower(142, 34)
+                    .build()
+        );
+
         guiElements.add(new GuiEnergyInfo(() -> Arrays.asList(
               LangUtils.localize("gui.producing") + ": " + MekanismUtils.getEnergyDisplay(tileEntity.producingEnergy)
                     + "/t",
               LangUtils.localize("gui.maxOutput") + ": " + MekanismUtils.getEnergyDisplay(tileEntity.getMaxOutput())
                     + "/t"), this, MekanismUtils.getResource(ResourceType.GUI, "GuiHeatGenerator.png")));
-        guiElements.add(new GuiFluidGauge(() -> tileEntity.lavaTank, Type.WIDE, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiHeatGenerator.png"), 55, 18));
-        guiElements.add(new GuiPowerBar(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiHeatGenerator.png"), 164, 15));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiHeatGenerator.png"), 16, 34));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiHeatGenerator.png"), 142, 34).with(SlotOverlay.POWER));
+        //non standard heat info
         guiElements.add(new GuiHeatInfo(() ->
         {
             TemperatureUnit unit = TemperatureUnit.values()[general.tempUnit.ordinal()];

@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiTurbineStats extends GuiMekanism {
 
-    public TileEntityTurbineCasing tileEntity;
+    private TileEntityTurbineCasing tileEntity;
 
     public GuiTurbineStats(InventoryPlayer inventory, TileEntityTurbineCasing tentity) {
         super(tentity, new ContainerNull(inventory.player, tentity));

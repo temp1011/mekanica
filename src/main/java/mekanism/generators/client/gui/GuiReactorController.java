@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiReactorController extends GuiMekanism {
 
-    public TileEntityReactorController tileEntity;
+    private TileEntityReactorController tileEntity;
 
     public GuiReactorController(InventoryPlayer inventory, final TileEntityReactorController tentity) {
         super(new ContainerReactorController(inventory, tentity));

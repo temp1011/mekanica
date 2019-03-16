@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import mekanism.api.Coord4D;
+import mekanism.client.gui.ElementBuilder;
 import mekanism.client.gui.GuiMekanism;
 import mekanism.client.gui.element.GuiEnergyGauge;
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiFluidGauge;
 import mekanism.client.gui.element.GuiGauge.Type;
 import mekanism.client.gui.element.GuiNumberGauge;
 import mekanism.client.gui.element.GuiNumberGauge.INumberInfoHandler;
-import mekanism.client.gui.element.GuiProgress;
-import mekanism.client.gui.element.GuiProgress.IProgressInfoHandler;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.render.MekanismRenderer;
 import mekanism.client.render.MekanismRenderer.FluidType;
@@ -38,7 +36,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiReactorHeat extends GuiMekanism {
 
-    public TileEntityReactorController tileEntity;
+    private TileEntityReactorController tileEntity;
 
     public GuiReactorHeat(InventoryPlayer inventory, final TileEntityReactorController tentity) {
         super(new ContainerNull(inventory.player, tentity));
@@ -70,7 +68,6 @@ public class GuiReactorHeat extends GuiMekanism {
                 return "Plasma: " + MekanismUtils.getTemperatureDisplay(level, TemperatureUnit.KELVIN);
             }
         }, Type.STANDARD, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 7, 50));
-        guiElements.add(new GuiProgress(() -> tileEntity.getPlasmaTemp() > tileEntity.getCaseTemp() ? 1 : 0, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 27, 75));
         guiElements.add(new GuiNumberGauge(new INumberInfoHandler() {
             @Override
             public TextureAtlasSprite getIcon() {
@@ -92,13 +89,18 @@ public class GuiReactorHeat extends GuiMekanism {
                 return "Case: " + MekanismUtils.getTemperatureDisplay(level, TemperatureUnit.KELVIN);
             }
         }, Type.STANDARD, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 61, 50));
-        guiElements.add(new GuiProgress(() -> tileEntity.getCaseTemp() > 0 ? 1 : 0, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 81, 60));
-        guiElements.add(new GuiProgress(() -> (tileEntity.getCaseTemp() > 0 && tileEntity.waterTank.getFluidAmount() > 0
-              && tileEntity.steamTank.getFluidAmount() < tileEntity.steamTank.getCapacity()) ? 1 : 0, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 81, 90));
-        guiElements.add(new GuiFluidGauge(() -> tentity.waterTank, Type.SMALL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 115, 84));
-        guiElements.add(new GuiFluidGauge(() -> tentity.steamTank, Type.SMALL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 151, 84));
+
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiTall.png")
+                    .addProgress(() -> tileEntity.getPlasmaTemp() > tileEntity.getCaseTemp() ? 1 : 0, ProgressBar.SMALL_RIGHT, 27, 75)
+                    .addProgress(() -> tileEntity.getCaseTemp() > 0 ? 1 : 0, ProgressBar.SMALL_RIGHT, 81, 60)
+                    .addProgress( () -> (tileEntity.getCaseTemp() > 0
+                          && tileEntity.waterTank.getFluidAmount() > 0
+                          && tileEntity.steamTank.getFluidAmount() < tileEntity.steamTank.getCapacity()) ? 1 : 0,
+                          ProgressBar.SMALL_RIGHT, 81, 90)
+                    .addFluidGauge(() -> tileEntity.waterTank, Type.SMALL, 115, 84)
+                    .addFluidGauge(() -> tentity.steamTank, Type.SMALL, 151, 84).build()
+        );
         guiElements.add(new GuiEnergyGauge(() -> tileEntity, Type.SMALL, this,
               MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 115, 46));
         guiElements.add(new GuiFuelTab(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png")));

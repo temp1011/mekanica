@@ -1,14 +1,9 @@
 package mekanism.generators.client.gui;
 
 import java.util.Arrays;
+import mekanism.client.gui.ElementBuilderPowered;
 import mekanism.client.gui.GuiMekanism;
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiPowerBar;
-import mekanism.client.gui.element.GuiRedstoneControl;
-import mekanism.client.gui.element.GuiSecurityTab;
-import mekanism.client.gui.element.GuiSlot;
-import mekanism.client.gui.element.GuiSlot.SlotOverlay;
-import mekanism.client.gui.element.GuiSlot.SlotType;
 import mekanism.common.util.LangUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.MekanismUtils.ResourceType;
@@ -22,32 +17,30 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiSolarGenerator extends GuiMekanism {
 
-    public TileEntitySolarGenerator tileEntity;
+    private TileEntitySolarGenerator tileEntity;
 
     public GuiSolarGenerator(InventoryPlayer inventory, TileEntitySolarGenerator tentity) {
         super(new ContainerSolarGenerator(inventory, tentity));
         tileEntity = tentity;
-        guiElements.add(new GuiRedstoneControl(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiSolarGenerator.png")));
-        guiElements.add(new GuiSecurityTab(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiSolarGenerator.png")));
+
+        guiElements.addAll(
+              new ElementBuilderPowered(tileEntity, this, "GuiSolarGenerator.png")
+                    .addPowerBar(164, 15)
+                    .addRedstone()
+                    .addSecurity()
+                    .addSlotPower(142, 34)
+                    .build()
+        );
 
         guiElements.add(new GuiEnergyInfo(() -> Arrays.asList(
               LangUtils.localize("gui.producing") + ": " + MekanismUtils
                     .getEnergyDisplay(tileEntity.isActive ? tileEntity.getProduction() : 0) + "/t",
               LangUtils.localize("gui.maxOutput") + ": " + MekanismUtils.getEnergyDisplay(tileEntity.getMaxOutput())
                     + "/t"), this, MekanismUtils.getResource(ResourceType.GUI, "GuiSolarGenerator.png")));
-        guiElements.add(new GuiPowerBar(this, tileEntity,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiSolarGenerator.png"), 164, 15));
-        guiElements.add(new GuiSlot(SlotType.NORMAL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiSolarGenerator.png"), 142, 34).with(SlotOverlay.POWER));
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        int xAxis = (mouseX - (width - xSize) / 2);
-        int yAxis = (mouseY - (height - ySize) / 2);
-
         fontRenderer.drawString(tileEntity.getName(), !tileEntity.fullName.contains("Advanced") ? 45 : 30, 6, 0x404040);
         fontRenderer.drawString(LangUtils.localize("container.inventory"), 8, (ySize - 96) + 2, 0x404040);
         fontRenderer

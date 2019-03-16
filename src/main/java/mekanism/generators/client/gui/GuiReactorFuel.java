@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import mekanism.api.Coord4D;
+import mekanism.client.gui.ElementBuilder;
 import mekanism.client.gui.GuiMekanism;
 import mekanism.client.gui.element.GuiEnergyInfo;
-import mekanism.client.gui.element.GuiGasGauge;
 import mekanism.client.gui.element.GuiGauge.Type;
-import mekanism.client.gui.element.GuiProgress;
-import mekanism.client.gui.element.GuiProgress.IProgressInfoHandler;
 import mekanism.client.gui.element.GuiProgress.ProgressBar;
 import mekanism.client.sound.SoundHandler;
 import mekanism.common.Mekanism;
@@ -34,9 +32,9 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiReactorFuel extends GuiMekanism {
 
-    public TileEntityReactorController tileEntity;
+    private TileEntityReactorController tileEntity;
 
-    public GuiTextField injectionRateField;
+    private GuiTextField injectionRateField;
 
     public GuiReactorFuel(InventoryPlayer inventory, final TileEntityReactorController tentity) {
         super(new ContainerNull(inventory.player, tentity));
@@ -47,16 +45,17 @@ public class GuiReactorFuel extends GuiMekanism {
               LangUtils.localize("gui.producing") + ": " + MekanismUtils
                     .getEnergyDisplay(tileEntity.getReactor().getPassiveGeneration(false, true)) + "/t")
               : new ArrayList<>(), this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png")));
-        guiElements.add(new GuiGasGauge(() -> tentity.deuteriumTank, Type.SMALL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 25, 64));
-        guiElements.add(new GuiGasGauge(() -> tentity.fuelTank, Type.STANDARD, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 79, 50));
-        guiElements.add(new GuiGasGauge(() -> tentity.tritiumTank, Type.SMALL, this,
-              MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 133, 64));
-        guiElements.add(new GuiProgress(() -> tileEntity.getActive() ? 1 : 0, ProgressBar.SMALL_RIGHT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 45, 75));
-        guiElements.add(new GuiProgress(() -> tileEntity.getActive() ? 1 : 0, ProgressBar.SMALL_LEFT, this, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png"), 99, 75));
         guiElements.add(new GuiHeatTab(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png")));
         guiElements.add(new GuiStatTab(this, tileEntity, MekanismUtils.getResource(ResourceType.GUI, "GuiTall.png")));
+
+        guiElements.addAll(
+              new ElementBuilder(tileEntity, this, "GuiTall.png")
+                    .addGasGauge(() -> tentity.deuteriumTank, Type.SMALL, 25, 64)
+                    .addGasGauge(() -> tentity.tritiumTank, Type.SMALL, 133, 64)
+                    .addGasGauge(() -> tentity.fuelTank, Type.STANDARD, 79, 50)
+                    .addProgress(() -> tileEntity.getActive() ? 1 : 0, ProgressBar.SMALL_RIGHT, 45, 75)
+                    .addProgress(() -> tileEntity.getActive() ? 1 : 0, ProgressBar.SMALL_LEFT, 99, 75).build()
+        );
     }
 
     @Override

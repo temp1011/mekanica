@@ -28,8 +28,8 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiReactorStats extends GuiMekanism {
 
-    public static NumberFormat nf = NumberFormat.getIntegerInstance();
-    public TileEntityReactorController tileEntity;
+    private static NumberFormat nf = NumberFormat.getIntegerInstance();
+    private TileEntityReactorController tileEntity;
 
     public GuiReactorStats(InventoryPlayer inventory, final TileEntityReactorController tentity) {
         super(new ContainerNull(inventory.player, tentity));
